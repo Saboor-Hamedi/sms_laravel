@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+textarea {
+    border: none;
+    outline: none;
+}
+textarea:focus {
+    box-shadow: none;
+}
+small {
+    height: 1em; /* Ensure space is reserved for the error message */
+    display: block;
+}
