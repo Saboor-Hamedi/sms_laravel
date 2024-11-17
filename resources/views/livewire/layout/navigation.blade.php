@@ -32,9 +32,11 @@ new class extends Component {
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('score.scores')" :active="request()->routeIs('score.scores')" wire:navigate>
-                        {{ __('Scores') }}
-                    </x-nav-link>
+                    @role('manager')
+                        <x-nav-link :href="route('scores.create')" :active="request()->routeIs('scores.create')" wire:navigate>
+                            {{ __('Scores') }}
+                        </x-nav-link>
+                    @endrole
                 </div>
             </div>
 

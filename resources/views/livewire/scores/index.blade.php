@@ -9,7 +9,6 @@
     <section class="flex flex-1 w-full gap-2 mt-2 mb-2">
         <table class="w-full border border-collapse border-gray-300 table-auto">
             <thead>
-
                 <tr class="text-xs bg-gray-100">
                     <th class="px-4 py-2 text-left border border-gray-300">Assignment</th>
                     <th class="px-4 py-2 text-left border border-gray-300">Formative</th>
@@ -30,15 +29,16 @@
                         <td class="px-4 py-2 border border-gray-300">{{ $score->final }}</td>
                         <td class="px-4 py-2 border border-gray-300">{{ $score->average }}</td>
                         <td class="px-4 py-2 border border-gray-300">{{ Str::limit($score->report, 20, '...') }}</td>
-                        <td class="px-4 py-2 border border-gray-300">
-                            <a class="text-blue-500 hover:text-blue-700"
-                                href="{{ route('score.edit', $score->id) }}">Edit</a>
-
-                        </td>
-                        <td class="px-4 py-2 border border-gray-300">
-                            <button type="submit" class="default-button"
-                                wire:click="delete({{ $score->id }})">Delete</button>
-                        </td>
+                        @role(['teacher', 'manager'])
+                            <td class="px-4 py-2 border border-gray-300">
+                                <a class="text-blue-500 hover:text-blue-700"
+                                    href="{{ route('scores.edit', $score->id) }}">Edit</a>
+                            </td>
+                            <td class="px-4 py-2 border border-gray-300">
+                                <button type="submit" class="default-button"
+                                    wire:click="delete({{ $score->id }})">Delete</button>
+                            </td>
+                        @endrole
                     </tr>
                 @endforeach
                 <tr class="text-xs bg-gray-100">

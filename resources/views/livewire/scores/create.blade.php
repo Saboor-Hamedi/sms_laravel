@@ -2,9 +2,6 @@
     <main class="flex h-screen">
         {{-- <livewire:sidebar.sidebar /> --}}
         <section class="flex flex-col flex-1 h-screen gap-2 p-2">
-            {{-- <div class="flex-shrink-0">
-                <livewire:header.header />
-            </div> --}}
 
             <div class="flex flex-col gap-4 p-4 border border-gray-300 rounded-md shadow-md lg:max-w-full">
                 @if (session()->has('success'))

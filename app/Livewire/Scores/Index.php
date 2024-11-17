@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Score;
+namespace App\Livewire\Scores;
 
 use App\Models\Scores;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +25,9 @@ class Index extends Component
     }
     public function render()
     {
+        // Get scores based on the user's role
+
         $scores = Scores::with('user')->latest()->where('user_id', Auth::id())->paginate(3);
-        return view('livewire.score.index', ['scores' => $scores])->layout('layouts.app');
+        return view('livewire.scores.index', ['scores' => $scores])->layout('layouts.app');
     }
 }

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Livewire\Score;
+namespace App\Livewire\Scores;
 
 use App\Models\Scores as ModelsScores;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -25,8 +26,13 @@ class Edit extends Component
 
     public function mount($id)
     {
+        if (!Auth::user()->hasRole('manager')) {
+            return redirect()->route('dashboard');  // Redirect to home if not manager
+        }
         $this->update($id);
     }
+
+
 
     public function update($id)
     {
@@ -58,6 +64,6 @@ class Edit extends Component
     }
     public function render()
     {
-        return view('livewire.score.edit')->layout('layouts.app');
+        return view('livewire.scores.edit')->layout('layouts.app');
     }
 }

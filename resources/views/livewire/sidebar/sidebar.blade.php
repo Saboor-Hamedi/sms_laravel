@@ -9,7 +9,7 @@
             </a>
         </li>
         <li class="mb-4">
-            <a href="{{ route('score.scores') }}" class="flex items-center p-2 text-gray-700 rounded hover:bg-blue-300">
+            <a href="{{ route('scores.create') }}" class="flex items-center p-2 text-gray-700 rounded hover:bg-blue-300">
                 <i class="fas fa-user"></i>
                 <span class="ml-2">Scores</span>
             </a>
@@ -26,6 +26,13 @@
                 wire:navigate='register'>
                 <i class="fas fa-cog"></i>
                 <span class="ml-2">Login</span>
+            </a>
+        </li>
+        <li class="mb-4">
+            <a href="{{ route('permissions.create') }}"
+                class="flex items-center p-2 text-gray-700 rounded hover:bg-blue-300" wire:navigate='permission'>
+                <i class="fas fa-cog"></i>
+                <span class="ml-2">Permission</span>
             </a>
         </li>
         <li class="mb-4">

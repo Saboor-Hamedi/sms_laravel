@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Score;
+namespace App\Livewire\Scores;
 
 use App\Models\Scores as ModelsScores;
 use Illuminate\Support\Facades\Auth;
@@ -8,7 +8,7 @@ use Livewire\Attributes\Validate;
 
 use Livewire\Component;
 
-class Scores extends Component
+class Create extends Component
 {
 
     #[Validate('required|numeric|max:100')]
@@ -23,6 +23,13 @@ class Scores extends Component
     public $average = '';
     #[Validate('nullable|max:255')]
     public $report = '';
+
+    public function mount()
+    {
+        if (!Auth::user()->hasRole(['manager', 'teacher'])) {
+            return redirect()->route('dashboard');  // Redirect to home if not manager
+        }
+    }
     public function save()
     {
         $this->validate();
@@ -42,6 +49,6 @@ class Scores extends Component
 
     public function render()
     {
-        return view('livewire.score.scores')->layout('layouts.app');
+        return view('livewire.scores.create')->layout('layouts.app');
     }
 }
