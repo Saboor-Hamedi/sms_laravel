@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('final')->nullable();
             $table->integer('average')->nullable();
             $table->string('report')->nullable(); // Nullable if report is not mandatory
+            $table->foreignId('academic_year_id')->constrained('academics')->onDelete('cascade');
             $table->index(['report', 'assignment', 'formative', 'midterm', 'final']);
             $table->timestamps();
         });

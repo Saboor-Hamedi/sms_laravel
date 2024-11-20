@@ -9,10 +9,12 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/scroll.css') }}" rel="stylesheet">
     @livewireStyles
+    {{-- @bukStyles(true) --}}
     @vite('resources/css/app.css')
 </head>
 
-<body class="font-sans antialiased">
+<body>
+    {{-- flex h-screen --}}
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
         @if (Auth::check())
             <livewire:layout.navigation />
@@ -24,6 +26,7 @@
     <script src="{{ asset('js/sidebar.js') }}"></script>
     <script src="{{ asset('js/editor.js') }}"></script>
     @livewireScripts
+    {{-- @bukScripts(true) --}}
     @vite('resources/js/app.js')
 </body>
 

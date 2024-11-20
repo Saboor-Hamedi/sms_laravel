@@ -14,4 +14,8 @@ class Scores extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function academic()
+    {
+        return $this->belongsTo(Academics::class, 'academic_year_id');
+    }
 }

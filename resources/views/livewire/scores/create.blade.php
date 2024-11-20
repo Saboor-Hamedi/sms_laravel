@@ -49,13 +49,27 @@
                         </div>
                     </div>
 
-                    <div class="w-full">
-                        <input type="text" wire:model='average' name="average"
-                            class="w-full p-3 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="The Average">
-                        @error('average')
-                            <small class="text-xs text-red-600">{{ $message }}</small>
-                        @enderror
+                    <div class="flex gap-4">
+                        <div class="w-full">
+                            <input type="text" wire:model='average' name="average"
+                                class="w-full p-3 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="The Average">
+                            @error('average')
+                                <small class="text-xs text-red-600">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="w-full">
+                            <select wire:model="academic_year_id" id="academic_year_id" name="academic_year_id"
+                                class="w-full p-3 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">Select Year</option>
+                                @foreach ($academic_years as $year)
+                                    <option value="{{ $year->id }}">{{ $year->year }}</option>
+                                @endforeach
+                            </select>
+                            @error('academic_year_id')
+                                <small class="text-xs text-red-600">{{ $message }}</small>
+                            @enderror
+                        </div>
                     </div>
 
                     <div class="w-full">
@@ -65,9 +79,12 @@
                         @error('report')
                             <small class="text-xs text-red-600">{{ $message }}</small>
                         @enderror
+
                     </div>
                     <div class="flex justify-start">
-                        <button class="px-4 py-2 rounded default-button" type="submit">Submit</button>
+                        <button class="rounded default-button" type="submit">Submit</button>
+                        <button class="ml-2 rounded default-button" type="submit"
+                            wire:click.prevent="cancel">Cancel</button>
                     </div>
                 </form>
             </div>

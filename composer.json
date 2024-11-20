@@ -6,11 +6,13 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "asdh/laravel-flatpickr": "^2.2",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "laravel/ui": "^4.5",
         "livewire/livewire": "^3.4",
         "livewire/volt": "^1.0",
+        "spatie/browsershot": "^4.3",
         "spatie/laravel-permission": "^6.10"
     },
     "require-dev": {

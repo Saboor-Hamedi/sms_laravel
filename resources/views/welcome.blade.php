@@ -1,34 +1,39 @@
-<x-app-layout>
-    {{-- <livewire:header.header /> --}}
-
-    <main class="flex h-screen">
+<x-layout>
+    <section class="flex h-screen gap-2">
+        <!-- Sidebar -->
         <livewire:sidebar.sidebar />
-        <section class="flex flex-col flex-1 h-screen gap-2 p-2">
-            <div class="flex-shrink-0">
+
+        <!-- Main Content -->
+        <div class="flex flex-col flex-1">
+            <!-- Header without Padding -->
+            <div class="bg-blue-500">
                 <livewire:header.header />
             </div>
 
-            <div class="flex-1 overflow-auto rounded shadow scrollbar-thin scrollbar-thumb scrollbar-track"
-                id="posts">
-                <livewire:chat.chat />
-            </div>
-
-            <div class="flex-shrink-0">
-                <div class="flex items-center justify-center p-2 rounded shadow">
-                    <livewire:chat.create />
+            <!-- Chat Section with Padding -->
+            <div class="flex flex-1 mt-3 mb-3 overflow-hidden bg-[#f3f4f6]">
+                <div class="flex-1 overflow-auto rounded shadow scrollbar-thin scrollbar-thumb scrollbar-track"
+                    id="posts">
+                    <livewire:chat.chat />
                 </div>
             </div>
-        </section>
-    </main>
+
+            <!-- Chat Input Form without Padding -->
+            <div class="flex-shrink-0 p-2 bg-[#f3f4f6]">
+                <livewire:chat.create />
+            </div>
+        </div>
+    </section>
+
     <script>
         document.addEventListener('livewire:load', function() {
-            Livewire.on('messageSent', function() {
-                const chatBox = document.getElementById('posts');
-                chatBox.scrollTop = chatBox.scrollHeight;
-            });
-
+            // Scroll chat box to the bottom
             const chatBox = document.getElementById('posts');
             chatBox.scrollTop = chatBox.scrollHeight;
+
+            Livewire.on('messageSent', function() {
+                chatBox.scrollTop = chatBox.scrollHeight;
+            });
         });
     </script>
-</x-app-layout>
+</x-layout>

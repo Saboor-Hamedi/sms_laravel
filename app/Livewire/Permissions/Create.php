@@ -10,7 +10,7 @@ class Create extends Component
 {
 
 
-    #[Validate('required')]
+    #[Validate('required|unique:permissions,name')]
     public $name;
 
     public function save()

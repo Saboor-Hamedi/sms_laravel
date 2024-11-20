@@ -70,8 +70,10 @@
                             <small class="text-xs text-red-600">{{ $message }}</small>
                         @enderror
                     </div>
-                    <div class="flex justify-start">
-                        <button class="px-4 py-2 rounded default-button" type="submit">Submit</button>
+                    <div class="flex justify-start gap-2">
+                        <button class="rounded default-button" type="submit">Submit</button>
+                        <button class="rounded default-button" type="submit"
+                            wire:click.prevent="cancel">Cancel</button>
                     </div>
                 </form>
             </div>

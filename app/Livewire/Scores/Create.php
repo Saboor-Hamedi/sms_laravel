@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Scores;
 
+use App\Models\Academics;
 use App\Models\Scores as ModelsScores;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
@@ -23,16 +24,28 @@ class Create extends Component
     public $average = '';
     #[Validate('nullable|max:255')]
     public $report = '';
+    #[Validate('required')]
+    public $academic_year_id = '';
+    public $academic_years = [];
+
+    protected $listeners = ['refresh_academic_year' => 'academicYear'];
 
     public function mount()
     {
-        if (!Auth::user()->hasRole(['manager', 'teacher'])) {
-            return redirect()->route('dashboard');  // Redirect to home if not manager
-        }
+        // if (!Auth::user()->hasRole(['admin', 'teacher'])) {
+        //     return redirect()->route('dashboard');  // Redirect to home if not manager
+        // }
+        $this->academicYear();
+    }
+    public function academicYear()
+    {
+        $this->academic_years = Academics::where('year', '>', '2010')->get();
     }
     public function save()
     {
+
         $this->validate();
+
         ModelsScores::create([
             'user_id' =>   Auth::user()->id,
             'assignment' => $this->assignment,
@@ -40,11 +53,18 @@ class Create extends Component
             'midterm' => $this->midterm,
             'final' => $this->final,
             'average' => $this->average,
-            'report' => $this->report
+            'report' => $this->report,
+            'academic_year_id' => $this->academic_year_id,
         ]);
 
         $this->reset();
         session()->flash('success', 'Scores saved successfully');
+        $this->dispatch('refresh_academic_year');
+    }
+    public function cancel()
+    {
+        $this->reset();
+        return redirect()->route('dashboard');
     }
 
     public function render()

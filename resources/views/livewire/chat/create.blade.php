@@ -1,10 +1,9 @@
-<div class="w-full border rounded">
+<div class="w-full ">
     <form wire:submit.prevent="save">
-        <textarea wire:model.defer="name" id="name" class="w-full p-2 rounded resize-none"
-            placeholder="Type your message here..." @keydown.enter.exact.prevent="save()">
+        <textarea wire:model.defer="name" id="name" placeholder="Type your message here..."
+            @keydown.enter.exact.prevent="save()">
         </textarea>
     </form>
-
     @script
         <script>
             document.getElementById("name").addEventListener("keypress", e => {

@@ -13,8 +13,8 @@
                 </div>
 
                 <div class="flex justify-start">
-                    <button class="px-4 py-2 rounded default-button" type="submit">Submit</button>
-                    <button class="px-4 py-2 ml-2 rounded default-button" type="button"
+                    <button class="rounded default-button" type="submit">Submit</button>
+                    <button class="ml-2 rounded default-button" type="button"
                         wire:click.prevent='cancel'>Cancel</button>
                 </div>
 

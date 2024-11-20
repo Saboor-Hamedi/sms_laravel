@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Academics;
 use App\Models\Posts;
+use App\Models\Scores;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -19,19 +21,51 @@ class DatabaseSeeder extends Seeder
     protected static ?string $password;
     public function run(): void
     {
-        Posts::factory(1)->create();
-        User::factory()->create([
-            'name' => 'admin',
+        User::create([
+            'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('123'),
+            'password' => Hash::make('123'),
             'remember_token' => Str::random(10),
         ]);
+        // Posts::factory(1)->create();
+        // Academics::factory(20)->create();
+        // Scores::factory(1000)->create();
+        $this->call(AcademicsSeeder::class);
+        $this->call(ScoresSeeder::class);
+        $this->call(PostsSeeder::class);
+
+
+
+        // User::create([
+        //     'name' => 'Teacher',
+        //     'email' => 'teacher@gmail.com',
+        //     'email_verified_at' => now(),
+        //     'password' => Hash::make('123'),
+        //     'remember_token' => Str::random(10),
+        // ]);
+
+        // User::create([
+        //     'name' => 'Guest',
+        //     'email' => 'guest@gmail.com',
+        //     'email_verified_at' => now(),
+        //     'password' => Hash::make('123'),
+        //     'remember_token' => Str::random(10),
+        // ]);
+
+        // User::create([
+        //     'name' => 'Parent',
+        //     'email' => 'parent@gmail.com',
+        //     'email_verified_at' => now(),
+        //     'password' => Hash::make('123'),
+        //     'remember_token' => Str::random(10),
+        // ]);
 
         Role::firstOrCreate(['name' => 'teacher']);
         Role::firstOrCreate(['name' => 'student']);
         Role::firstOrCreate(['name' => 'parent']);
         Role::firstOrCreate(['name' => 'principal']);
         Role::firstOrCreate(['name' => 'manager']);
+        Role::firstOrCreate(['name' => 'admin']);
     }
 }
