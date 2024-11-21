@@ -11,9 +11,9 @@
             </div>
 
             <!-- Chat Section with Padding -->
-            <div class="flex flex-1 mt-3 mb-3 overflow-hidden bg-[#f3f4f6]">
+            <div class="flex flex-1 mt-3 mb-3 overflow-hidden bg-[#f3f4f6] ">
                 <div class="flex-1 overflow-auto rounded shadow scrollbar-thin scrollbar-thumb scrollbar-track"
-                    id="posts">
+                    wire:scroll id="posts">
                     <livewire:chat.chat />
                 </div>
             </div>

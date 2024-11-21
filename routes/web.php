@@ -9,6 +9,7 @@ use App\Livewire\Permissions\Create as CreatePermissions;
 use App\Livewire\Permissions\Edit as EditPermissions;
 use App\Livewire\Scores\Create as CreateScores;
 use App\Livewire\Academic\Create as CreateAcademic;
+use App\Livewire\Academic\Show as ShowAcademic;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Scores\Edit;
 
@@ -24,6 +25,7 @@ Route::get('/permissions/{id}/edit', EditPermissions::class)->name('permissions.
 
 // academic routes 
 Route::get('/academic.create', CreateAcademic::class)->name('academic.create');
+Route::get('/academic/{year}/show', ShowAcademic::class)->name('academic.show');
 // pdf routes - scores 
 
 Route::get('/pdf', ScoringReports::class)->name('pdf.scoring-reports');

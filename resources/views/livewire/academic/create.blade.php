@@ -4,6 +4,9 @@
     <div class="py-2">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                    <h1 class="ml-2 sm:text-md text-xl font-bold text-gray-800">New Academic Year</h1>
+                </div>
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     @if (session()->has('success'))
                         <div class="px-4 py-3 mb-2 text-blue-700 bg-blue-100 border-t border-b border-blue-500"
@@ -45,6 +48,13 @@
             // function(date) {
             //     return (date.getDay() === 0 || date.getDay() === 6);
             // }
+
+            // flatpickr-calendar animate arrowTop arrowLeft open resize it
+            onOpen: function(selectedDates, dateStr, instance) {
+                document.querySelector(".flatpickr-calendar").classList.add("animate__animated",
+                    "animate__fadeIn")
+            },
+
 
         });
     </script>
