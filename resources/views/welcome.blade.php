@@ -20,6 +20,7 @@
 
             <!-- Chat Input Form without Padding -->
             <div class="flex-shrink-0 p-2 bg-[#f3f4f6]">
+
                 <livewire:chat.create />
             </div>
         </div>

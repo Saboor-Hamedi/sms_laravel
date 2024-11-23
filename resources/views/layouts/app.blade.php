@@ -8,6 +8,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/scroll.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/flatpickr.css') }}" rel="stylesheet">
+
     @livewireStyles
     {{-- @bukStyles(true) --}}
     @vite('resources/css/app.css')
@@ -25,6 +27,7 @@
     </div>
     <script src="{{ asset('js/sidebar.js') }}"></script>
     <script src="{{ asset('js/editor.js') }}"></script>
+    <script src="{{ asset('js/flatpickr.js') }}"></script>
     @livewireScripts
     {{-- @bukScripts(true) --}}
     @vite('resources/js/app.js')

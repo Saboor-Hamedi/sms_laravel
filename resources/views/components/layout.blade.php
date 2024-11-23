@@ -9,6 +9,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('css/scroll.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/flatpickr.css') }}" rel="stylesheet">
     @livewireStyles
     @vite('resources/css/app.css')
 </head>
@@ -20,6 +21,8 @@
     </main>
     <script src="{{ asset('js/sidebar.js') }}"></script>
     <script src="{{ asset('js/editor.js') }}"></script>
+    <script src="{{ asset('js/flatpickr.js') }}"></script>
+
     @livewireScripts
     @vite('resources/js/app.js')
 </body>

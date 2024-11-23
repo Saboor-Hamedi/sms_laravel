@@ -1,8 +1,12 @@
 <div class="w-full ">
     <form wire:submit.prevent="save">
+
         <textarea wire:model.defer="name" id="name" placeholder="Type your message here..."
             @keydown.enter.exact.prevent="save()">
         </textarea>
+        @if (session()->has('error'))
+            <small class="text-red-500 text-[8px] text-center">{{ session('error') }}</small>
+        @endif
     </form>
     @script
         <script>
@@ -12,7 +16,6 @@
                     @this.save();
                 }
             });
-
             Livewire.on('posts-updated', () => {
                 setTimeout(() => {
                     const postsContainer = document.querySelector('[x-ref=postsContainer]');

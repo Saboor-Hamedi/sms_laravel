@@ -64,7 +64,7 @@
             </li>
             <li class="mb-4">
                 <a href="{{ route('academic.create') }}"
-                    class="flex items-center p-2 text-gray-700 rounded hover:bg-blue-300" wire:navigate='permissions'>
+                    class="flex items-center p-2 text-gray-700 rounded hover:bg-blue-300" wire:navigate='academic'>
                     <x-heroicon-o-academic-cap class="w-6 text-gray-500 text-[10px]" />
 
                     <span class="ml-2">Academic Year</span>
