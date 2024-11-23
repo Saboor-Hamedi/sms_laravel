@@ -1,4 +1,4 @@
-<div class="relative flex items-center justify-center w-full row-span-1 p-2 bg-white shadow-md">
+<div class="relative flex items-center justify-center w-full row-span-1 p-2 ">
     <header class="relative top-0 z-0 w-full ">
         <div class="container flex items-center justify-between px-2 mx-auto">
             <h1 class="text-xl font-bold text-gray-800">Chat</h1>

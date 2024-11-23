@@ -3,6 +3,8 @@
 namespace App\Livewire\Chat;
 
 use App\Models\Posts;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -12,7 +14,6 @@ class Chat extends Component
     #[Validate('required|string|max:255')]
     public $name = '';
 
-    public $editingPostContent = '';
     public $editingPostId = null;
 
     protected $listeners = [
@@ -28,34 +29,36 @@ class Chat extends Component
     public function edit($postId)
     {
         $post = Posts::findOrFail($postId);
+        $this->authorize('update', $post);
         $this->editingPostId = $postId;
-        $this->editingPostContent = $post->name;
+        $this->name = $post->name;
     }
 
     public function save()
     {
-        $this->validate([
-            'editingPostContent' => 'required|string|max:255',
+        $this->validate();
+        $post = Posts::findOrFail($this->editingPostId);
+
+        $post->update([
+            'user_id' => Auth::id(),
+            'name' => $this->name,
         ]);
 
-        $post = Posts::find($this->editingPostId);
-        $post->name = $this->editingPostContent;
-        $post->save();
-
         $this->editingPostId = null;
-        $this->editingPostContent = '';
+        $this->name = '';
+
         $this->reloadPosts();
     }
 
-    public function cancel()
-    {
-        $this->editingPostId = null;
-        $this->editingPostContent = '';
-    }
 
     public function reloadPosts()
     {
-        $this->posts = Posts::orderBy('created_at', 'asc')->get();
+        $this->posts = Posts::with(['user'])->orderBy('created_at', 'asc')->get();
+    }
+    public function cancel()
+    {
+        $this->editingPostId = null;
+        $this->name = '';
     }
 
     public function render()

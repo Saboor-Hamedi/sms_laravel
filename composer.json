@@ -7,6 +7,9 @@
     "require": {
         "php": "^8.2",
         "asdh/laravel-flatpickr": "^2.2",
+        "blade-ui-kit/blade-heroicons": "^2.5",
+        "blade-ui-kit/blade-icons": "^1.7",
+        "blade-ui-kit/blade-ui-kit": "^0.6.2",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "laravel/ui": "^4.5",

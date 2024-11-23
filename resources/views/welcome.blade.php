@@ -6,14 +6,14 @@
         <!-- Main Content -->
         <div class="flex flex-col flex-1">
             <!-- Header without Padding -->
-            <div class="bg-blue-500">
+            <div>
                 <livewire:header.header />
             </div>
 
             <!-- Chat Section with Padding -->
             <div class="flex flex-1 mt-3 mb-3 overflow-hidden bg-[#f3f4f6] ">
                 <div class="flex-1 overflow-auto rounded shadow scrollbar-thin scrollbar-thumb scrollbar-track"
-                    wire:scroll id="posts">
+                    wire:scroll id="posts" wire:scroll="loadMore">
                     <livewire:chat.chat />
                 </div>
             </div>

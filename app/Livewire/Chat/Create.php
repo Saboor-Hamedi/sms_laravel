@@ -8,6 +8,7 @@ use Livewire\Attributes\Validate;
 
 class Create extends Component
 {
+    #[Validate('required|string|max:255')]
     public $name = '';
 
     protected $listeners = [
@@ -16,10 +17,8 @@ class Create extends Component
 
     public function save()
     {
-        // Validate the input
-        $this->validate([
-            'name' => 'required|string|max:255'
-        ]);
+
+        $this->validate();
 
         // Only save and dispatch if name is not empty
         if (!empty($this->name)) {
