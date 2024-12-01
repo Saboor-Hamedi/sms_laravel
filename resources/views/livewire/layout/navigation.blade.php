@@ -2,6 +2,7 @@
 
 use App\Livewire\Actions\Logout;
 use Livewire\Volt\Component;
+use Illuminate\Support\Str;
 
 new class extends Component {
     /**
@@ -32,9 +33,11 @@ new class extends Component {
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('scores.create')" :active="request()->routeIs('scores.create')" wire:navigate>
-                        {{ __('Scores') }}
-                    </x-nav-link>
+                    @role('teacher')
+                        <x-nav-link :href="route('scores.create')" :active="request()->routeIs('scores.create')" wire:navigate>
+                            {{ __('Scores') }}
+                        </x-nav-link>
+                    @endrole
                     <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')" wire:navigate>
                         {{ __('Home') }}
                     </x-nav-link>
@@ -47,7 +50,7 @@ new class extends Component {
                     <x-slot name="trigger">
                         <button
                             class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md dark:text-gray-400 dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none">
-                            <div x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name"
+                            <div x-data="{{ json_encode(['name' => Str::ucfirst(auth()->user()->name) ?? '']) }}" x-text="name"
                                 x-on:profile-updated.window="name = $event.detail.name"></div>
 
                             <div class="ms-1">

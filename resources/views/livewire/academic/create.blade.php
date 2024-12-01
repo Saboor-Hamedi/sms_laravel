@@ -23,7 +23,7 @@
                             @enderror
                         </div>
                         <div class="mt-2">
-                            <button class="default-button">Submit</button>
+                            <button class="default-button rounded">Submit</button>
                         </div>
                     </form>
                 </div>

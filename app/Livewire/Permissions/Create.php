@@ -13,6 +13,8 @@ class Create extends Component
     #[Validate('required|unique:permissions,name')]
     public $name;
 
+    public $permissionId = '';
+
     public function save()
     {
         $this->validate();
@@ -22,16 +24,18 @@ class Create extends Component
             $this->reset();
             session()->flash('success', 'Permission created successfully.');
 
-            return redirect()->route('dashboard');
+            return redirect()->route('permissions.index');
         } catch (\Exception $e) {
             session()->flash('error', 'An error occurred while creating the permission. Please try again.');
             return redirect()->route('dashboard');
         }
     }
+
+    public function delete($id) {}
     public function cancel()
     {
         $this->reset();
-        return redirect()->route('dashboard');
+        return redirect()->route('permissions.index');
     }
     public function render()
     {

@@ -45,7 +45,7 @@ class ScorePolicy
      */
     public function delete(User $user, Scores $scores): bool
     {
-        return $user->id === $scores->user_id;
+        return $user?->id === $scores->user_id;
     }
 
     /**

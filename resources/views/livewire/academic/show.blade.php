@@ -36,12 +36,12 @@
                                                 {{ $score->academic->year ?? 'N/A' }}</td>
                                             <td class="px-4 py-2 border border-gray-300">
                                                 {{ Str::limit($score->report, 20, '...') }}</td>
-                                            <td class="px-2 py-2 border border-gray-300">
-                                                <a class="default-button text-[10px]"
+                                            <td class="px-2 py-2 border border-gray-300 ">
+                                                <a class="default-button text-[10px] rounded"
                                                     href="{{ route('scores.edit', $score->id) }}">Edit</a>
                                             </td>
-                                            <td class="px-2 py-2 border border-gray-300">
-                                                <button type="button" class="default-button text-[10px]"
+                                            <td class="px-2 py-2 border border-gray-300 ">
+                                                <button type="button" class="default-button text-[10px] rounded"
                                                     wire:click="delete({{ $score->id }})"
                                                     onclick="confirm('Are you sure you want to delete this score?') || event.stopImmediatePropagation()">Delete</button>
                                             </td>

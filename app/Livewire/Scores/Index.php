@@ -28,12 +28,12 @@ class Index extends Component
     public function render()
     {
         // create role for admin
-        // $admin = User::where('email', 'admin@gmail.com')->first();
+        // $admin = User::where('email', operator: 'admin@gmail.com')->first();
         // $adminRole = Role::firstOrCreate(['name' => 'admin']);
         // $permissions = Permission::all();
         // $adminRole->syncPermissions($permissions);
         // $admin->assignRole($adminRole);
-        // dd($admin->hasRole('teacher'));
+        // dd($admin->hasRole('admin'));
 
 
         // $scores = Scores::with(['user', 'academic'])->latest()->where('user_id', Auth::id())->paginate(3);

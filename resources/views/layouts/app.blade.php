@@ -11,7 +11,6 @@
     <link href="{{ asset('css/flatpickr.css') }}" rel="stylesheet">
 
     @livewireStyles
-    {{-- @bukStyles(true) --}}
     @vite('resources/css/app.css')
 </head>
 
@@ -19,7 +18,8 @@
     {{-- flex h-screen --}}
     <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
         @if (Auth::check())
-            <livewire:layout.navigation />
+            {{-- <livewire:layout.navigation /> --}}
+            <livewire:header.header />
         @endif
         <main>
             {{ $slot }}
@@ -29,7 +29,6 @@
     <script src="{{ asset('js/editor.js') }}"></script>
     <script src="{{ asset('js/flatpickr.js') }}"></script>
     @livewireScripts
-    {{-- @bukScripts(true) --}}
     @vite('resources/js/app.js')
 </body>
 

@@ -30,8 +30,8 @@
                             <th class="px-4 py-2 border border-gray-300">Year</th>
                             <th class="px-4 py-2 border border-gray-300">Report</th>
                             @if ($scores->isNotEmpty() && $scores->first()->user_id == auth()->user()->id)
-                                <th class="px-4 py-2 border border-gray-300">Edit</th>
-                                <th class="px-4 py-2 border border-gray-300">Delete</th>
+                                <th class="px-4 py-2 border border-gray-300 rounded">Edit</th>
+                                <th class="px-4 py-2 border border-gray-300 rounded">Delete</th>
                             @endif
                         </tr>
                     </thead>
@@ -47,11 +47,11 @@
                                 <td class="px-4 py-2 border border-gray-300">{{ Str::limit($score->report, 20, '...') }}
                                 </td>
                                 <td class="px-2 py-2 border border-gray-300 ">
-                                    <a class="default-button text-[10px]" wire:navigate='edit'
+                                    <a class="default-button text-[10px] rounded" wire:navigate='edit'
                                         href="{{ route('scores.edit', $score->id) }}">Edit</a>
                                 </td>
                                 <td class="px-2 py-2 border border-gray-300 ">
-                                    <button type="submit" class="default-button text-[10px]"
+                                    <button type="submit" class="default-button text-[10px] rounded"
                                         wire:click="delete({{ $score->id }})"
                                         wire:confirm="Are you sure you want to delete this score?">Delete</button>
                                 </td>
