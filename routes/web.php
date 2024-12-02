@@ -9,6 +9,7 @@ use App\Livewire\Permissions\Index as IndexPermissions;
 use App\Livewire\Permissions\Create as CreatePermissions;
 use App\Livewire\Permissions\Edit as EditPermissions;
 use App\Livewire\Permissions\UserRoleManager;
+use App\Livewire\UserProfile\Index as UserProfileIndex;
 use App\Livewire\Scores\Create as CreateScores;
 use App\Livewire\Academic\Create as CreateAcademic;
 use App\Livewire\Academic\Index as IndexAcademic;
@@ -36,6 +37,7 @@ Route::middleware([CheckPermissions::class])->group(function () {
     Route::get('/scores.scores-admin', ScoresAdmin::class)->name('scores.scores-admin');
 });
 
+Route::get('/user-profile.index', UserProfileIndex::class)->name('user-profile.index');
 // pdf routes - scores 
 Route::get('/pdf', ScoringReports::class)->name('pdf.scoring-reports');
 Route::get('/pdf/report', [PDFController::class, 'tempReport'])->name('pdf.report');

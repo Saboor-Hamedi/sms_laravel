@@ -8,10 +8,10 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     {{-- Custom CSS --}}
+    <link href="{{ asset('css/dashboard__content.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/scroll.css') }}" rel="stylesheet">
     <link href="{{ asset('css/flatpickr.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dashboard__content.css') }}" rel="stylesheet">
 
     @livewireStyles
     @vite('resources/css/app.css')

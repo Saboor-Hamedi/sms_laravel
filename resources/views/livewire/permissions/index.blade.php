@@ -36,9 +36,11 @@
                                             href="{{ route('permissions.edit', $permission->id) }}">Edit</a>
                                     </td>
                                     <td class="px-4 py-2 border border-gray-300 ">
+                                        {{-- wire:click="delete({{ $permission->id }})" --}}
                                         <button type="submit" class="default-button text-[10px] rounded"
-                                            wire:click="delete({{ $permission->id }})"
-                                            wire:confirm="Are you sure you want to delete this permission?">Delete</button>
+                                            wire:confirm="Are you sure you want to delete this permission?">
+                                            Delete
+                                        </button>
                                     </td>
 
                                 </tr>

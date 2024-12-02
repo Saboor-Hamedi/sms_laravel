@@ -39,7 +39,7 @@ class Index extends Component
         // $scores = Scores::with(['user', 'academic'])->latest()->where('user_id', Auth::id())->paginate(3);
         $scores = Scores::with(['academic'])
             ->where('user_id', Auth::id())
-            ->orderBy('created_at', 'desc')
+            ->latest()
             ->paginate(24);
 
 
