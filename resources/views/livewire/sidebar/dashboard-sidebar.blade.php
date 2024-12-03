@@ -2,7 +2,7 @@
 
     <div class="dashboard__sidebar" id="dashboard__sidebar">
         {{-- Sidebar content goes here --}}
-        <h2 class='p-4'>Sidebar</h2>
+        <h2 class='p-4 text-center'>System Dashboard</h2>
 
         {{-- end --}}
         <ul class="p-2">
@@ -76,8 +76,9 @@
                     <img src="{{ asset('css/img/apple-icon.png') }}" alt="Profile" class="profile__image">
                     <span class="profile__name">John Doe</span>
                 </div>
-                <a href="#">Settings</a>
                 <a href="{{ route('user-profile.index') }}" wire:navigate='user-profile'>Profile</a>
+                <a href="{{ route('profile') }}" wire:navigate='profile'>Update Detailts</a>
+                <a href="#">Settings</a>
                 <a href="#">@livewire('logout.logout')</a>
             </div>
         </div>

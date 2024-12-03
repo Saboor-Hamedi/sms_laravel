@@ -1,29 +1,22 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
 
-    <div class="py-12">
-        <div class="mx-auto space-y-6 max-w-7xl sm:px-6 lg:px-8">
-            <div class="p-4 bg-white shadow sm:p-8 dark:bg-gray-800 sm:rounded-lg">
-                <div class="max-w-xl">
-                    <livewire:profile.update-profile-information-form />
-                </div>
-            </div>
-
-            <div class="p-4 bg-white shadow sm:p-8 dark:bg-gray-800 sm:rounded-lg">
-                <div class="max-w-xl">
-                    <livewire:profile.update-password-form />
-                </div>
-            </div>
-
-            <div class="p-4 bg-white shadow sm:p-8 dark:bg-gray-800 sm:rounded-lg">
-                <div class="max-w-xl">
-                    <livewire:profile.delete-user-form />
-                </div>
+    <section class="w-full p-2 flex flex-col gap-2 ">
+        <div class="  bg-white rounded-sm shadow-sm p-2 dark:bg-gray-800">
+            <div class="max-w-full">
+                <livewire:profile.update-profile-information-form />
             </div>
         </div>
-    </div>
+
+        <div class="  bg-white rounded-sm shadow-sm p-2 dark:bg-gray-800">
+            <div class="max-w-full">
+                <livewire:profile.update-password-form />
+            </div>
+        </div>
+
+        <div class="  bg-white rounded-sm shadow-sm p-2 dark:bg-gray-800">
+            <div class="max-w-full">
+                <livewire:profile.delete-user-form />
+            </div>
+        </div>
+    </section>
 </x-app-layout>

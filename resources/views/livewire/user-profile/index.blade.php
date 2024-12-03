@@ -8,7 +8,9 @@
                         class="object-cover object-center w-full h-full rounded-full">
                 </div>
                 <div>
-                    <h3 class="relative text-xl font-bold leading-6 text-slate-900">Dadda Hicham</h3>
+                    <h3 class="relative text-xl font-bold leading-6 text-slate-900">
+                        {{ Str::ucfirst(Auth::user()->name ?? 'N/A') }}
+                    </h3>
                     <p class="text-sm text-gray-600">@daddasoft</p>
                 </div>
                 <div class="flex flex-wrap gap-3">
@@ -19,15 +21,17 @@
                     <span class="px-3 py-1 text-xs font-medium text-indigo-800 bg-indigo-100 rounded-sm">Projects</span>
                 </div>
                 <div class="flex gap-2">
-                    <button type="button" class="rounded default-button text-[10px]">Send Message</button>
+                    <a href="{{ route('profile') }}" class="rounded default-button text-[10px]"
+                        wire:navigate='profile'>Update
+                        Profile</a>
                     <button type="button" class="rounded default-button text-[10px]">Add to projects</button>
                 </div>
                 <h4 class="font-medium leading-3 text-md">About</h4>
-                <p class="text-sm text-stone-500">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facere
-                    dolores
-                    aliquid sequi sunt iusto ipsum earum natus omnis asperiores architecto praesentium dignissimos
-                    pariatur,
-                    ipsa cum? Voluptate vero eius at voluptas?</p>
+                <p class="text-sm text-stone-500">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti id corporis unde sequi rem
+                    cupiditate, exercitationem tempore obcaecati voluptate nostrum, pariatur adipisci laudantium quidem
+                    recusandae. Aspernatur ipsa repellat sit nulla?
+                </p>
                 <h4 class="font-medium leading-3 text-md">Experiences</h4>
 
             </div>
