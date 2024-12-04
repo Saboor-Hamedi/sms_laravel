@@ -10,7 +10,8 @@
         </div>
     @endif
     <section class="flex flex-col w-full gap-2 mt-2 mb-2 ">
-        @livewire('pdf.scoring-reports')
+        {{-- report's button  --}}
+        @livewire('reports.scores')
         <div class="overflow-x-auto custom__scroll__x">
             <table class="w-full border border-collapse border-gray-300 table-auto ">
                 <thead>

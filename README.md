@@ -35,3 +35,11 @@ https://github.com/Saboor-Hamedi/sms_laravel.git
 -   Finally, you can run the server by running the following command:
 
 `php artisan serve`
+
+---
+
+## PDF Generator
+
+-   I am using `https://spatie.be/docs/browsershot/v4/installation-setup`
+    `composer require spatie/browsershot`
+    `npm install puppeteer`

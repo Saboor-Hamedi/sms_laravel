@@ -2,6 +2,8 @@
 
     @foreach ($posts as $post)
         <div class="flex flex-col gap-4 p-4 bg-white border border-gray-200 rounded-md shadow-md">
+
+
             @if ($editingPostId === $post->id)
                 <form wire:submit.prevent="save" class="space-y-2">
                     <textarea wire:model.defer="name" id="name" placeholder="Edit the message..."
@@ -18,6 +20,7 @@
             @else
                 <div>
                     <div class="flex items-center justify-between mb-2">
+
                         <small class="text-xs text-gray-500">{{ $post->created_at->diffForHumans() }}</small>
                         @if (Auth::check())
                             <button wire:click="edit({{ $post->id }})"
@@ -26,7 +29,6 @@
                     </div>
                     <p class="text-gray-900">{{ $post->name }}</p>
                     <small class="text-xs text-gray-500">{{ $post->user->name }}</small>
-
                 </div>
             @endif
         </div>

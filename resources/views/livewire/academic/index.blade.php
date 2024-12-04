@@ -1,7 +1,7 @@
 <div>
     <ul>
         <li class="mb-2" onclick="toggleNestedList(event, this)">
-            <a href="" class="flex items-center p-2 text-gray-700 rounded hover:bg-blue-300">
+            <a href="javascript:void(0)" class="flex items-center p-2 text-gray-700 rounded hover:bg-blue-300">
                 <x-heroicon-m-queue-list class="w-6 text-gray-500 text-[10px]" />
                 <span class="ml-2">Lists of Academic Year</span>
             </a>

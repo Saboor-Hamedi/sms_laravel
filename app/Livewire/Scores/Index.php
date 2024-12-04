@@ -3,16 +3,15 @@
 namespace App\Livewire\Scores;
 
 use App\Models\Scores;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
+use Livewire\Attributes\Layout;
 
 class Index extends Component
 {
     use AuthorizesRequests;
+    #[Layout('layouts.app')]
     public function delete($id)
     {
         $score = Scores::findOrFail($id);
@@ -27,22 +26,10 @@ class Index extends Component
     }
     public function render()
     {
-        // create role for admin
-        // $admin = User::where('email', operator: 'admin@gmail.com')->first();
-        // $adminRole = Role::firstOrCreate(['name' => 'admin']);
-        // $permissions = Permission::all();
-        // $adminRole->syncPermissions($permissions);
-        // $admin->assignRole($adminRole);
-        // dd($admin->hasRole('admin'));
-
-
-        // $scores = Scores::with(['user', 'academic'])->latest()->where('user_id', Auth::id())->paginate(3);
         $scores = Scores::with(['academic'])
             ->where('user_id', Auth::id())
             ->latest()
             ->paginate(24);
-
-
-        return view('livewire.scores.index', ['scores' => $scores])->layout('layouts.app');
+        return view('livewire.scores.index', ['scores' => $scores]);
     }
 }

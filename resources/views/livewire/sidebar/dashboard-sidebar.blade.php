@@ -8,41 +8,102 @@
         <ul class="p-2">
             @if (Auth::check())
                 <li class="mb-4">
-                    <a href="{{ route('dashboard') }}" class="flex items-center p-2 rounded hover:bg-blue-300 "
+                    <a href="{{ route('dashboard') }}"
+                        class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]"
                         wire:navigate='dashboard'>
-                        <x-heroicon-o-home class="w-6  text-[10px]" />
+                        <x-heroicon-o-home class="hero__icons" />
                         <span class="ml-2">Dashboard</span>
                     </a>
                 </li>
+                {{-- registeration --}}
+                <li class="w-full mb-4 text-blue-500 border border-gray-600 rounded-md cursor-pointer">
+                </li>
+                {{-- nested menu --}}
+
+                <li class="mb-4 " onclick="menuToggle()">
+                    <a href="javascript:void(0)"
+                        class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]">
+                        <x-heroicon-o-home class="hero__icons" />
+                        <span class="ml-2">Details</span>
+                    </a>
+                </li>
+
+                <ul id="dropdown__menu" class="hidden py-2 space-y-2 ">
+                    <li class="ml-4">
+                        <a href="{{ route('students.create') }}"
+                            class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]"
+                            wire:navigate='students.create'>
+                            <x-heroicon-o-user class="hero__icons" />
+                            <span class="ml-2">Register Students</span>
+                        </a>
+                    </li>
+                    <li class="ml-4">
+                        <a href="#"
+                            class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]">Password</a>
+                    </li>
+                    <li class="ml-4">
+                        <a href="#"
+                            class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]">Posts</a>
+                    </li>
+                </ul>
+
+                <script>
+                    function menuToggle() {
+                        var dropdownMenu = document.getElementById('dropdown__menu');
+                        if (dropdownMenu.classList.contains('hidden')) {
+                            dropdownMenu.classList.remove('hidden');
+                        } else {
+                            dropdownMenu.classList.add('hidden');
+                        }
+                    }
+                    document.addEventListener('DOMContentLoaded', menuToggle);
+                    document.addEventListener('livewire:navigated', menuToggle);
+                </script>
+
+                {{-- end nested menu --}}
 
                 @can('admin')
+                    {{-- start dropdown --}}
+                    <li class="pl-6 mt-2 dropdown-menu" onclick="toggleDropdown()">
+
+                    </li>
+                    {{-- Permissions --}}
+                    <li class="w-full mb-4 text-blue-500 border border-gray-600 rounded-md cursor-pointer">
+                    </li>
+                    {{-- drop down end --}}
                     <li class="mb-4">
                         <a href="{{ route('permissions.user-role-manager') }}"
-                            class="flex items-center p-2 rounded hover:bg-blue-300 "
+                            class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px] "
                             wire:navigate='permissions.user-role-manager'>
-                            <x-heroicon-o-home class="w-6  text-[10px]" />
+                            <x-heroicon-o-home class="hero__icons" />
                             <span class="ml-2">Grant Permissions</span>
                         </a>
                     </li>
+
                     <li class="mb-4">
-                        <a href="{{ route('permissions.create') }}" class="flex items-center p-2 rounded hover:bg-blue-300 "
+                        <a href="{{ route('permissions.create') }}"
+                            class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px] "
                             wire:navigate='permissions'>
-                            <x-heroicon-o-cube class="w-6  text-[10px]" />
+                            <x-heroicon-o-cube class="hero__icons" />
                             <span class="ml-2">Create Permission</span>
                         </a>
                     </li>
                     <li class="mb-4">
-                        <a href="{{ route('permissions.index') }}" class="flex items-center p-2 rounded hover:bg-blue-300 "
+                        <a href="{{ route('permissions.index') }}"
+                            class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]"
                             wire:navigate='permissions'>
-                            <x-heroicon-o-cloud-arrow-up class="w-6  text-[10px]" />
-
+                            <x-heroicon-o-cloud-arrow-up class="hero__icons" />
                             <span class="ml-2">Show Permission</span>
                         </a>
                     </li>
+                    <li class="w-full mb-4 text-blue-500 border border-gray-600 rounded-md cursor-pointer">
+                    </li>
+                    {{-- Academics  --}}
                     <li class="mb-4">
-                        <a href="{{ route('academic.create') }}" class="flex items-center p-2 rounded hover:bg-blue-300 "
+                        <a href="{{ route('academic.create') }}"
+                            class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]"
                             wire:navigate='academic'>
-                            <x-heroicon-o-academic-cap class="w-6 " />
+                            <x-heroicon-o-academic-cap class="hero__icons" />
                             <span class="ml-2">Academic Year</span>
                         </a>
                     </li>
@@ -50,9 +111,10 @@
                 {{-- Academic list --}}
                 @can('teacher')
                     <li class="mb-4">
-                        <a href="{{ route('scores.create') }}" class="flex items-center p-2 rounded hover:bg-blue-300 "
+                        <a href="{{ route('scores.create') }}"
+                            class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]"
                             wire:navigate='scores'>
-                            <x-iconpark-scoreboard-o class="w-6  text-[10px]" />
+                            <x-iconpark-scoreboard-o class="hero__icons" />
                             <span class="ml-2">Scores</span>
                         </a>
                     </li>

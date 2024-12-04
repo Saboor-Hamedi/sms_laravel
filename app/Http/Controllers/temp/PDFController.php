@@ -4,15 +4,15 @@ namespace App\Http\Controllers\temp;
 
 use App\Http\Controllers\Controller;
 use App\Models\Scores;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PDFController extends Controller
 {
-    public function showReport(Request $request)
+
+    public function scorePDF()
     {
-        // Fetch the scores
-        $scores = Scores::with(['academic'])->where('user_id', auth()->user()->id)->limit(10)->get();
-        $html = view('livewire.pdf.report', compact('scores'))->render();
-        return response($html);
+        $scores = Scores::with(['academic'])
+            ->latest()->get();;
+        return view('reports.scores-reports', compact('scores'));
     }
 }

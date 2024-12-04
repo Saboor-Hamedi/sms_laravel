@@ -12,7 +12,22 @@
     transition: transform 0.3s ease-in-out;
     z-index: 1000;
 }
+/* start scroll  */
+.dashboard__sidebar::-webkit-scrollbar {
+    width: 8px;
+    height: 6px;
+}
 
+.dashboard__sidebar::-webkit-scrollbar-track {
+    background: #f3f4f6;
+    /* border-radius: 10px; */
+}
+
+.dashboard__sidebar::-webkit-scrollbar-thumb {
+    background: #aaa1a1;
+    /* border-radius: 10px; */
+}
+/* end scroll */
 .dashboard__sidebar.dashboard__open {
     transform: translateX(0);
 }
@@ -131,4 +146,10 @@
     .burger-button {
         display: none;
     }
+}
+/* hero icons */
+.hero__icons {
+    margin-right: 5px;
+    width: 15px;
+    height: 15px;
 }
