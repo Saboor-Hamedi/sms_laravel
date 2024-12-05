@@ -64,9 +64,7 @@
 
                 @can('admin')
                     {{-- start dropdown --}}
-                    <li class="pl-6 mt-2 dropdown-menu" onclick="toggleDropdown()">
-
-                    </li>
+                    <li class="pl-6 mt-2 dropdown-menu" onclick="toggleDropdown()"></li>
                     {{-- Permissions --}}
                     <li class="w-full mb-4 text-blue-500 border border-gray-600 rounded-md cursor-pointer">
                     </li>
