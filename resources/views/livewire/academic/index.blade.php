@@ -1,7 +1,8 @@
 <div>
     <ul>
         <li class="mb-2" onclick="toggleNestedList(event, this)">
-            <a href="javascript:void(0)" class="flex items-center p-2 text-gray-700 rounded hover:bg-blue-300">
+            <a href="javascript:void(0)"
+                class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]">
                 <x-heroicon-m-queue-list class="w-6 text-gray-500 text-[10px]" />
                 <span class="ml-2">Lists of Academic Year</span>
             </a>
@@ -12,7 +13,7 @@
                 @foreach ($scores as $score)
                     <li class="mb-2">
                         <a href="{{ route('academic.show', $score->academic->year) }}"
-                            class="flex items-center p-2 text-gray-700 rounded hover:bg-blue-300"
+                            class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]"
                             wire:navigate='overview'>
                             <i class="fas fa-eye"></i>
                             <span class="ml-2">{{ $score->academic->year ?? '' }}</span>

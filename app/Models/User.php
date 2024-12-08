@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -57,5 +58,21 @@ class User extends Authenticatable
     public function scores()
     {
         return $this->hasMany(Scores::class);
+    }
+
+    public function student()
+    {
+        return $this->hasOne(Student::class);
+    }
+
+    public function getRoles()
+    {
+        if ($this->roles->isNotEmpty()) {
+            return $this->roles->map(function ($role) {
+                return '<a href="#" class="btn btn-sm btn-primary">#' . $role->name . '</a>';
+            })->implode('. ');
+        } else {
+            return 'Guest';
+        }
     }
 }

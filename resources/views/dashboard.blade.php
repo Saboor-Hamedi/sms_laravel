@@ -1,4 +1,7 @@
 <x-app-layout>
+
+    @section('title', 'Dashboard')
+
     <div class="py-2">
         <div class="p-2 mx-auto max-w-7xl">
             @if (Auth::user()->hasRole('admin'))

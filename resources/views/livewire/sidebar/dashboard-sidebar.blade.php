@@ -2,7 +2,7 @@
 
     <div class="dashboard__sidebar" id="dashboard__sidebar">
         {{-- Sidebar content goes here --}}
-        <h2 class='p-4 text-center'>System Dashboard</h2>
+        <h2 class='p-4 text-center'>SMS Dashboard</h2>
 
         {{-- end --}}
         <ul class="p-2">
@@ -15,54 +15,51 @@
                         <span class="ml-2">Dashboard</span>
                     </a>
                 </li>
-                {{-- registeration --}}
-                <li class="w-full mb-4 text-blue-500 border border-gray-600 rounded-md cursor-pointer">
-                </li>
-                {{-- nested menu --}}
 
-                <li class="mb-4 " onclick="menuToggle()">
-                    <a href="javascript:void(0)"
-                        class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]">
-                        <x-heroicon-o-home class="hero__icons" />
-                        <span class="ml-2">Details</span>
+                {{-- profile update --}}
+
+                <li class="mb-4">
+                    <a href="{{ route('user-profile.update') }}"
+                        class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]"
+                        wire:navigate='scores'>
+                        <x-heroicon-o-document-text class="hero__icons" />
+                        <span class="ml-2">Update Profile</span>
                     </a>
                 </li>
 
-                <ul id="dropdown__menu" class="hidden py-2 space-y-2 ">
-                    <li class="ml-4">
-                        <a href="{{ route('students.create') }}"
-                            class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]"
-                            wire:navigate='students.create'>
-                            <x-heroicon-o-user class="hero__icons" />
-                            <span class="ml-2">Register Students</span>
+                @can('admin')
+                    {{-- registeration --}}
+                    <li class="w-full mb-4 text-blue-500 border border-gray-600 rounded-md cursor-pointer">
+                    </li>
+                    {{-- nested menu --}}
+
+                    <li class="mb-4 " onclick="menuToggle()">
+                        <a href="javascript:void(0)"
+                            class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]">
+                            <x-heroicon-o-home class="hero__icons" />
+                            <span class="ml-2">Details</span>
                         </a>
                     </li>
-                    <li class="ml-4">
-                        <a href="#"
-                            class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]">Password</a>
-                    </li>
-                    <li class="ml-4">
-                        <a href="#"
-                            class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]">Posts</a>
-                    </li>
-                </ul>
 
-                <script>
-                    function menuToggle() {
-                        var dropdownMenu = document.getElementById('dropdown__menu');
-                        if (dropdownMenu.classList.contains('hidden')) {
-                            dropdownMenu.classList.remove('hidden');
-                        } else {
-                            dropdownMenu.classList.add('hidden');
-                        }
-                    }
-                    document.addEventListener('DOMContentLoaded', menuToggle);
-                    document.addEventListener('livewire:navigated', menuToggle);
-                </script>
+                    <ul id="dropdown__menu" class="hidden py-2 space-y-2 ">
+                        <li class="ml-4">
+                            <a href="{{ route('students.register') }}"
+                                class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]"
+                                wire:navigate='students.register'>
+                                <x-heroicon-o-user class="hero__icons" />
+                                <span class="ml-2">Register Students</span>
+                            </a>
+                        </li>
+                        <li class="ml-4">
+                            <a href="#"
+                                class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]">Password</a>
+                        </li>
+                        <li class="ml-4">
+                            <a href="#"
+                                class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]">Posts</a>
+                        </li>
+                    </ul>
 
-                {{-- end nested menu --}}
-
-                @can('admin')
                     {{-- start dropdown --}}
                     <li class="pl-6 mt-2 dropdown-menu" onclick="toggleDropdown()"></li>
                     {{-- Permissions --}}
@@ -138,7 +135,7 @@
                 </div>
                 <a href="{{ route('user-profile.index') }}" wire:navigate='user-profile'>Profile</a>
                 <a href="{{ route('profile') }}" wire:navigate='profile'>Update Detailts</a>
-                <a href="#">Settings</a>
+                <a href="#" wire:navigate='settings'>Settings</a>
                 <a href="#">@livewire('logout.logout')</a>
             </div>
         </div>
@@ -170,21 +167,4 @@
         </script>
         {{-- end --}}
     </div>
-
-    <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('dashboard__sidebar');
-            const navbar = document.getElementById('dashboard__navbar');
-            const content = document.getElementById('dashboard__content');
-            const isOpen = sidebar.classList.toggle('dashboard__open');
-            if (isOpen) {
-                navbar.classList.add('shifted');
-            } else {
-                navbar.classList.remove('shifted');
-                content.classList.remove('shifted');
-            }
-        }
-        document.addEventListener('DOMContentLoaded', toggleSidebar);
-        document.addEventListener('livewire:navigated', toggleSidebar);
-    </script>
 </div>

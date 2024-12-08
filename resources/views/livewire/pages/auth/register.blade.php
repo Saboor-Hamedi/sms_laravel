@@ -36,7 +36,7 @@ new #[Layout('layouts.guest')] class extends Component {
 }; ?>
 
 <div>
-    <form wire:submit="register">
+    <form wire:submit.prevent="register">
         <!-- Name -->
         <div>
             <x-text-input wire:model="name" id="name" class="block mt-1 w-full" type="text" name="name" required

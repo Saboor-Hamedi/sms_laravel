@@ -10,6 +10,7 @@ use Livewire\Attributes\Layout;
 
 class Index extends Component
 {
+
     use AuthorizesRequests;
     #[Layout('layouts.app')]
     public function delete($id)
