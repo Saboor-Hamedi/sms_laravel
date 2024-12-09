@@ -80,7 +80,7 @@
                         <span class="ml-2">Scores</span>
                     </a>
                 </li>
-                <livewire:academic.index />
+                {{-- <livewire:academic.index /> --}}
             @endcan
         @endif
     </ul>

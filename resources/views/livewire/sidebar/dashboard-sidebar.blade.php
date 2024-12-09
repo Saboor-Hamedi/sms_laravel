@@ -2,8 +2,7 @@
 
     <div class="dashboard__sidebar" id="dashboard__sidebar">
         {{-- Sidebar content goes here --}}
-        <h2 class='p-4 text-center'>SMS Dashboard</h2>
-
+        <h2 class='p-4 text-center w-full bg-gray-700'>SMS Dashboard</h2>
         {{-- end --}}
         <ul class="p-2">
             @if (Auth::check())
@@ -31,7 +30,7 @@
                             Register Students
                         </h4>
                     </div>
-                    <li class="mb-4" onclick="menuToggle()">
+                    <li class="mb-1" onclick="menuToggle()">
                         <a href="javascript:void(0)"
                             class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]">
                             <x-heroicon-o-home class="hero__icons" />
@@ -39,52 +38,54 @@
                         </a>
                     </li>
 
-                    <ul id="dropdown__menu" class="hidden py-2 space-y-2 ">
+                    <ul id="dropdown__menu" class="hidden ">
                         <li class="ml-4">
                             <x-admin-link :href="route('students.register')" :active="request()->routeIs('students.register')">
                                 <x-heroicon-o-user class="hero__icons" />
-                                <span class="ml-2">Register Students</span>
+                                <span>{{ __('Register Students') }}</span>
                             </x-admin-link>
                         </li>
                         <li class="ml-4">
                             <a href="#"
-                                class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]">Password</a>
+                                class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]">{{ __('Password') }}</a>
                         </li>
                         <li class="ml-4">
                             <a href="#"
-                                class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]">Posts</a>
+                                class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]">
+                                {{ __('Posts') }}
+                            </a>
                         </li>
                     </ul>
 
                     {{-- start dropdown --}}
-                    <li class="pl-3 mt-2 dropdown-menu" onclick="toggleDropdown()"></li>
+                    <li class="pl-3 dropdown-menu" onclick="toggleDropdown()"></li>
                     {{-- Permissions --}}
                     <div>
-                        <h4 class="lg:text-[20px] md:text[15px] sm:text-[12px] py-3 ">
+                        <h4 class="lg:text-[20px] md:text[15px] sm:text-[12px] mb-2 ">
                             Permissions
                         </h4>
                     </div>
                     {{-- drop down end --}}
-                    <li class="mb-4">
+                    <li class="mb-1">
                         <x-admin-link :href="route('permissions.user-role-manager')" :active="request()->routeIs('permissions.user-role-manager')">
                             <x-heroicon-o-home class="hero__icons" />
                             <span class="ml-2">Grant Permissions</span>
                         </x-admin-link>
                     </li>
-                    <li class="mb-4">
+                    <li class="mb-1">
                         <x-admin-link :href="route('permissions.create')" :active="request()->routeIs('permissions.create')">
                             <x-heroicon-o-cube class="hero__icons" />
                             <span class="ml-2">Create Permission</span>
                         </x-admin-link>
                     </li>
-                    <li class="mb-4">
+                    <li class="mb-1">
                         <x-admin-link :href="route('permissions.index')" :active="request()->routeIs('permissions.index')">
                             <x-heroicon-o-cloud-arrow-up class="hero__icons" />
                             <span class="ml-2">Show Permission</span>
                         </x-admin-link>
                     </li>
                     <div>
-                        <h4 class="lg:text-[20px] md:text[15px] sm:text-[12px] py-3 ">
+                        <h4 class="lg:text-[20px] md:text[15px] sm:text-[12px] mb-3 ">
                             Academic Year
                         </h4>
                     </div>
@@ -98,7 +99,7 @@
                 @endcan
                 {{-- Academic list --}}
                 @can('teacher')
-                    <li class="mb-4">
+                    <li class="mb-1">
                         <a href="{{ route('scores.create') }}"
                             class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]"
                             wire:navigate='scores'>

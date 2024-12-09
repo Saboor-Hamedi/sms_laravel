@@ -11,13 +11,11 @@
         </div>
     @endif
     <section class="flex flex-col w-full gap-2 mt-2 mb-2 ">
+
         @livewire('reports.scores')
-        @php
-            $groupedScores = $scores->groupBy('academic.year');
-        @endphp
+
         @foreach ($groupedScores as $year => $yearScores)
             <h2 class="mt-4 text-lg font-bold">Academic Year: {{ $year }}</h2>
-
             <div class="overflow-x-auto custom__scroll__x">
                 <table class="w-full border border-collapse border-gray-300 table-auto ">
                     <thead>
