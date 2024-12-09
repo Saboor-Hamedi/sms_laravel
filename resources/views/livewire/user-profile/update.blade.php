@@ -53,6 +53,14 @@
                             <small class="text-xs text-red-600">{{ $message }}</small>
                         @enderror
                     </div>
+
+                </div>
+                <div class="w-full mt-4">
+                    <textarea wire:model.defer="description" id="description" placeholder="About Me..."
+                        class="w-full p-2 bg-white rounded-lg resize-none focus:outline-none "></textarea>
+                    @error('description')
+                        <small class="text-xs text-red-600">{{ $message }}</small>
+                    @enderror
                 </div>
                 <div class="flex w-ful gap-2">
                     <button class="rounded default-button text-[10px] mt-2">{{ __('Register') }}</button>

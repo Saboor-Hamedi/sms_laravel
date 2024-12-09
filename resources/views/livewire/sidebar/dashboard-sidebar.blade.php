@@ -7,33 +7,31 @@
         {{-- end --}}
         <ul class="p-2">
             @if (Auth::check())
-                <li class="mb-4">
-                    <a href="{{ route('dashboard') }}"
-                        class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]"
-                        wire:navigate='dashboard'>
-                        <x-heroicon-o-home class="hero__icons" />
-                        <span class="ml-2">Dashboard</span>
-                    </a>
-                </li>
-
+                <x-admin-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-heroicon-o-home class="hero__icons" /> {{ __('Dashboard') }}
+                </x-admin-link>
                 {{-- profile update --}}
-
-                <li class="mb-4">
-                    <a href="{{ route('user-profile.update') }}"
-                        class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]"
-                        wire:navigate='scores'>
-                        <x-heroicon-o-document-text class="hero__icons" />
-                        <span class="ml-2">Update Profile</span>
-                    </a>
-                </li>
-
+                <div>
+                    <h4 class="lg:text-[20px] md:text[15px] sm:text-[12px] py-3 ">
+                        Personal Details
+                    </h4>
+                </div>
+                <x-admin-link :href="route('user-profile.index')" :active="request()->routeIs('user-profile.index')">
+                    <x-heroicon-o-document-text class="hero__icons" />
+                    {{ __('Profile') }}
+                </x-admin-link>
+                <x-admin-link :href="route('user-profile.update')" :active="request()->routeIs('user-profile.update')">
+                    <x-heroicon-o-document-text class="hero__icons" />
+                    {{ __('Update Profile') }}
+                </x-admin-link>
                 @can('admin')
-                    {{-- registeration --}}
-                    <li class="w-full mb-4 text-blue-500 border border-gray-600 rounded-md cursor-pointer">
-                    </li>
                     {{-- nested menu --}}
-
-                    <li class="mb-4 " onclick="menuToggle()">
+                    <div>
+                        <h4 class="lg:text-[20px] md:text[15px] sm:text-[12px] py-3 ">
+                            Register Students
+                        </h4>
+                    </div>
+                    <li class="mb-4" onclick="menuToggle()">
                         <a href="javascript:void(0)"
                             class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]">
                             <x-heroicon-o-home class="hero__icons" />
@@ -43,12 +41,10 @@
 
                     <ul id="dropdown__menu" class="hidden py-2 space-y-2 ">
                         <li class="ml-4">
-                            <a href="{{ route('students.register') }}"
-                                class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]"
-                                wire:navigate='students.register'>
+                            <x-admin-link :href="route('students.register')" :active="request()->routeIs('students.register')">
                                 <x-heroicon-o-user class="hero__icons" />
                                 <span class="ml-2">Register Students</span>
-                            </a>
+                            </x-admin-link>
                         </li>
                         <li class="ml-4">
                             <a href="#"
@@ -61,46 +57,43 @@
                     </ul>
 
                     {{-- start dropdown --}}
-                    <li class="pl-6 mt-2 dropdown-menu" onclick="toggleDropdown()"></li>
+                    <li class="pl-3 mt-2 dropdown-menu" onclick="toggleDropdown()"></li>
                     {{-- Permissions --}}
-                    <li class="w-full mb-4 text-blue-500 border border-gray-600 rounded-md cursor-pointer">
-                    </li>
+                    <div>
+                        <h4 class="lg:text-[20px] md:text[15px] sm:text-[12px] py-3 ">
+                            Permissions
+                        </h4>
+                    </div>
                     {{-- drop down end --}}
                     <li class="mb-4">
-                        <a href="{{ route('permissions.user-role-manager') }}"
-                            class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px] "
-                            wire:navigate='permissions.user-role-manager'>
+                        <x-admin-link :href="route('permissions.user-role-manager')" :active="request()->routeIs('permissions.user-role-manager')">
                             <x-heroicon-o-home class="hero__icons" />
                             <span class="ml-2">Grant Permissions</span>
-                        </a>
+                        </x-admin-link>
                     </li>
-
                     <li class="mb-4">
-                        <a href="{{ route('permissions.create') }}"
-                            class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px] "
-                            wire:navigate='permissions'>
+                        <x-admin-link :href="route('permissions.create')" :active="request()->routeIs('permissions.create')">
                             <x-heroicon-o-cube class="hero__icons" />
                             <span class="ml-2">Create Permission</span>
-                        </a>
+                        </x-admin-link>
                     </li>
                     <li class="mb-4">
-                        <a href="{{ route('permissions.index') }}"
-                            class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]"
-                            wire:navigate='permissions'>
+                        <x-admin-link :href="route('permissions.index')" :active="request()->routeIs('permissions.index')">
                             <x-heroicon-o-cloud-arrow-up class="hero__icons" />
                             <span class="ml-2">Show Permission</span>
-                        </a>
+                        </x-admin-link>
                     </li>
-                    <li class="w-full mb-4 text-blue-500 border border-gray-600 rounded-md cursor-pointer">
-                    </li>
+                    <div>
+                        <h4 class="lg:text-[20px] md:text[15px] sm:text-[12px] py-3 ">
+                            Academic Year
+                        </h4>
+                    </div>
                     {{-- Academics  --}}
                     <li class="mb-4">
-                        <a href="{{ route('academic.create') }}"
-                            class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]"
-                            wire:navigate='academic'>
+                        <x-admin-link :href="route('academic.create')" :active="request()->routeIs('academic.create')">
                             <x-heroicon-o-academic-cap class="hero__icons" />
                             <span class="ml-2">Academic Year</span>
-                        </a>
+                        </x-admin-link>
                     </li>
                 @endcan
                 {{-- Academic list --}}

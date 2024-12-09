@@ -40,6 +40,8 @@
                     <span class="px-3 py-1 text-xs font-medium text-blue-800 bg-blue-100 rounded-sm">Management</span>
                     <span class="px-3 py-1 text-xs font-medium text-indigo-800 bg-indigo-100 rounded-sm">Projects</span>
                 </div>
+
+
                 <div class="flex gap-2">
                     <a href="{{ route('profile') }}" class="rounded default-button text-[10px]" wire:navigate='profile'>
                         {{ __('Update Profile') }}
@@ -48,9 +50,7 @@
                 </div>
                 <h4 class="font-medium leading-3 text-md">About</h4>
                 <p class="text-sm text-stone-500">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti id corporis unde sequi rem
-                    cupiditate, exercitationem tempore obcaecati voluptate nostrum, pariatur adipisci laudantium quidem
-                    recusandae. Aspernatur ipsa repellat sit nulla?
+                    {!! $student->description ?? '' !!}
                 </p>
                 <h4 class="font-medium leading-3 text-md">Experiences</h4>
 

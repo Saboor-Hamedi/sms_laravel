@@ -12,7 +12,6 @@
     @endif
     <section class="flex flex-col w-full gap-2 mt-2 mb-2 ">
         @livewire('reports.scores')
-
         @php
             $groupedScores = $scores->groupBy('academic.year');
         @endphp

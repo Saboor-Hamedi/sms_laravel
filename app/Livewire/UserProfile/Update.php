@@ -31,6 +31,8 @@ class Update extends Component
     public $state = '';
     #[Validate('required|min:2|max:100')]
     public $address = '';
+    #[Validate('required|nullable|min:2|max:255')]
+    public $description = '';
 
 
     /*
@@ -44,6 +46,7 @@ class Update extends Component
         $this->country = $student->country ??  '';
         $this->state = $student->state ?? '';
         $this->address = $student->address ?? '';
+        $this->description = $student->description ?? '';
     }
     /*
     *  update method to update the student record in the database.
@@ -61,6 +64,7 @@ class Update extends Component
                     'country' => $this->country,
                     'state' => $this->state,
                     'address' => $this->address,
+                    'description' => $this->description,
                     'is_active' => true,
                 ]
             );

@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('lastname', 50);
+            $table->string('lastname', 50)->index('lastname');
             $table->string('country', 50);
             $table->string('state', 50);
-            $table->string('address', 100)->nullable();
+            $table->string('address', 100);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
