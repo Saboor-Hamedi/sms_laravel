@@ -11,11 +11,34 @@
                         class="object-cover object-center w-full h-full rounded-full">
                 </div>
                 <div>
-                    <h3 class="relative text-xl font-bold leading-6 text-slate-900 mb-2">
-                        {{ Str::ucfirst(Auth::user()->name ?? 'N/A') }}
-                        {{ $student->lastname ?? 'N/A' }}
-                    </h3>
-                    <div class="flex flex-col ">
+                    <div class="flex justify-between items-center max-w-full">
+                        <div class="">
+                            <h3 class="text-base sm:text-lg md:text-xl text-black font-bold">
+                                {{ Str::ucfirst(Auth::user()->name ?? 'N/A') }}
+                                {{ $student->lastname ?? '' }}
+                            </h3>
+                        </div>
+                        <div class="flex gap-2 ">
+                            <a href="{{ route('profile') }}" type="button" class="rounded default-button text-[10px]"
+                                wire:navigate='profile'>
+                                {{ __('Profile') }}
+                            </a>
+                            <a href="{{ route('profile') }}" type="button" class="rounded default-button text-[10px]"
+                                wire:navigate='profile'>
+                                {{ __('Post') }}
+                            </a>
+                        </div>
+                    </div>
+
+                    {{-- bio --}}
+                    <div>
+                        <h4 class="lg:text-lg font-medium leading-4 text-slate-400 md:text-md sm:text-sm">Bio</h4>
+                        <p class="lg:text-[14px] font-medium leading-4 text-slate-400 md:text-[13px] sm:text-[11px]">
+                            {!! $student->description ?? '' !!}
+                        </p>
+                    </div>
+                    {{-- end bio --}}
+                    <div class="flex flex-col mt-2">
                         {{-- last name --}}
                         <div class="flex items-center justify-start text-center">
                             <x-heroicon-c-code-bracket class="hero__icons" />
@@ -26,33 +49,25 @@
                         {{-- location --}}
                         <div class="flex items-center justify-start text-center">
                             <x-heroicon-o-map class="hero__icons" />
-                            {{ $student->address ?? '' }}
+                            {{ $student->address ?? 'Add address' }}
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-wrap gap-3">
+                <div class="flex flex-wrap gap-3 ">
                     <span class="px-3 py-1 text-xs font-medium text-yellow-800 bg-yellow-100 rounded-sm">
-                        {{ $student->country ?? 'N/A' }}
+                        {{ $student->country ?? 'no country' }}
                     </span>
                     <span class="px-3 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-sm">
-                        {{ $student->state ?? '' }}
+                        {{ $student->state ?? 'no state' }}
                     </span>
                     <span class="px-3 py-1 text-xs font-medium text-blue-800 bg-blue-100 rounded-sm">Management</span>
                     <span class="px-3 py-1 text-xs font-medium text-indigo-800 bg-indigo-100 rounded-sm">Projects</span>
                 </div>
 
 
-                <div class="flex gap-2">
-                    <a href="{{ route('profile') }}" class="rounded default-button text-[10px]" wire:navigate='profile'>
-                        {{ __('Update Profile') }}
-                    </a>
-                    <button type="button" class="rounded default-button text-[10px]">{{ __('New Post') }}</button>
-                </div>
-                <h4 class="font-medium leading-3 text-md">About</h4>
-                <p class="text-sm text-stone-500">
-                    {!! $student->description ?? '' !!}
-                </p>
-                <h4 class="font-medium leading-3 text-md">Experiences</h4>
+
+
+                {{-- <h4 class="font-medium leading-3 text-md">Experiences</h4> --}}
 
             </div>
         </div>

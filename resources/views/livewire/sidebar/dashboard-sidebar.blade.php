@@ -100,12 +100,11 @@
                 {{-- Academic list --}}
                 @can('teacher')
                     <li class="mb-1">
-                        <a href="{{ route('scores.create') }}"
-                            class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]"
-                            wire:navigate='scores'>
+                        <x-admin-link :href="route('scores.create')" :active="request()->routeIs('scores.create')">
                             <x-iconpark-scoreboard-o class="hero__icons" />
                             <span class="ml-2">Scores</span>
-                        </a>
+                        </x-admin-link>
+
                     </li>
                     <livewire:academic.index />
                 @endcan
