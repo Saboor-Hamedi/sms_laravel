@@ -32,13 +32,11 @@ class Index extends Component
     }
     public function render()
     {
-        // how to add the code below into a cache::remember ? 
         $userId = Auth::id();
         $cacheKey = self::CACHE_KEY . '_' . $userId;
-        $scores = Cache::remember($cacheKey, self::CACHE_TIME, function () use ($userId) {
-            return Scores::with(['academic', 'user']) // Eager load 'academic' and 'user'
+        $scores = Cache::remember($cacheKey, now()->addMinutes(self::CACHE_TIME), function () use ($userId) {
+            return Scores::with(['academic', 'user'])
                 ->where('user_id', $userId)
-                // ->orderBy('year', 'desc')
                 ->paginate(self::PAGINATE_SIZE);
         });
 

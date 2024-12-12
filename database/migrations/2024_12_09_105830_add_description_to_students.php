@@ -13,7 +13,8 @@ return new class extends Migration
     //  add column
     public function up(): void
     {
-        Schema::table('students', function (Blueprint $table) {
+        Schema::table('students', callback: function (Blueprint $table) {
+
             $table->string('description', 100)->nullable();
         });
     }
@@ -24,7 +25,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('students', function (Blueprint $table) {
-            $table->string('description', 100)->nullable();
+            if (Schema::hasColumn('students', 'description')) {
+                $table->dropColumn('description');
+            }
         });
     }
 };

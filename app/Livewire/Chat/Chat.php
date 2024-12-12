@@ -4,12 +4,18 @@ namespace App\Livewire\Chat;
 
 use App\Models\Posts;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Chat extends Component
 {
+    use WithPagination;
+    const CACH_KEY = 'posts';
+    const CACHE_TIME = 10;
+
     public $posts = [];
     #[Validate('required|string|max:255')]
     public $name = '';
@@ -53,7 +59,10 @@ class Chat extends Component
 
     public function reloadPosts()
     {
-        $this->posts = Posts::with(['user'])->orderBy('created_at', 'asc')->get();
+        $this->posts = Cache::remember(self::CACH_KEY, now()->addMinutes(self::CACHE_TIME), function () {
+            return Posts::with(['user'])->orderBy('created_at', 'asc')->take(100)->get();
+            // return Posts::with(['user'])->orderBy('created_at', 'asc')->paginate(10); // Implement pagination
+        });
     }
     public function cancel()
     {
