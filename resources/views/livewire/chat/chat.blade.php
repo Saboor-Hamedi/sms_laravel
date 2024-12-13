@@ -3,7 +3,6 @@
     @foreach ($posts as $post)
         <div class="flex flex-col gap-4 p-4 bg-white border border-gray-200 rounded-md shadow-md">
 
-
             @if ($editingPostId === $post->id)
                 <form wire:submit.prevent="save" class="space-y-2">
                     <textarea wire:model.defer="name" id="name" placeholder="Edit the message..."
