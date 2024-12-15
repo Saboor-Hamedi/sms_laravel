@@ -72,12 +72,8 @@ new #[Layout('layouts.guest')] class extends Component {
                 class="max-w-full transition-shadow duration-300 ease-in-out bg-gradient-to-r from-gray-800 to-gray-600 text-white rounded-lg p-2 font-semibold uppercase shadow-md hover:shadow-lg hover:from-gray-600 hover:to-gray-800 active:translate-y-0.5 active:shadow-sm">
                 {{ __('Register') }}
             </button>
-            <a class="underline
-            mx-auto mt-2
-                text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md
-                focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
-                dark:focus:ring-offset-gray-800"
-                href="{{ route('login') }}" wire:navigate>
+            <a class="underline text-sm text-gray-600 hover:text-gray-900 mt-1 " href="{{ route('login') }}"
+                wire:navigate>
                 {{ __('Already have account') }}
             </a>
         </div>

@@ -43,12 +43,13 @@
                         <div class="flex items-center justify-start text-center">
                             <x-heroicon-c-code-bracket class="hero__icons" />
                             @if (Auth::check())
-                                {!! Auth::user()->getRoles() !!}
+                                <span class="mr-2 text-sm font-medium">Role: </span> {!! Auth::user()->displayRoles() !!}
                             @endif
                         </div>
                         {{-- location --}}
                         <div class="flex items-center justify-start text-center">
                             <x-heroicon-o-map class="hero__icons" />
+                            <span class="mr-2 text-sm font-medium">Address: </span>
                             {{ $student->address ?? 'Add address' }}
                         </div>
                     </div>

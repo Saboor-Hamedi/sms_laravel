@@ -16,4 +16,8 @@ class Student extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function grades()
+    {
+        return $this->belongsToMany(Grade::class, 'grade_student', 'student_id', 'grade_id');
+    }
 }

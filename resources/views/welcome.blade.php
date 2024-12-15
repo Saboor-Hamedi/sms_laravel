@@ -1,53 +1,7 @@
 <x-layout>
 
     <!-- Header -->
-    <header class="bg-gray-800 text-white fixed w-full z-50 top-0">
-        <div class="container mx-auto flex justify-between items-center p-5">
-            <div class="text-2xl font-bold cursor-pointer">
-                <span class="text-[#2a9be7] cursor-pointer">SMS</span>
-            </div>
-            <nav class="hidden md:flex space-x-4">
-                <a class="hover:text-gray-400" href="#">
-                    Home
-                </a>
-                <a class="hover:text-gray-400" href="#">
-                    About Us
-                </a>
-                <a class="hover:text-gray-400" href="#">
-                    Services
-                </a>
-                <a class="hover:text-gray-400" href="#">
-                    Contact
-                </a>
-            </nav>
-            <div class="md:hidden">
-                <button class="text-white focus:outline-none" id="menu-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                    </svg>
-
-                </button>
-            </div>
-        </div>
-        <div class="hidden md:hidden" id="mobile-menu">
-            <nav class="flex flex-col space-y-2 p-5">
-                <a class="hover:text-gray-400" href="#">
-                    Home
-                </a>
-                <a class="hover:text-gray-400" href="#">
-                    About Us
-                </a>
-                <a class="hover:text-gray-400" href="#">
-                    Services
-                </a>
-                <a class="hover:text-gray-400" href="#">
-                    Contact
-                </a>
-            </nav>
-        </div>
-    </header>
+    <livewire:header.fheader />
     <!-- Hero Section -->
     <section class="relative bg-gray-200 text-center py-20 mt-20">
         <img alt="A scenic landscape with mountains and a clear sky"
@@ -154,8 +108,7 @@
                 </div>
                 <div class="w-full md:w-1/3 p-4">
                     <div class="bg-white p-6 rounded-lg shadow-lg">
-                        <img alt="Icon representing digital marketing services" class="w-16 h-16 mx-auto"
-                            height="64"
+                        <img alt="Icon representing digital marketing services" class="w-16 h-16 mx-auto" height="64"
                             src="https://storage.googleapis.com/a1aa/image/4piLLGe3jr2UGanY4GjBf0FcE6kgqnSNVDHYue4UFDQxxp0nA.jpg"
                             width="64" />
                         <h3 class="mt-4 text-xl font-bold text-gray-800">
@@ -266,17 +219,5 @@
             </p>
         </div>
     </footer>
-    <script>
-        document.getElementById('menu-btn').addEventListener('click', function() {
-            var menu = document.getElementById('mobile-menu');
-            if (menu.classList.contains('hidden')) {
-                menu.classList.remove('hidden');
-            } else {
-                menu.classList.add('hidden');
-            }
-        });
-    </script>
-
-
 
 </x-layout>

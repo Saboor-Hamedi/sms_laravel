@@ -46,9 +46,10 @@ new #[Layout('layouts.guest')] class extends Component {
         <div class="block mt-4 mb-4">
             <label for="remember" class="inline-flex items-center">
                 <input wire:model="form.remember" id="remember" type="checkbox"
-                    class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800"
+                    class="cursor-pointerrounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800"
                     name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
+                <span
+                    class="ml-1 cursor-pointer text-sm text-gray-600 hover:text-gray-900 ">{{ __('Remember me') }}</span>
             </label>
         </div>
 
@@ -58,11 +59,7 @@ new #[Layout('layouts.guest')] class extends Component {
                 {{ __('Login') }}
             </button>
             @if (Route::has('password.request'))
-                <a class="underline
-                mt-2
-                text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md
-                focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
-                dark:focus:ring-offset-gray-800"
+                <a class="underline text-sm text-gray-600 hover:text-gray-900 mt-1 "
                     href="{{ route('password.request') }}" wire:navigate>
                     {{ __('Forgot your password?') }}
                 </a>

@@ -3,6 +3,8 @@
 namespace App\Livewire\Academic;
 
 use App\Models\Academics;
+use Livewire\Attributes\Layout;
+
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -10,6 +12,8 @@ class Create extends Component
 {
     #[Validate('required|digits:4|integer|min:2021|max:9999|unique:academics,year')]
     public $academic_year = '';
+
+    #[Layout('layouts.app')]
 
     public function save()
     {
@@ -26,6 +30,6 @@ class Create extends Component
     }
     public function render()
     {
-        return view('livewire.academic.create')->layout('layouts.app');
+        return view('livewire.academic.create');
     }
 }

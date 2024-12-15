@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Permissions;
 
+use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -13,11 +14,13 @@ class Edit extends Component
     #[Validate('required|string|max:50')]
     public $name = '';
     public $permissionId;
+
+    #[Layout('layouts.app')]
     public function mount($id)
     {
-        if (!Auth::user()->hasRole(['admin'])) {
-            $this->redirect('/dashboard');
-        }
+        // if (!Auth::user()->hasRole(['admin'])) {
+        //     $this->redirect('/dashboard');
+        // }
         $this->update($id);
     }
     public function update($id)
@@ -46,6 +49,6 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.permissions.edit')->layout('layouts.app');
+        return view('livewire.permissions.edit');
     }
 }

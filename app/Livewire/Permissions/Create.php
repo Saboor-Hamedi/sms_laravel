@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Permissions;
 
+use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Spatie\Permission\Models\Permission as ModelsPermission;
@@ -14,6 +15,8 @@ class Create extends Component
     public $name;
 
     public $permissionId = '';
+
+    #[Layout('layouts.app')]
 
     public function save()
     {
@@ -39,6 +42,6 @@ class Create extends Component
     }
     public function render()
     {
-        return view('livewire.permissions.create')->layout('layouts.app');
+        return view('livewire.permissions.create');
     }
 }

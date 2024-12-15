@@ -3,21 +3,21 @@
 namespace App\Livewire\Scores;
 
 use App\Models\Scores;
+use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\Cache;
 
 class Index extends Component
 {
 
     use AuthorizesRequests;
+    #[Layout('layouts.app')]
 
     const CACHE_KEY = 'scores';
     const CACHE_TIME = 60;
     const PAGINATE_SIZE = 24;
-    #[Layout('layouts.app')]
     public function delete($id)
     {
         $score = Scores::findOrFail($id);

@@ -3,6 +3,7 @@
 namespace App\Livewire\Scores;
 
 use App\Models\Scores as ModelsScores;
+use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -22,7 +23,7 @@ class Edit extends Component
     public $report = '';
 
     public $scoreId;
-
+    #[Layout('layouts.app')]
     public function mount($id)
     {
         // if (!Auth::user()->hasRole('manager')) {
@@ -30,9 +31,6 @@ class Edit extends Component
         // }
         $this->update($id);
     }
-
-
-
     public function update($id)
     {
         $score = ModelsScores::findOrFail($id);
@@ -44,7 +42,6 @@ class Edit extends Component
         $this->average = $score->average;
         $this->report = $score->report;
     }
-
     public function edit()
     {
         $this->validate();
@@ -68,6 +65,6 @@ class Edit extends Component
     }
     public function render()
     {
-        return view('livewire.scores.edit')->layout('layouts.app');
+        return view('livewire.scores.edit');
     }
 }

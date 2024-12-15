@@ -3,6 +3,7 @@
 namespace App\Livewire\Permissions;
 
 use App\Models\User;
+use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Spatie\Permission\Models\Permission;
@@ -19,6 +20,8 @@ class UserRoleManager extends Component
     public $userPermissions = [];
 
     public $user;
+
+    #[Layout('layouts.app')]
 
     // Fetch roles and permissions to populate the form
     public function mount()
@@ -110,6 +113,6 @@ class UserRoleManager extends Component
 
     public function render()
     {
-        return view('livewire.permissions.user-role-manager')->layout('layouts.app');
+        return view('livewire.permissions.user-role-manager');
     }
 }

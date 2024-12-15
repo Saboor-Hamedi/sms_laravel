@@ -4,6 +4,8 @@ namespace App\Livewire\Scores;
 
 use App\Models\Academics;
 use App\Models\Scores as ModelsScores;
+
+use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
 
@@ -12,6 +14,8 @@ use Livewire\Component;
 class Create extends Component
 {
 
+    // layout
+    #[Layout('layouts.app')]
     #[Validate('required|numeric|max:100')]
     public $assignment = '';
     #[Validate('required|numeric|max:100')]
@@ -25,6 +29,8 @@ class Create extends Component
     #[Validate('nullable|max:255')]
     public $report = '';
     #[Validate('required')]
+
+
     public $academic_year_id = '';
     public $academic_years = [];
 
@@ -39,7 +45,7 @@ class Create extends Component
     }
     public function academicYear()
     {
-        $this->academic_years = Academics::where('year', '>', '2010')->get();
+        $this->academic_years = Academics::where('year', '>', '2010')->latest()->get();
     }
     public function save()
     {
@@ -69,6 +75,6 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.scores.create')->layout('layouts.app');
+        return view('livewire.scores.create');
     }
 }

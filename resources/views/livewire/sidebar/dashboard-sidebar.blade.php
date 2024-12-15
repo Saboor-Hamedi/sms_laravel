@@ -123,13 +123,15 @@
             <button class="rounded default-button">Profile</button>
             <div class="dropdown__content">
                 <div class="profile__item">
-                    <img src="{{ asset('css/img/apple-icon.png') }}" alt="Profile" class="profile__image">
+                    <img src="{{ asset('css/img/logo.png') }}" alt="Profile" class="profile__image">
                     <span class="profile__name">John Doe</span>
                 </div>
-                <a href="{{ route('user-profile.index') }}" wire:navigate='user-profile'>Profile</a>
+                <a href="{{ route('user-profile.index') }}" wire:navigate='user-profile'>
+                    {{ Str::ucfirst(Auth::user()->name ?? 'Ananymous') }}
+                </a>
                 <a href="{{ route('profile') }}" wire:navigate='profile'>Update Detailts</a>
                 <a href="#" wire:navigate='settings'>Settings</a>
-                <a href="#">@livewire('logout.logout')</a>
+                @livewire('logout.logout')
             </div>
         </div>
 
