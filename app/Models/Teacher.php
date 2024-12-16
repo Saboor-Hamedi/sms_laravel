@@ -24,8 +24,11 @@ class Teacher extends Model
     /** @use HasFactory<\Database\Factories\TeacherFactory> */
     use HasFactory;
 
-    public function grade()
+    protected $guarded = ['id'];
+
+
+    public function user()
     {
-        return $this->hasMany(Grade::class, 'teacher_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

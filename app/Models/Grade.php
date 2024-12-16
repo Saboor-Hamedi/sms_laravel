@@ -19,14 +19,14 @@ class Grade extends Model
 
     /** @use HasFactory<\Database\Factories\GradeFactory> */
     use HasFactory;
-    protected $fillable = ['name', 'teacher_id'];
+    protected $fillable = ['name'];
 
     public function teacher()
     {
-        return $this->belongsTo(Teacher::class, 'teacher_id');
+        return $this->belongsTo(User::class, 'teacher_id');
     }
     public function students()
     {
-        return $this->belongsToMany(Student::class, 'grade_student', 'grade_id', 'student_id');
+        return $this->belongsToMany(User::class, 'grade_student', 'grade_id', 'student_id');
     }
 }

@@ -11,9 +11,9 @@
                         class="object-cover object-center w-full h-full rounded-full">
                 </div>
                 <div>
-                    <div class="flex justify-between items-center max-w-full">
+                    <div class="flex items-center justify-between max-w-full">
                         <div class="">
-                            <h3 class="text-base sm:text-lg md:text-xl text-black font-bold">
+                            <h3 class="text-base font-bold text-black sm:text-lg md:text-xl">
                                 {{ Str::ucfirst(Auth::user()->name ?? 'N/A') }}
                                 {{ $student->lastname ?? '' }}
                             </h3>
@@ -32,7 +32,7 @@
 
                     {{-- bio --}}
                     <div>
-                        <h4 class="lg:text-lg font-medium leading-4 text-slate-400 md:text-md sm:text-sm">Bio</h4>
+                        <h4 class="font-medium leading-4 lg:text-lg text-slate-400 md:text-md sm:text-sm">Bio</h4>
                         <p class="lg:text-[14px] font-medium leading-4 text-slate-400 md:text-[13px] sm:text-[11px]">
                             {!! $student->description ?? '' !!}
                         </p>

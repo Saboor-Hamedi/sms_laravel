@@ -1,5 +1,8 @@
 <div class="p-2">
     @section('title', 'Update Profile')
+    <div class="p-6 bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+        <h1 class="ml-2 text-xl font-bold text-gray-800 sm:text-md">Update Your Profile</h1>
+    </div>
     <section class="w-full p-2 bg-white shadow-sm dark:bg-gray-800">
         @if (session()->has('success'))
             <div class="px-4 py-3 mb-2 text-blue-700 bg-blue-100 border-t border-b border-blue-500" role="alert">
@@ -62,7 +65,7 @@
                         <small class="text-xs text-red-600">{{ $message }}</small>
                     @enderror
                 </div>
-                <div class="flex w-ful gap-2">
+                <div class="flex gap-2 w-ful">
                     <button class="rounded default-button text-[10px] mt-2">{{ __('Register') }}</button>
                     <button class="rounded default-button text-[10px] mt-2"
                         wire:click="cancel">{{ __('Cancel') }}</button>

@@ -1,24 +1,24 @@
-<header class="bg-gray-800 text-white fixed w-full z-50 top-0">
-    <div class="container mx-auto flex justify-between items-center p-5">
+<header class="fixed top-0 z-50 w-full text-white bg-gray-800">
+    <div class="container flex items-center justify-between p-5 mx-auto">
         <div class="text-2xl font-bold cursor-pointer">
-            <span class="text-[#2a9be7] cursor-pointer">SMS</span>
+            <span class="text-[#2a9be7] cursor-pointer">{{ __('SMS') }}</span>
         </div>
-        <nav class="hidden md:flex space-x-4">
+        <nav class="hidden space-x-4 md:flex">
             @if (Auth::check())
                 <a class="hover:text-gray-400" href="{{ route('dashboard') }}" wire:navigate='dashboard'>
-                    Dashboard
+                    {{ __('Dashboard') }}
                 </a>
             @endif
 
             @if (!Auth::check())
                 <a class="hover:text-gray-400" href="#" wire:navigate='login'>
-                    About
+                    {{ __('About') }}
                 </a>
                 <a class="hover:text-gray-400" href="{{ route('register') }}" wire:navigate='register'>
-                    Register
+                    {{ __('Register') }}
                 </a>
                 <a class="hover:text-gray-400" href="{{ route('login') }}" wire:navigate='login'>
-                    Login
+                    {{ __('Login') }}
                 </a>
             @endif
         </nav>
@@ -29,22 +29,22 @@
         </div>
     </div>
     <div class="hidden md:hidden" id="mobile-menu">
-        <nav class="flex flex-col space-y-2 p-5">
+        <nav class="flex flex-col p-5 space-y-2">
             @if (Auth::check())
                 <a class="hover:text-gray-400" href="{{ route('dashboard') }}" wire:navigate='dashboard'>
-                    Dashboard
+                    {{ __('Dashboard') }}
                 </a>
             @endif
 
             @if (!Auth::check())
                 <a class="hover:text-gray-400" href="#" wire:navigate='login'>
-                    About
+                    {{ __('About') }}
                 </a>
                 <a class="hover:text-gray-400" href="{{ route('register') }}" wire:navigate='register'>
-                    Register
+                    {{ __('Register') }}
                 </a>
                 <a class="hover:text-gray-400" href="{{ route('login') }}" wire:navigate='login'>
-                    Login
+                    {{ __('Login') }}
                 </a>
             @endif
         </nav>

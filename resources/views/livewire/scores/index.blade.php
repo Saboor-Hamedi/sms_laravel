@@ -1,5 +1,4 @@
 <div>
-
     <div class="py-4 bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
         <h1 class="ml-1 text-xl font-bold text-gray-800 sm:text-md">New Academic Year</h1>
     </div>
@@ -10,10 +9,9 @@
             <p class="text-sm">{{ session('success') }}.</p>
         </div>
     @endif
-    <section class="flex flex-col w-full gap-2 mt-2 mb-2 ">
+    <section class="w-full p-2 bg-white shadow-sm dark:bg-gray-800">
 
         @livewire('reports.scores')
-
         @foreach ($groupedScores as $year => $yearScores)
             <h2 class="mt-4 text-lg font-bold">Academic Year: {{ $year }}</h2>
             <div class="overflow-x-auto custom__scroll__x">

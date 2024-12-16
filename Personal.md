@@ -43,3 +43,13 @@ https://github.com/Saboor-Hamedi/sms_laravel.git
 -   I am using `https://spatie.be/docs/browsershot/v4/installation-setup`
     `composer require spatie/browsershot`
     `npm install puppeteer`
+
+---
+
+### Add Grade/classes for teachers and students
+
+-   [many-to-many relationship] (https://laravel.com/docs/8.x/eloquent-relationships#many-to-many)
+-   Well, we refer grade as classes, like 1A, 2B, 3C, etc. Every grades must be unique.
+-   You can add grade/classes for teachers and students by adding them in the respective tables.
+-   Admins are responsible for adding teachers and students.
+-   At the moment teachers can only see their classes and students can only see their grades.

@@ -55,16 +55,24 @@ class User extends Authenticatable
     {
         return $this->hasMany(Posts::class);
     }
+
+    // teacher relationship
+    public function teacher()
+    {
+        return $this->hasOne(Teacher::class);
+    }
+    // student relationship
+    public function student()
+    {
+        return $this->hasOne(Student::class);
+    }
+    // scores relationship
     public function scores()
     {
         return $this->hasMany(Scores::class);
     }
 
-    public function student()
-    {
-        return $this->hasOne(Student::class);
-    }
-
+    // display roles on users profile
     public function displayRoles()
     {
         if ($this->roles && $this->roles->isNotEmpty()) {
@@ -78,5 +86,19 @@ class User extends Authenticatable
     public function userRoles($role): string
     {
         return '<a href="javascript:viod()" class="btn btn-sm btn-primary">#' . Str::ucfirst($role) . '</a>';
+    }
+
+
+    /*
+      * many-to-many relationship, teachers, students, grades
+      * @property Grade  
+    */
+    public function grades()
+    {
+        return $this->hasMany(Grade::class, 'teacher_id');
+    }
+    public function studentGrades()
+    {
+        return $this->belongsToMany(Grade::class, 'student_grades', 'student_', 'grade_id');
     }
 }
