@@ -19,7 +19,8 @@ class Grade extends Model
 
     /** @use HasFactory<\Database\Factories\GradeFactory> */
     use HasFactory;
-    protected $fillable = ['name'];
+    protected $fillable = ['subject_name', 'teacher_id'];
+    public $timestamps = false;
 
     public function teacher()
     {

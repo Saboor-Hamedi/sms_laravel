@@ -9,15 +9,12 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class AcademicsFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+
     public function definition(): array
     {
         return [
-            'year' => $this->faker->numberBetween(2010, 2024)
+            // 'year' => $this->faker->numberBetween(2010, 2024)
+            'year' => $this->faker->unique()->year,
         ];
     }
 }

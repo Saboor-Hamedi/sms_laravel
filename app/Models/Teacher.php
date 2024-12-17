@@ -24,7 +24,19 @@ class Teacher extends Model
     /** @use HasFactory<\Database\Factories\TeacherFactory> */
     use HasFactory;
 
-    protected $guarded = ['id'];
+    protected $fillable = [
+        'user_id',
+        'lastname',
+        'birthdate',
+        'phone',
+        'country',
+        'state',
+        'address',
+        'description',
+        'is_active',
+        'created_at',
+    ];
+    public $timestamps = false;
 
 
     public function user()

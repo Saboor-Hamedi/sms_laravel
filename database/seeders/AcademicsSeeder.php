@@ -13,6 +13,6 @@ class AcademicsSeeder extends Seeder
      */
     public function run(): void
     {
-        Academics::factory(2)->create();
+        Academics::factory(4)->create();
     }
 }

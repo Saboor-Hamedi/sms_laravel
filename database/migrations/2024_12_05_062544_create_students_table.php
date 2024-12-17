@@ -14,18 +14,19 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete(action: 'cascade');
-            $table->string('lastname', 50)->index('lastname');
-            $table->string('country', 50);
-            $table->string('state', 50);
-            $table->string('address', 100);
+            $table->string('lastname', 50)->default('Default Lastname')->index('student_lastname_index');
+            $table->date('birthdate')->nullable();
+            $table->string('phone', 50)->nullable();
+            $table->string('country', 50)->nullable();
+            $table->string('state', 50)->nullable();
+            $table->string('address', 100)->nullable();
+            $table->string('description', 100);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+
     public function down(): void
     {
         Schema::dropIfExists('students');
