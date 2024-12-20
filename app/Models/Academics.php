@@ -7,9 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Academics extends Model
 {
-    /** @use HasFactory<\Database\Factories\AcademicsFactory> */
-
-
     use HasFactory;
     protected $guarded = ['id'];
     public $timestamps = false;
@@ -17,5 +14,10 @@ class Academics extends Model
     public function scores()
     {
         return $this->hasMany(Scores::class);
+    }
+    // register student for academic year 'grades/classes'
+    public function grades()
+    {
+        return $this->hasMany(Grade::class);
     }
 }

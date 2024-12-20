@@ -16,13 +16,5 @@ class StudentSeeder extends Seeder
     public function run(): void
     {
         Student::factory(1)->create();
-        // $teachers = User::factory()->count(1)->create()->each(function ($user) {
-        //     $user->assignRole('teacher');
-        // });
-        // // Create grades and associate them with teachers and students
-        // Grade::factory()->count(1)->create()->each(function ($grade) use ($teachers, $students) {
-        //     $grade->teacher()->associate($teachers->random())->save();
-        //     $grade->students()->attach($students->random(1));
-        // });
     }
 }

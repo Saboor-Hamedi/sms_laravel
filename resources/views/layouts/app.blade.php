@@ -8,23 +8,19 @@
     <title>{{ config('app.name', 'SMS') }} - @yield('title')</title>
 
     {{-- Custom CSS --}}
-    <link href="{{ asset('css/dashboard__content.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/scroll.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/flatpickr.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/scroll.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/flatpickr.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dashboard__content.css') }}">
 
     @livewireStyles
     @vite('resources/css/app.css')
 
-    <style>
-
-    </style>
 </head>
 
 <body class="m-0 font-sans text-base antialiased font-normal leading-default bg-gray-50 text-slate-500">
 
     <livewire:sidebar.dashboard-sidebar />
-
 
     <main class="dashboard__content " id="dashboard__content">
         {{ $slot }}
@@ -39,8 +35,6 @@
 
     @livewireScripts
     @vite('resources/js/app.js')
-
-
 </body>
 
 </html>

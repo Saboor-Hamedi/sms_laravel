@@ -19,8 +19,9 @@ class Grade extends Model
 
     /** @use HasFactory<\Database\Factories\GradeFactory> */
     use HasFactory;
-    protected $fillable = ['subject_name', 'teacher_id'];
-    public $timestamps = false;
+
+    protected $fillable = ['subject_name', 'teacher_id', 'academic_id'];
+    public $timestamps = true;
 
     public function teacher()
     {
@@ -29,5 +30,10 @@ class Grade extends Model
     public function students()
     {
         return $this->belongsToMany(User::class, 'grade_student', 'grade_id', 'student_id');
+    }
+    // academic year, register students based on academic year 
+    public function academic()
+    {
+        return $this->belongsTo(Academics::class, 'academic_id');
     }
 }

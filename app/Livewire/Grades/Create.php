@@ -2,7 +2,13 @@
 
 namespace App\Livewire\Grades;
 
+use App\Models\Academics;
+use App\Models\Grade;
+use App\Models\Subject;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 /*
@@ -22,8 +28,74 @@ use Livewire\Component;
 class Create extends Component
 {
     #[Layout('layouts.app')]
+
+    public $students = [];
+
+    public $subjects = [];
+
+    public $academics = [];
+    public $roles = [];
+
+    // validations
+
+    #[Validate('required')]
+    public $name = '';
+    #[Validate('required')]
+    public $student_name = '';
+
+    #[Validate('required')]
+    public $academic_id = '';
+
+    protected $listeners = ['refresh_academic_year', 'fetchAcademicYear'];
+    public function mount()
+    {
+        $this->run();
+    }
+    public function run()
+    {
+        $this->fetchSubjects();
+        $this->fetchStudents();
+        $this->fetchAcademicYear();
+    }
+    public function fetchSubjects()
+    {
+        $this->subjects = Subject::pluck('name', 'id');
+    }
+
+    public function fetchStudents()
+    {
+        $this->roles = User::role('student')->pluck('name', 'id');
+    }
+    public function fetchAcademicYear()
+    {
+        $this->academics  = Academics::pluck('year', 'id');
+    }
+    public function save()
+    {
+        $this->validate();
+        $grade = new Grade;
+        $grade->teacher_id = Auth::id();
+        $grade->subject_name = $this->name;
+        $grade->academic_id = $this->academic_id;
+        $grade->save();
+        $grade->students()->attach($this->student_name);
+        $this->reset();
+        session()->flash('success', 'Grade created successfully');
+        $this->dispatch('refresh_academic_year');
+    }
+    public function cancel()
+    {
+        return redirect()->route('dashboard');
+    }
     public function render()
     {
-        return view('livewire.grades.create');
+        return view(
+            'livewire.grades.create',
+            [
+                'subjects' => $this->subjects,
+                'roles' => $this->roles,
+                'academics' => $this->academics,
+            ]
+        );
     }
 }

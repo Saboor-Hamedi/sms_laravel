@@ -6,14 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete(action: 'cascade');
+            $table->foreignId(column: 'user_id')->constrained('users')->onDelete(action: 'cascade');
             $table->string('lastname', 50)->default('Default Lastname')->index('student_lastname_index');
             $table->date('birthdate')->nullable();
             $table->string('phone', 50)->nullable();

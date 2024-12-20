@@ -12,7 +12,7 @@ class Index extends Component
     #[Layout('layouts.app')]
     public function render()
     {
-        $grades = Grade::with(['teacher', 'students'])->latest()->paginate(10);
+        $grades = Grade::with(['teacher', 'students', 'academic'])->latest()->paginate(10);
         return view('livewire.grades.index', ['grades' => $grades]);
     }
 }

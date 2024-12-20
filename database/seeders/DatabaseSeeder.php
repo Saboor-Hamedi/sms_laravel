@@ -32,8 +32,8 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('123'),
             'remember_token' => Str::random(10),
         ]);
-
         $teacher->assignRole('teacher');
+
         // student
         $student = User::create([
             'name' => 'student',
@@ -45,11 +45,12 @@ class DatabaseSeeder extends Seeder
 
         $student->assignRole('student');
 
+        $this->call(PostsSeeder::class);
         $this->call(AcademicsSeeder::class);
         $this->call(ScoresSeeder::class);
-        $this->call(PostsSeeder::class);
-        $this->call(TeacherSeeder::class);
         $this->call(StudentSeeder::class);
+        $this->call(TeacherSeeder::class);
+        $this->call(GradeSeeder::class);
         $this->call(SubjectSeeder::class);
     }
 }

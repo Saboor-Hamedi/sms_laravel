@@ -15,21 +15,30 @@
                                     {{-- <th class="px-4 py-2 border border-gray-300">Student Name</th> --}}
                                     <th class="px-4 py-2 border border-gray-300">Subject Name</th>
                                     <th class="px-4 py-2 border border-gray-300">Student Name</th>
-                                    <th class="px-4 py-2 border border-gray-300">Final</th>
-                                    <th class="px-4 py-2 border border-gray-300">Average</th>
-                                    <th class="px-4 py-2 border border-gray-300">Year</th>
-                                    <th class="px-4 py-2 border border-gray-300">Report</th>
+                                    <th class="px-4 py-2 border border-gray-300">Academic Year</th>
+
                                 </tr>
                             </thead>
                             @foreach ($grades as $grade)
                                 <tr class="text-center odd:bg-gray-100 even:bg-gray-200">
                                     {{-- <td class="px-4 py-2 border border-gray-300">{{ $grade->teacher->name }}</td> --}}
                                     <td class="px-4 py-2 border border-gray-300">
-                                        {{ Str::ucfirst($grade->subject_name) }}</td>
+                                        {{ Str::ucfirst($grade->subject_name) }}
+                                    </td>
+
                                     @foreach ($grade->students as $student)
-                                        <td class="px-4 py-2 border border-gray-300">{{ Str::ucfirst($student->name) }}
+                                        <td class="px-4 py-2 border border-gray-300">
+                                            {{ Str::ucfirst($student->name) }}
                                         </td>
                                     @endforeach
+
+                                    <td class="px-4 py-2 border border-gray-300">{{ optional($grade->academic)->year }}
+                                    </td>
+
+                                    {{-- <td class="px-4 py-2 border border-gray-300">
+                                        {{ $grade->academic ? $grade->academic->year : 'N/A' }}
+                                    </td> --}}
+
                                 </tr>
                             @endforeach
                         </table>
