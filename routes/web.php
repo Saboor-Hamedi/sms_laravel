@@ -28,7 +28,8 @@ use App\Livewire\Academic\Index as IndexAcademic;
 use App\Livewire\Academic\Show as ShowAcademic;
 
 // students 
-use App\Livewire\Students\Register as RegisterStudents;
+use App\Livewire\Users\User as NewUser;
+
 // update profile 
 use App\Livewire\UserProfile\Index as UserProfileIndex;
 use App\Livewire\UserProfile\Update as UpdateUserProfile;
@@ -36,8 +37,7 @@ use App\Livewire\UserProfile\Update as UpdateUserProfile;
 // Grades/Clcass 
 use App\Livewire\Grades\Index as IndexGrades;
 use App\Livewire\Grades\Create as CreateGrades;
-use App\Livewire\Grades\Show as ShowGrades;
-// Route::view('/', 'welcome');
+
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome'); // home
 
 Route::middleware([ScorePermissions::class])->group(function () {
@@ -56,7 +56,7 @@ Route::middleware([AdminPermissions::class])->group(function () {
     Route::get('/scores.scores-admin', ScoresAdmin::class)->name('scores.scores-admin');
     Route::get('/reports.scores-reports', [PDFController::class, 'scorePDF'])->name('reports.scores-reports');
     // Register Students
-    Route::get('/students.register', RegisterStudents::class)->name('students.register');
+    Route::get('users/user', NewUser::class)->name('users.user');
 
     // grades 
     Route::get('grades/index', IndexGrades::class)->name('grades.index');

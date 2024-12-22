@@ -27,22 +27,22 @@
                     {{-- nested menu --}}
                     <div>
                         <h4 class="lg:text-[20px] md:text[15px] sm:text-[12px] py-3 ">
-                            {{ __('Register Students') }}
+                            {{ __('Register Users') }}
                         </h4>
                     </div>
                     <li class="mb-1" onclick="menuToggle()">
                         <a href="javascript:void(0)"
                             class="flex items-center p-2 rounded hover:bg-gray-700 lg:text-[13px] md:text[11px] sm:text-[10px]">
                             <x-heroicon-o-home class="hero__icons" />
-                            <span class="ml-2">{{ __('Details') }}</span>
+                            <span class="ml-2">{{ __('Users') }}</span>
                         </a>
                     </li>
 
-                    <ul id="dropdown__menu" class="hidden ">
+                    <ul id="dropdown__menu" class="hidden">
                         <li class="ml-4">
-                            <x-admin-link :href="route('students.register')" :active="request()->routeIs('students.register')">
+                            <x-admin-link :href="route('users.user')" :active="request()->routeIs('users.user')">
                                 <x-heroicon-o-user class="hero__icons" />
-                                <span>{{ __('Register Students') }}</span>
+                                <span>{{ __('Add New User') }}</span>
                             </x-admin-link>
                         </li>
                         <li class="ml-4">

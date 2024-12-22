@@ -29,7 +29,7 @@ class Grade extends Model
     }
     public function students()
     {
-        return $this->belongsToMany(User::class, 'grade_student', 'grade_id', 'student_id');
+        return $this->belongsToMany(User::class, 'grade_student', 'grade_id', 'student_id')->withTimestamps();
     }
     // academic year, register students based on academic year 
     public function academic()

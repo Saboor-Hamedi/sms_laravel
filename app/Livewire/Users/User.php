@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Livewire\Students;
+namespace App\Livewire\Users;
 
-use App\Models\User;
+use App\Models\User as UserModel;
 use Livewire\Attributes\Layout;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
@@ -10,23 +10,26 @@ use Livewire\Component;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class Register extends Component
+class User extends Component
 {
 
     #[Layout('layouts.app')]
-
-    #[Validate('required|alpha|min:2|max:50')]
     public $name = '';
-    #[Validate('required|string|email|unique:users,email|max:255')]
     public $email = '';
-    #[Validate('required|confirmed|min:6|max:25')]
     public $password = '';
-    #[Validate('required')]
     public $password_confirmation = '';
 
     public function save()
     {
-        $this->validate();
+        $this->validate(
+            [
+                'name' => 'required|alpha|min:2|max:50',
+                'email' => 'required|string|email|unique:users,email|max:255',
+                'password' => 'required|confirmed|min:6|max:25',
+                'password_confirmation' => 'required',
+            ]
+        );
+
         // Create go grab roles and permissions
         $studentPermission = Permission::firstOrCreate(['name' => 'student']);
         $studentRole = Role::firstOrCreate(['name' => 'student']);
@@ -34,11 +37,12 @@ class Register extends Component
             $studentRole->givePermissionTo($studentPermission);
         }
         try {
-            $user = User::create([
+            $user = UserModel::create([
                 'name' => $this->name,
                 'email' => Str::lower($this->email),
                 'password' => bcrypt($this->password),
             ]);
+
             // assign roles and permissions to user
             $user->assignRole($studentRole);
             $user->givePermissionTo($studentPermission);
@@ -49,9 +53,15 @@ class Register extends Component
         } catch (\Exception $e) {
             session()->flash('error', 'Registration failed!');
         }
-        $this->reset();
+        $this->resetForm();
     }
-
+    public function resetForm()
+    {
+        $this->name = '';
+        $this->email = '';
+        $this->password = '';
+        $this->password_confirmation = '';
+    }
     public function cancel()
     {
         $this->reset();
@@ -63,6 +73,6 @@ class Register extends Component
 
     public function render()
     {
-        return view('livewire.students.register');
+        return view('livewire.users.user');
     }
 }

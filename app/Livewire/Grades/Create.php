@@ -12,7 +12,7 @@ use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 /*
- * @author  <Saboor-Hamedi> 
+ * @author  <Abudul Saboor Hamedi>
  * @package App\Livewire\Grades
  * @version 1.0.0
  * @since   December 16, 2024
@@ -30,65 +30,144 @@ class Create extends Component
     #[Layout('layouts.app')]
 
     public $students = [];
-
     public $subjects = [];
-
     public $academics = [];
     public $roles = [];
 
-    // validations
-
-    #[Validate('required')]
-    public $name = '';
-    #[Validate('required')]
+    public $subject_name = '';
     public $student_name = '';
-
-    #[Validate('required')]
     public $academic_id = '';
 
     protected $listeners = ['refresh_academic_year', 'fetchAcademicYear'];
+    /**
+     * Mount the component.
+     *
+     * This function is called when the component is mounted.
+     * It calls the initializeData function which initializes the data for the component.
+     */
     public function mount()
     {
-        $this->run();
+        $this->initializeData();
     }
-    public function run()
+    /**
+     * This function is used to initialize the data for the livewire component.
+     * It calls the following functions and assigns them to the public properties of the component:
+     * - fetchSubjects
+     * - fetchStudents
+     * - fetchAcademicYear
+     */
+
+    public function initializeData()
     {
-        $this->fetchSubjects();
-        $this->fetchStudents();
-        $this->fetchAcademicYear();
+        $this->subjects = $this->fetchSubjects();
+        $this->roles = $this->fetchStudents();
+        $this->academics = $this->fetchAcademicYear();
     }
+    /**
+     * Fetch all subjects from the database and return them as a collection.
+     *
+     * The collection contains the name and id of each subject.
+     * The name is the value and the id is the key.
+     *
+     * @return \Illuminate\Support\Collection
+     * @author  <Abudul Saboor Hamedi>
+     */
     public function fetchSubjects()
     {
-        $this->subjects = Subject::pluck('name', 'id');
+        return Subject::pluck('name', 'id');
     }
 
+    /**
+     * Fetch all students from the database and return them as a collection.
+     *
+     * The collection contains the name and id of each student.
+     * The name is the value and the id is the key.
+     *
+     * @return \Illuminate\Support\Collection
+     * @author  <Abudul Saboor Hamedi>
+     */
     public function fetchStudents()
     {
-        $this->roles = User::role('student')->pluck('name', 'id');
+        return User::role('student')->pluck('name', 'id');
     }
+    /**
+     * Summary of fetchAcademicYear
+     * @return \Illuminate\Support\Collection
+     * fetch academic year from the database and return it as a collection
+     * pluck year and id from the collection and return it.
+     * @author  <Abudul Saboor Hamedi>
+     */
     public function fetchAcademicYear()
     {
-        $this->academics  = Academics::pluck('year', 'id');
+        return Academics::orderBy('year', 'desc')->pluck('year', 'id');
     }
+    /**
+     * Summary of save
+     * @return void
+     * @author  <Abudul Saboor Hamedi>
+     * $grade->students()->attach($this->student_name); // insert on grade_student pivot table
+     * $this->resetForm(); // reset form after submit
+     * session()->flash('success', 'Grade created successfully'); // flash message
+     * $this->dispatch('refresh_academic_year'); // refresh academic year dropdown
+     */
     public function save()
     {
-        $this->validate();
-        $grade = new Grade;
-        $grade->teacher_id = Auth::id();
-        $grade->subject_name = $this->name;
-        $grade->academic_id = $this->academic_id;
-        $grade->save();
+        $this->validate([
+            'subject_name' => 'required',
+            'student_name' => 'required',
+            'academic_id' => 'required',
+        ]);
+        $grade = Grade::create([
+            'teacher_id' => Auth::id(),
+            'subject_name' => $this->subject_name,
+            'academic_id' => $this->academic_id,
+        ]);
         $grade->students()->attach($this->student_name);
-        $this->reset();
+
+        $this->resetForm();
+
         session()->flash('success', 'Grade created successfully');
         $this->dispatch('refresh_academic_year');
     }
+
+
+    /**
+     * Resets the form fields to their default values.
+     *
+     * This method is called after submitting the form.
+     *
+     * @return void
+     * @author  <Abudul Saboor Hamedi>
+     */
+    public function resetForm()
+    {
+        $this->subject_name = '';
+        $this->student_name = '';
+        $this->academic_id = '';
+    }
     public function cancel()
     {
+        /**
+         * Redirects the user to the dashboard.
+         *
+         * This method is called when the user clicks the cancel button.
+         *
+         * @return \Illuminate\Http\RedirectResponse
+         * @author  <Abudul Saboor Hamedi>
+         */
         return redirect()->route('dashboard');
     }
     public function render()
     {
+        /**
+         * Renders the Livewire component for creating a new grade.
+         *
+         * The component displays a form with select fields for the subject and academic year,
+         * and a multiple select field for the students.
+         *
+         * @return \Illuminate\Contracts\View\View The rendered Livewire component.
+         * @author  <Abudul Saboor Hamedi>
+         */
         return view(
             'livewire.grades.create',
             [
