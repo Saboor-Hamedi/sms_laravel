@@ -11,9 +11,16 @@
                 <p class="text-sm">{{ session('success') }}</p>
             </div>
         @endif
+        {{-- error --}}
+        @if (session()->has('error'))
+            <div class="px-4 py-3 mb-2 text-red-700 bg-red-100 border-t border-b border-blue-500" role="alert">
+                <p class="font-bold">Informational message</p>
+                <p class="text-sm">{{ session('error') }}</p>
+            </div>
+        @endif
         <div class="grid w-full grid-cols-1 mx-auto">
             <form wire:submit.prevent="save">
-                <div class="flex flex-col gap-3 md:flex-row">
+                <div class="flex flex-col gap-2 md:flex-row">
                     {{-- NAME --}}
                     <div class="flex-1">
                         <input type="text" placeholder="First Name" id="name" name="name"
@@ -35,7 +42,7 @@
                     </div>
                 </div>
                 {{--  --}}
-                <div class="flex flex-col gap-3 mt-4 md:flex-row">
+                <div class="flex flex-col gap-2 mt-2 md:flex-row">
                     {{-- STATE --}}
                     <div class="flex-1">
                         <input type="password" placeholder="Password" id="password" wire:model.defer="password"
@@ -56,7 +63,26 @@
                             <small class="text-xs text-red-600">{{ $message }}</small>
                         @enderror
                     </div>
+
                 </div>
+                {{-- PERMISSIONS --}}
+                <div class="flex-1 mt-2">
+                    <select wire:model.defer="permission_name" id="permission_name" name="permission_name"
+                        class="w-full p-2 bg-white border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="0">Select A Role</option>
+                        @if ($permissions->isNotEmpty())
+                            @foreach ($permissions as $id => $name)
+                                <option value="{{ $name }}">{{ $name }}</option>
+                            @endforeach
+                        @else
+                            <option value="">No permissions available</option>
+                        @endif
+                    </select>
+                    @error('permission_name')
+                        <small class="text-xs text-red-600">{{ $message }}</small>
+                    @enderror
+                </div>
+                {{-- BUTTONS --}}
                 <div class="flex w-ful gap-2 mt-2">
                     <button class="rounded default-button text-[10px] "
                         wire:loading.attr="disabled">{{ __('Save') }}</button>
