@@ -8,27 +8,19 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * This is pivot table for many to many relationship between parent and student
      */
     public function up(): void
     {
-        Schema::create('s_parents', function (Blueprint $table) {
+        Schema::create('parent_student', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student_id')->constrained('students')->cascadeOnDelete();
-            $table->string('name', 50);
-            $table->string('lastname', 50);
-            $table->string('job', 100);
-            $table->string('phone', 20);
-            $table->string('email', 50);
-            $table->string('address', 150);
+            $table->foreignId('parent_id')->constrained('student_parents')->cascadeOnDelete();
             $table->timestamps();
         });
     }
-
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('s_parents');
+        Schema::dropIfExists('parent_student');
     }
 };

@@ -1,7 +1,5 @@
 <x-app-layout>
-
     @section('title', 'Dashboard')
-
     <div class="py-2">
         <div class="p-2 mx-auto max-w-7xl">
             @can('admin')
@@ -15,8 +13,8 @@
                     @can('teacher')
                         <livewire:scores.index />
                     @endcan
-                    @can('parents')
-                        @livewire('reports.report-students')
+                    @can('parent')
+                        @livewire('parent.student-parents')
                     @endcan
                 </div>
             </div>

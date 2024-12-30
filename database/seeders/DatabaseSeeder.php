@@ -45,6 +45,16 @@ class DatabaseSeeder extends Seeder
 
         $student->assignRole('student');
 
+        // parent
+        $parent = User::create([
+            'name' => 'parent',
+            'email' => 'parent@gmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('123'),
+            'remember_token' => Str::random(10),
+        ]);
+        $parent->assignRole('parent');
+
         $this->call(PostsSeeder::class);
         $this->call(AcademicsSeeder::class);
         $this->call(ScoresSeeder::class);

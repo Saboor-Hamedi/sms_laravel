@@ -32,7 +32,8 @@
                                         </td>
                                     @endforeach
 
-                                    <td class="px-4 py-2 border border-gray-300">{{ optional($grade->academic)->year }}
+                                    <td class="px-4 py-2 border border-gray-300">
+                                        {{ optional($grade->academic)->year }}
                                     </td>
 
                                     {{-- <td class="px-4 py-2 border border-gray-300">

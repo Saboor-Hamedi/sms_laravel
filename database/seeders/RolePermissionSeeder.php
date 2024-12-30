@@ -21,6 +21,7 @@ class RolePermissionSeeder extends Seeder
         $teacher = Permission::firstOrCreate(['name' => 'teacher']);
         $prinicipal = Permission::firstOrCreate(['name' => 'principal']);
         $student = Permission::firstOrCreate(['name' => 'student']);
+        $parent = Permission::firstOrCreate(['name' => 'parent']);
 
         // Create roles and assign permissions
         $role = Role::firstOrCreate(['name' => 'admin']);
@@ -34,5 +35,8 @@ class RolePermissionSeeder extends Seeder
 
         $role = Role::firstOrCreate(['name' => 'student']);
         $role->givePermissionTo($student);
+
+        $role = Role::firstOrCreate(['name' => 'parent']);
+        $role->givePermissionTo($parent);
     }
 }
