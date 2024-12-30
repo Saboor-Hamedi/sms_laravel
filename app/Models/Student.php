@@ -34,10 +34,6 @@ class Student extends Model
 
     public function parents()
     {
-        return $this->belongsToMany(
-            StudentParent::class,
-            'parent_id',
-            'student_id'
-        )->withPivot('created_at');
+        return $this->belongsToMany(Parents::class, 'parent_students', 'student_id',  'parent_id');
     }
 }

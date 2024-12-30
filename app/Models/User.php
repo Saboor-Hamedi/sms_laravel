@@ -101,4 +101,13 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Grade::class, 'student_grades', 'student_', 'grade_id');
     }
+
+    /**
+     * This will help to get the parent of the user
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function parent()
+    {
+        return $this->hasOne(Parents::class);
+    }
 }

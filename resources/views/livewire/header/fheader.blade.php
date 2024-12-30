@@ -11,7 +11,7 @@
             @endif
 
             @if (!Auth::check())
-                <a class="hover:text-gray-400" href="#" wire:navigate='login'>
+                <a class="hover:text-gray-400" href="#" wire:navigate='about'>
                     {{ __('About') }}
                 </a>
                 <a class="hover:text-gray-400" href="{{ route('register') }}" wire:navigate='register'>

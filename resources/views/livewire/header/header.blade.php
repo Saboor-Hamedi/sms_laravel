@@ -28,12 +28,9 @@
                         <a href="#"
                             class="text-gray-700 transition-colors duration-300 hover:text-gray-900">About</a>
                     </li>
-
                     <!-- Logout Button (only visible when authenticated) -->
                     @if (Auth::check())
-                        <li>
-                            @livewire('logout.logout')
-                        </li>
+                        @livewire('logout.logout')
                     @endif
                 </ul>
             </nav>

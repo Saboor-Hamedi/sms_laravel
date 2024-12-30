@@ -11,7 +11,7 @@ return new class extends Migration
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete(action: 'cascade');
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('lastname', 50)->default('Default Lastname')->index('teacher_lastname_index');
             $table->date('birthdate')->nullable();
             $table->string('phone', 50)->nullable();
