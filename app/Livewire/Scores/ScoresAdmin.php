@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Livewire\Attributes\Lazy;
 
 class ScoresAdmin extends Component
 {
@@ -15,6 +16,7 @@ class ScoresAdmin extends Component
     const CACHE_TIME = 10;
     const PAGINATE_SIZE = 24;
     #[Layout('layouts.app')]
+    #[Lazy]
     public function render()
     {
         $userId = Auth::id();

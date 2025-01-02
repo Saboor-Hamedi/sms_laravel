@@ -6,11 +6,12 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Spatie\Permission\Models\Permission as ModelsPermission;
+use Livewire\Attributes\Lazy;
 
 class Create extends Component
 {
 
-
+    #[Lazy]
     #[Validate('required|unique:permissions,name')]
     public $name;
 

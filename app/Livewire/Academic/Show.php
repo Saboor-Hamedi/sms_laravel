@@ -8,6 +8,7 @@ use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\Attributes\Lazy;
 
 class Show extends Component
 {
@@ -16,6 +17,7 @@ class Show extends Component
 
     public $year = '';
     public $academic_year_id = '';
+    #[Lazy]
     #[Layout('layouts.app')]
     public function mount($year)
     {

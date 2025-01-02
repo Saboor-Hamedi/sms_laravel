@@ -5,10 +5,11 @@ namespace App\Livewire\Chat;
 use App\Models\Posts;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Gate;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithPagination;
+
+use Livewire\Attributes\Lazy;
 
 class Chat extends Component
 {
@@ -16,7 +17,9 @@ class Chat extends Component
     const CACH_KEY = 'posts';
     const CACHE_TIME = 10;
 
+
     public $posts = [];
+    #[Lazy]
     #[Validate('required|string|max:255')]
     public $name = '';
 

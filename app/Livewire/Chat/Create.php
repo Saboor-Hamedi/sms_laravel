@@ -6,9 +6,11 @@ use App\Models\Posts;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\Attributes\Validate;
+use Livewire\Attributes\Lazy;
 
 class Create extends Component
 {
+    #[Lazy]
     #[Validate('required|string|max:255')]
     public $name = '';
 

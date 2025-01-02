@@ -1,4 +1,4 @@
-<section class=" w-full p-2">
+<section class="w-full p-2">
     <div class="overflow-hidden bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg">
         <div class="p-6 text-gray-900 dark:text-gray-100">
             <div class="container mx-auto p-4">
@@ -30,23 +30,22 @@
                 <div class="flex flex-row gap-3 max-w-full ">
                     <div class="mb-4">
                         <h3 class="text-xl font-bold mb-2">Roles</h3>
-                        @foreach ($roles as $role)
+                        @foreach ($roles as $id => $roleName)
                             <label class="block">
-                                <input type="checkbox" wire:click="toggleRole('{{ $role->name }}')"
-                                    @if (in_array($role->name, $userRoles)) checked @endif>
-
-                                {{ $role->name }}
+                                <input type="checkbox" wire:click="toggleRole('{{ $roleName }}')"
+                                    @if (in_array($roleName, $userRoles)) checked @endif>
+                                {{ $roleName }}
                             </label>
                         @endforeach
                     </div>
 
                     <div class="mb-4">
                         <h3 class="text-xl font-bold mb-2">Permissions</h3>
-                        @foreach ($permissions as $permission)
+                        @foreach ($permissions as $id => $permissionName)
                             <label class="block">
-                                <input type="checkbox" wire:click="togglePermission('{{ $permission->name }}')"
-                                    @if (in_array($permission->name, $userPermissions)) checked @endif>
-                                {{ $permission->name }}
+                                <input type="checkbox" wire:click="togglePermission('{{ $permissionName }}')"
+                                    @if (in_array($permissionName, $userPermissions)) checked @endif>
+                                {{ $permissionName }}
                             </label>
                         @endforeach
                     </div>

@@ -3,14 +3,14 @@
 namespace App\Livewire\Permissions;
 
 use Livewire\Attributes\Layout;
-use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Lazy;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Spatie\Permission\Models\Permission as ModelsPermission;
 
 class Edit extends Component
 {
-
+    #[Lazy]
     #[Validate('required|string|max:50')]
     public $name = '';
     public $permissionId;

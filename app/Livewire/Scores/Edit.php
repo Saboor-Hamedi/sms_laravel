@@ -6,9 +6,11 @@ use App\Models\Scores as ModelsScores;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\Attributes\Lazy;
 
 class Edit extends Component
 {
+    #[Lazy]
     #[Validate('required|numeric|max:100')]
     public $assignment = '';
     #[Validate('required|numeric|max:100')]

@@ -3,14 +3,14 @@
 namespace App\Livewire\Reports;
 
 use App\Models\Scores as ModelsScores;
-use Illuminate\Support\Facades\Storage;
-use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
 use Livewire\Component;
 use Spatie\Browsershot\Browsershot;
+use Livewire\Attributes\Lazy;
 
 class Scores extends Component
 {
 
+    #[Lazy]
     public function downloadReport()
     {
         set_time_limit(120); // Increase the PHP execution time

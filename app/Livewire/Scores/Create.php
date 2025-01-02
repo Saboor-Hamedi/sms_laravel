@@ -10,10 +10,12 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
 
 use Livewire\Component;
+use Livewire\Attributes\Lazy;
 
 class Create extends Component
 {
 
+    #[Lazy]
     // layout
     #[Layout('layouts.app')]
     #[Validate('required|numeric|max:100')]

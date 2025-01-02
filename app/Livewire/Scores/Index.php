@@ -8,13 +8,14 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Cache;
+use Livewire\Attributes\Lazy;
 
 class Index extends Component
 {
 
     use AuthorizesRequests;
+    #[Lazy]
     #[Layout('layouts.app')]
-
     const CACHE_KEY = 'scores';
     const CACHE_TIME = 60;
     const PAGINATE_SIZE = 24;

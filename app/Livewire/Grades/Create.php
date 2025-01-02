@@ -8,9 +8,8 @@ use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
-use Livewire\Attributes\Validate;
 use Livewire\Component;
-
+use Livewire\Attributes\Lazy;
 /*
  * @author  <Abudul Saboor Hamedi>
  * @package App\Livewire\Grades
@@ -27,6 +26,7 @@ use Livewire\Component;
 
 class Create extends Component
 {
+    #[Lazy]
     #[Layout('layouts.app')]
 
     public $students = [];

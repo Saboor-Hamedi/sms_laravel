@@ -10,10 +10,12 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\Lazy;
 
 class StudentParents extends Component
 {
     use WithPagination;
+    #[Lazy]
 
     public function render()
     {

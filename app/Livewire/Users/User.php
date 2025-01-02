@@ -5,14 +5,14 @@ namespace App\Livewire\Users;
 use App\Models\User as UserModel;
 use Livewire\Attributes\Layout;
 use Illuminate\Support\Str;
-use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Livewire\Attributes\Lazy;
 
 class User extends Component
 {
-
+    #[Lazy]
     #[Layout('layouts.app')]
     public $name = '';
     public $email = '';

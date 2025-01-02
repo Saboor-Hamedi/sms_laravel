@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
-
+use Livewire\Attributes\Lazy;
 /*
     - This is the livewire component for updating the user profile.
     - It has a form to update the user profile.
@@ -19,7 +19,7 @@ use Livewire\Component;
 
 class Update extends Component
 {
-
+    #[Lazy]
     #[Layout('layouts.app')]
     #[Validate('required|min:2|max:50')]
     public $lastname = '';

@@ -3,16 +3,21 @@
 namespace App\Livewire\Permissions;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Livewire\Attributes\Lazy;
 
 class UserRoleManager extends Component
 {
 
+
+    #[Lazy]
     #[Validate('required|email')]
+
     public $email;
     public $roles = [];
     public $permissions = [];
@@ -23,18 +28,45 @@ class UserRoleManager extends Component
 
     #[Layout('layouts.app')]
 
+
     // Fetch roles and permissions to populate the form
     public function mount()
     {
-        $this->roles = Role::get();
-        $this->permissions = Permission::get();
+        // $this->roles = Role::pluck('name', 'id')->toArray();
+        // $this->permissions = Permission::pluck('name', 'id')->toArray();
+        $this->roles = $this->getRole();
+        $this->permissions = $this->getPermission();
     }
 
+    /**
+     * Summary of getRole
+     * Fetch roles name
+     * @return mixed
+     */
+    private function getRole()
+    {
+        return Cache::remember('role', 60, function () {
+            return Role::pluck('name', 'id')->toArray();
+        });
+    }
+    /**
+     * Summary of getPermission
+     * Fetch permissions name
+     * @return mixed
+     */
+    private function getPermission()
+    {
+        return Cache::remember('permission', 60, function () {
+            return Permission::pluck('name', 'id')->toArray();
+        });
+    }
     // Method to load user roles and permissions based on email input
     public function rolesAndPermissions()
     {
         $this->validate();
-        $this->user = User::where('email', $this->email)->first();
+        // $this->user = User::where('email', $this->email)->first();
+        $this->user = User::with(['roles', 'permissions'])->where('email', $this->email)->first();
+
 
         if ($this->user) {
             $this->userRoles = $this->user->roles->pluck('name')->toArray();
@@ -80,9 +112,10 @@ class UserRoleManager extends Component
     // Method to remove roles
     public function removeRole($roleName)
     {
+
         if ($this->user) {
             $this->user->removeRole($roleName);
-            $this->rolesAndPermissions();
+            $this->userRoles = array_diff($this->userRoles, [$roleName]); // Update the local array
             session()->flash('message', 'Role removed successfully.');
         }
     }
@@ -90,12 +123,20 @@ class UserRoleManager extends Component
     // Method to assign permissions
     public function assignPermission($permissionName)
     {
+        // if ($this->user) {
+        //     $this->user->givePermissionTo($permissionName);
+        //     $this->rolesAndPermissions();
+        //     session()->flash('message', 'Permission assigned successfully.');
+        // } else {
+        //     session()->flash('error', 'User not found.');
+        // }
+
         if ($this->user) {
             $this->user->givePermissionTo($permissionName);
-            $this->rolesAndPermissions();
+            $this->userPermissions[] = $permissionName; // Update the local array
             session()->flash('message', 'Permission assigned successfully.');
         } else {
-            session()->flash('error', 'User not found.');
+            session()->flash('error', 'User  not found.');
         }
     }
 

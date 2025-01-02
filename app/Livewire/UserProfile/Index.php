@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
-
+use Livewire\Attributes\Lazy;
 
 /*
 * This is where we load the profile of all users 
@@ -19,6 +19,8 @@ class Index extends Component
     const CACHE_KEY = 'student_profile';
     const CACHE_TIME = 60;
     const PAGINATE_SIZE = 24;
+
+    #[Lazy]
 
     #[Layout('layouts.app')]
     public function render()

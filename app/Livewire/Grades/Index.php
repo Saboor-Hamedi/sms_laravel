@@ -3,12 +3,14 @@
 namespace App\Livewire\Grades;
 
 use App\Models\Grade;
-use App\Models\Teacher;
+
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Livewire\Attributes\Lazy;
 
 class Index extends Component
 {
+    #[Lazy]
     #[Layout('layouts.app')]
     public function render()
     {

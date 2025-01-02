@@ -7,11 +7,14 @@ use Livewire\Attributes\Layout;
 
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\Attributes\Lazy;
 
 class Create extends Component
 {
     #[Validate('required|digits:4|integer|min:2021|max:9999|unique:academics,year')]
     public $academic_year = '';
+
+    #[Lazy]
 
     #[Layout('layouts.app')]
 

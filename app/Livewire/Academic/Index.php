@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Cache;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-
+use Livewire\Attributes\Lazy;
 /*
     * This the academic component which displays the scores of the user.
     * This class is responsible for academic years to show it for the teachers 
@@ -25,6 +25,7 @@ class Index extends Component
     const CACHE_KEY = 'scores';
     const CACHE_TIME = 60;
     const PAGINATE_SIZE = 24;
+    #[Lazy]
 
     #[Layout('layouts.app')]
     public function render(): mixed

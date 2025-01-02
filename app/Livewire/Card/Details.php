@@ -5,6 +5,7 @@ namespace App\Livewire\Card;
 use App\Models\User;
 use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
+use Livewire\Attributes\Lazy;
 
 class Details extends Component
 {
@@ -12,6 +13,8 @@ class Details extends Component
     public $userCount = 0;
     const CACHE_KEY = 'userCount';
     const CACHE_TIME = 10;
+
+    #[Lazy]
 
     public function mount()
     {

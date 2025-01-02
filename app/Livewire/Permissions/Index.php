@@ -3,20 +3,16 @@
 namespace App\Livewire\Permissions;
 
 use Livewire\Attributes\Layout;
-use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Lazy;
 use Livewire\Component;
 use Spatie\Permission\Models\Permission;
 
 class Index extends Component
 {
 
+    #[Lazy]
     #[Layout('layouts.app')]
-    // public function mount()
-    // {
-    //     if (!Auth::user()->hasRole(['admin'])) {
-    //         $this->redirect('/dashboard');
-    //     }
-    // }
+
     public function render()
     {
 
