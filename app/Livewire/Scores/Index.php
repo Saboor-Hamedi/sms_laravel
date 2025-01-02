@@ -14,8 +14,8 @@ class Index extends Component
 {
 
     use AuthorizesRequests;
-    #[Lazy]
     #[Layout('layouts.app')]
+    #[Lazy]
     const CACHE_KEY = 'scores';
     const CACHE_TIME = 60;
     const PAGINATE_SIZE = 24;

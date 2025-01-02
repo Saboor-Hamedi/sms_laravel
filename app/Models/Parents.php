@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Parents extends Model
 {
     use HasFactory;
-    protected $fillable = ['lastname', 'phone'];
+    protected $guarded = [
+        'id'
+    ];
     public $timestamps = true;
     /**
      * This method defines the many-to-many relationship between the parent and the student.

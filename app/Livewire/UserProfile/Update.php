@@ -34,7 +34,6 @@ class Update extends Component
     #[Validate('required|nullable|min:2|max:255')]
     public $description = '';
 
-
     /*
     *  mount method to set the initial values of the form.
     *  It gets the student record from the database and sets the values of the form.
@@ -55,7 +54,7 @@ class Update extends Component
     public function update()
     {
         $this->validate();
-
+        // Show placeholder
         try {
             $student = Student::updateOrCreate(
                 ['user_id' => Auth::id()],
@@ -68,7 +67,6 @@ class Update extends Component
                     'is_active' => true,
                 ]
             );
-
             session()->flash('success', $student->wasRecentlyCreated ? 'Profile created successfully.' : 'Profile updated successfully.');
         } catch (\Exception $e) {
             session()->flash('error', 'Something went wrong. Please try again later.');
@@ -79,8 +77,12 @@ class Update extends Component
     {
         return redirect()->route('user-profile.index');
     }
+
+
     public function render()
     {
+
+
         return view('livewire.user-profile.update');
     }
 }

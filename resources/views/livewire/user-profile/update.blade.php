@@ -70,6 +70,9 @@
                     <button class="rounded default-button text-[10px] mt-2"
                         wire:click="cancel">{{ __('Cancel') }}</button>
                 </div>
+                <div wire:loading.delay wire:target="update">
+                    <small class="text-xs text-gray-500 mt-2 text-[10px]">{{ __('Please wait...') }}</small>
+                </div>
             </form>
         </div>
 

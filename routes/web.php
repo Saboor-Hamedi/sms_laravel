@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Parent\StudentDetails;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
 // pdf print
@@ -69,6 +70,9 @@ Route::get('/user-profile.index', UserProfileIndex::class)->name('user-profile.i
 Route::get('/user-profile.update', action: UpdateUserProfile::class)->name('user-profile.update');
 Route::get('/reports.scores', ScoreReports::class)->name('reports.scores');
 
+
+// Parent
+Route::get('parent/student-details/{id}', StudentDetails::class)->name('parent.student-details');
 // end
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])

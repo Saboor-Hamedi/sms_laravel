@@ -14,7 +14,7 @@
                         <livewire:scores.index />
                     @endcan
                     @can('parent')
-                        @livewire('parent.student-parents')
+                        <livewire:parent.student-parents />
                     @endcan
                 </div>
             </div>

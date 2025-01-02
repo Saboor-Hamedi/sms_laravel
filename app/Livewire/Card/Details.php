@@ -14,7 +14,7 @@ class Details extends Component
     const CACHE_KEY = 'userCount';
     const CACHE_TIME = 10;
 
-    #[Lazy]
+    // #[Lazy]
 
     public function mount()
     {
