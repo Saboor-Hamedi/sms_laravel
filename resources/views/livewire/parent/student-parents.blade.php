@@ -13,18 +13,17 @@
                 </div>
             @endif
 
-            @if ($reports->isNotEmpty())
+            @if ($studentsProfile->isNotEmpty())
                 <div class="space-y-4">
-                    @foreach ($reports as $parent)
+                    @foreach ($studentsProfile as $profile)
                         <div class="p-4 border border-gray-200 rounded-lg shadow-sm bg-gray-50">
                             <h4 class="mb-2 text-lg font-semibold text-gray-800">Parent</h4>
-                            <p><span class="font-medium text-gray-600">Name:</span> {{ $parent->lastname }}</p>
-                            <p><span class="font-medium text-gray-600">Phone:</span> {{ $parent->phone }}</p>
-
-                            @if ($parent->students->isNotEmpty())
+                            <p><span class="font-medium text-gray-600">Name:</span> {{ $profile->lastname }}</p>
+                            <p><span class="font-medium text-gray-600">Phone:</span> {{ $profile->phone }}</p>
+                            @if ($profile->students->isNotEmpty())
                                 <h4 class="mt-4 text-lg font-semibold text-gray-800">Students</h4>
                                 <ul class="ml-4 list-disc">
-                                    @foreach ($parent->students as $student)
+                                    @foreach ($profile->students as $student)
                                         <li>
                                             <span class="font-medium text-gray-600">Name:</span>
                                             {{ $student->lastname }}
@@ -37,6 +36,17 @@
                                             <a href="{{ route('parent.student-details', $student->id) }}" wire:navigate
                                                 class="text-blue-500 underline">More Information</a>
                                         </li>
+                                        @foreach ($student->grades as $grade)
+                                            <li>
+                                                <span class="font-medium text-gray-600">Grade:</span>
+                                                {{ Str::ucfirst($grade->subject_name) }}
+
+                                            </li>
+                                            <li>
+                                                <span class="font-medium text-gray-600">Teacher:</span>
+                                                {{ Str::ucfirst($grade->teacher->user->name) }}
+                                            </li>
+                                        @endforeach
                                     @endforeach
                                 </ul>
                             @else
@@ -51,7 +61,7 @@
                 </div>
 
                 <div class="mt-4">
-                    {{ $reports->links() }}
+                    {{ $studentsProfile->links() }}
                 </div>
             @else
                 <div class="px-4 py-3 mt-4 text-red-700 bg-red-100 border-t border-b border-red-500 rounded-lg"

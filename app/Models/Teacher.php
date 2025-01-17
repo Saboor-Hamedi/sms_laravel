@@ -37,8 +37,22 @@ class Teacher extends Model
     public $timestamps = false;
 
 
+    /**
+     * The user that this teacher belongs to
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function students()
+    {
+        return $this->hasMany(Student::class);
+    }
+    public function grades()
+    {
+        return $this->hasMany(Grade::class, 'teacher_id');
     }
 }

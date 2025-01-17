@@ -17,7 +17,6 @@ use Illuminate\Database\Eloquent\Model;
 class Grade extends Model
 {
 
-    /** @use HasFactory<\Database\Factories\GradeFactory> */
     use HasFactory;
 
     protected $fillable = ['subject_name', 'teacher_id', 'academic_id'];
@@ -25,11 +24,11 @@ class Grade extends Model
 
     public function teacher()
     {
-        return $this->belongsTo(User::class, 'teacher_id');
+        return $this->belongsTo(Teacher::class, 'teacher_id');
     }
     public function students()
     {
-        return $this->belongsToMany(User::class, 'grade_student', 'grade_id', 'student_id')->withTimestamps();
+        return $this->belongsToMany(Student::class, 'grade_student', 'grade_id', 'student_id')->withTimestamps();
     }
     // academic year, register students based on academic year 
     public function academic()

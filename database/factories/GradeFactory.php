@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Teacher;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +17,9 @@ class GradeFactory extends Factory
      */
     public function definition(): array
     {
-        $teacher_id = User::role('teacher')->inRandomOrder()->first()->id;
+        // $teacher_id = User::role('teacher')->inRandomOrder()->first()->id;
+        $teacher_id = Teacher::inRandomOrder()->first()->id;
+
         return [
             'teacher_id' => $teacher_id,
             'subject_name' => $this->faker->sentence(2),
@@ -25,6 +27,4 @@ class GradeFactory extends Factory
             'updated_at' => now(),
         ];
     }
-
-    public function customWorld($words, $length = 10) {}
 }

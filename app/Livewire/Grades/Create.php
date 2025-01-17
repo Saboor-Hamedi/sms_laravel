@@ -4,7 +4,9 @@ namespace App\Livewire\Grades;
 
 use App\Models\Academics;
 use App\Models\Grade;
+use App\Models\Student;
 use App\Models\Subject;
+use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
@@ -32,11 +34,15 @@ class Create extends Component
     public $students = [];
     public $subjects = [];
     public $academics = [];
+    public $teachers = [];
     public $roles = [];
 
     public $subject_name = '';
     public $student_name = '';
     public $academic_id = '';
+    public $teacher_id = '';
+    public $grade_id = '';
+
 
     protected $listeners = ['refresh_academic_year', 'fetchAcademicYear'];
     /**
@@ -62,6 +68,7 @@ class Create extends Component
         $this->subjects = $this->fetchSubjects();
         $this->roles = $this->fetchStudents();
         $this->academics = $this->fetchAcademicYear();
+        $this->teachers = $this->fetchTeachers();
     }
     /**
      * Fetch all subjects from the database and return them as a collection.
@@ -88,7 +95,7 @@ class Create extends Component
      */
     public function fetchStudents()
     {
-        return User::role('student')->pluck('name', 'id');
+        return Student::pluck('lastname', 'id');
     }
     /**
      * Summary of fetchAcademicYear
@@ -100,6 +107,10 @@ class Create extends Component
     public function fetchAcademicYear()
     {
         return Academics::orderBy('year', 'desc')->pluck('year', 'id');
+    }
+    public function fetchTeachers()
+    {
+        return Teacher::pluck('lastname', 'id');
     }
     /**
      * Summary of save
@@ -113,19 +124,19 @@ class Create extends Component
     public function save()
     {
         $this->validate([
+            'teacher_id' => 'required',
             'subject_name' => 'required',
             'student_name' => 'required',
             'academic_id' => 'required',
         ]);
         $grade = Grade::create([
-            'teacher_id' => Auth::id(),
+            'teacher_id' => $this->teacher_id,
             'subject_name' => $this->subject_name,
             'academic_id' => $this->academic_id,
         ]);
         $grade->students()->attach($this->student_name);
 
         $this->resetForm();
-
         session()->flash('success', 'Grade created successfully');
         $this->dispatch('refresh_academic_year');
     }
@@ -174,6 +185,7 @@ class Create extends Component
                 'subjects' => $this->subjects,
                 'roles' => $this->roles,
                 'academics' => $this->academics,
+                'teachers' => $this->teachers,
             ]
         );
     }

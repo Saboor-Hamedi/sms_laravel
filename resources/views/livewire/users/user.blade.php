@@ -4,6 +4,12 @@
     <section class="w-full p-2 bg-white shadow-sm dark:bg-gray-800">
         <div class="py-4 bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 mb-3">
             <h1 class="ml-1 text-xl font-bold text-gray-800 sm:text-md">Register New User</h1>
+            <p>
+                <span class="mr-2 font-bold text-gray-600">#NOTE</span>
+                <small class="ml-5 text-gray-600">
+                    This is the place where you register new users, such teacher, student, parents, etc.
+                </small>
+            </p>
         </div>
         @if (session()->has('success'))
             <div class="px-4 py-3 mb-2 text-blue-700 bg-blue-100 border-t border-b border-blue-500" role="alert">

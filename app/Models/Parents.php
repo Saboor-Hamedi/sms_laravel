@@ -28,15 +28,7 @@ class Parents extends Model
             'student_id'
         )->withPivot('created_at');
     }
-    /**
-     * The teacher that is associated with this parent
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function teacher()
-    {
-        return $this->belongsTo(Teacher::class, 'teacher_id');
-    }
+
 
     /**
      * This method defines the relationship between the parent and the user model.

@@ -27,11 +27,50 @@ class Student extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    /**
+     * [grades description]
+     *
+     * many to many relationship
+     * @return [type] [description]
+     * @author saboor
+     * @since 2021-05-10
+     * @version 1.0
+     * @see https://laravel.com/docs/8.x/eloquent-relationships#many-to-many
+     * @see https://laravel.com/docs/8.x/eloquent-relationships#many-to-many-polymorphic-relations
+     * This belongs to the grades and students table
+     */
+    public function grades()
+    {
+        return $this->belongsToMany(Grade::class, 'grade_student', 'student_id', 'grade_id');
+    }
+    /**
+     * [grades description]
+     *
+     * many to many relationship
+     * @return [type] [description]
+     * @author saboor
+     * @since 2021-05-10
+     * @version 1.0
+     * @see https://laravel.com/docs/8.x/eloquent-relationships#many-to-many
+     * @see https://laravel.com/docs/8.x/eloquent-relationships#many-to-many-polymorphic-relations
+     * This belongs to the grades and teachers table
+     */
     public function teacher()
     {
-        return $this->belongsTo(Teacher::class);
+        return $this->belongsTo(Teacher::class, 'teacher_id', 'id');
     }
-
+    /**
+     * [grades description]
+     *
+     * many to many relationship
+     * @return [type] [description]
+     * @author saboor
+     * @since 2021-05-10
+     * @version 1.0
+     * @see https://laravel.com/docs/8.x/eloquent-relationships#many-to-many
+     * @see https://laravel.com/docs/8.x/eloquent-relationships#many-to-many-polymorphic-relations
+     * This belongs to the parents and students table
+     */
     public function parents()
     {
         return $this->belongsToMany(Parents::class, 'parent_students', 'student_id',  'parent_id');

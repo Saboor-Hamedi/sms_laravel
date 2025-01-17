@@ -89,18 +89,6 @@ class User extends Authenticatable
     }
 
 
-    /*
-      * many-to-many relationship, teachers, students, grades
-      * @property Grade  
-    */
-    public function grades()
-    {
-        return $this->hasMany(Grade::class, 'teacher_id');
-    }
-    public function studentGrades()
-    {
-        return $this->belongsToMany(Grade::class, 'student_grades', 'student_', 'grade_id');
-    }
 
     /**
      * This will help to get the parent of the user
