@@ -93,7 +93,8 @@
                     <button class="rounded default-button text-[10px] "
                         wire:loading.attr="disabled">{{ __('Save') }}</button>
                     <button class="rounded default-button text-[10px] " wire:loading.attr="disabled"
-                        wire:click="cancel">{{ __('Cancel') }}</button>
+                        wire:click="cancel">{{ __('Cancel') }}
+                    </button>
                 </div>
                 <div wire:loading wire:target="save">
                     <small class="text-xs text-gray-500 mt-2 text-[10px]">{{ __('Please wait...') }}</small>
