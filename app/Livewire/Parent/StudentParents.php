@@ -14,6 +14,7 @@ use Exception;
 class StudentParents extends Component
 {
     use WithPagination;
+
     #[Lazy]
 
     const PER_PAGE = 10;
@@ -23,7 +24,7 @@ class StudentParents extends Component
     public function ensureUserIsAuthenticated($userId)
     {
         if (!$userId) {
-            throw new Exception('User is not authenticated.');
+            throw new Exception('User is not authenticated');
         }
     }
 
@@ -34,7 +35,7 @@ class StudentParents extends Component
             ->paginate(self::PER_PAGE);
         // Check if the parent has any students assigned to them
         if ($data->isEmpty()) {
-            throw new ModelNotFoundException('No parent data found for the authenticated user.');
+            throw new ModelNotFoundException('No parent data found for the authenticated user');
         }
         return $data;
     }
