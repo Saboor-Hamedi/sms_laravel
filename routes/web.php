@@ -39,15 +39,22 @@ use App\Livewire\UserProfile\Update as UpdateUserProfile;
 use App\Livewire\Grades\Index as IndexGrades;
 use App\Livewire\Grades\Create as CreateGrades;
 
+// Teahcers: Only Teachers can see this
+use App\Livewire\Teachers\Register as RegisterTeacherProfile;
+use App\Livewire\Teachers\Profile as ShowTeacherProfile;
+
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome'); // home
 
+// Teachers
 Route::middleware([TeacherMiddleware::class])->group(function () {
     Route::get('/academic.index', IndexAcademic::class)->name('academic.index'); // academic index
     Route::get('/scores', CreateScores::class)->name('scores.create'); // new scores
     Route::get('/scores/{id}/edit', EditScores::class)->name('scores.edit'); // edit scores
     Route::get('/academic/{year}/show', ShowAcademic::class)->name('academic.show');
+    Route::get('/teachers/register', RegisterTeacherProfile::class)->name('teachers.register');
+    Route::get('/teachers/profile', ShowTeacherProfile::class)->name('teachers.profile');
 });
-
+// Admin
 Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('/permissions.index', IndexPermissions::class)->name('permissions.index'); // permissions index
     Route::get('/permissions.create', CreatePermissions::class)->name('permissions.create'); // new permissions

@@ -15,14 +15,29 @@
                         Personal Details
                     </h4>
                 </div>
-                <x-admin-link :href="route('user-profile.index')" :active="request()->routeIs('user-profile.index')">
-                    <x-heroicon-o-document-text class="hero__icons" />
-                    {{ __('Profile') }}
-                </x-admin-link>
-                <x-admin-link :href="route('user-profile.update')" :active="request()->routeIs('user-profile.update')">
-                    <x-heroicon-o-document-text class="hero__icons" />
-                    {{ __('Update Profile') }}
-                </x-admin-link>
+                {{-- Students --}}
+                @can('student')
+                    <x-admin-link :href="route('user-profile.index')" :active="request()->routeIs('user-profile.index')">
+                        <x-heroicon-o-document-text class="hero__icons" />
+                        {{ __('Profile') }}
+                    </x-admin-link>
+                    <x-admin-link :href="route('user-profile.update')" :active="request()->routeIs('user-profile.update')">
+                        <x-heroicon-o-document-text class="hero__icons" />
+                        {{ __('Update Profile') }}
+                    </x-admin-link>
+                @endcan
+                {{-- Teachers --}}
+                @can('teacher')
+                    <x-admin-link :href="route('teachers.profile')" :active="request()->routeIs('teachers.profile')">
+                        <x-heroicon-o-document-text class="hero__icons" />
+                        {{ __('Profile') }}
+                    </x-admin-link>
+
+                    <x-admin-link :href="route('teachers.register')" :active="request()->routeIs('teachers.register')">
+                        <x-heroicon-o-document-text class="hero__icons" />
+                        {{ __('Update Profile') }}
+                    </x-admin-link>
+                @endcan
                 @can('admin')
                     {{-- nested menu --}}
                     <div>

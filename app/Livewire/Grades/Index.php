@@ -10,8 +10,8 @@ use Livewire\Attributes\Lazy;
 
 class Index extends Component
 {
-    #[Lazy]
     #[Layout('layouts.app')]
+    #[Lazy]
     public function render()
     {
         $grades = Grade::with(['teacher', 'students', 'academic'])->latest()->paginate(10);

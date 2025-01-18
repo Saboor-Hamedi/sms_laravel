@@ -1,4 +1,6 @@
 <div>
+    @section('title', 'Scores')
+
     <div class="py-4 bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
         <h1 class="ml-1 text-xl font-bold text-gray-800 sm:text-md">New Academic Year</h1>
     </div>

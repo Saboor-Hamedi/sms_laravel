@@ -1,6 +1,5 @@
 <div>
     @section('title', 'Grades')
-
     <section class="py-2">
         <div class="p-2 mx-auto max-w-7xl">
             <div class="overflow-hidden bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg ">
