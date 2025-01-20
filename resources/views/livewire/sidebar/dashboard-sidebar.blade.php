@@ -38,6 +38,15 @@
                         {{ __('Update Profile') }}
                     </x-admin-link>
                 @endcan
+
+                {{-- parent details  --}}
+                @can('parent')
+                    {{-- <x-admin-link :href="route('parent.register-profile')" :active="request()->routeIs('parent.register-profile')">
+                        <x-heroicon-o-document-text class="hero__icons" />
+                        {{ __('Update Profile') }}
+                    </x-admin-link> --}}
+                @endcan
+                {{-- admin --}}
                 @can('admin')
                     {{-- nested menu --}}
                     <div>

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Middleware\ParentMiddleware;
+use App\Livewire\Parent\RegisterProfile;
 use App\Livewire\Parent\StudentDetails;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
@@ -78,8 +80,12 @@ Route::get('/user-profile.update', action: UpdateUserProfile::class)->name('user
 Route::get('/reports.scores', ScoreReports::class)->name('reports.scores');
 
 
+
 // Parent
-Route::get('parent/student-details/{id}', StudentDetails::class)->name('parent.student-details');
+Route::middleware([ParentMiddleware::class])->group(function () {
+    Route::get('parent/student-details/{id}', StudentDetails::class)->name('parent.student-details');
+    // Route::get('parent/register-profile', RegisterProfile::class)->name('parent.register-profile');
+});
 // end
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])

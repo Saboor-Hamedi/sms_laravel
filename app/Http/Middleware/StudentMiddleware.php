@@ -20,8 +20,9 @@ class StudentMiddleware
             $user = Auth::user();
             if ($user->hasRole('student')) {
                 return $next($request);
+            } else {
+                abort(403, 'Unauthorized action.');
             }
         }
-        abort(403, 'Unauthorized action.');
     }
 }

@@ -21,8 +21,9 @@ class TeacherMiddleware
             $user = Auth::user();
             if ($user->hasRole('teacher')) {
                 return $next($request);
+            } else {
+                abort(403, 'Unauthorized action.');
             }
         }
-        abort(403, 'Unauthorized action.');
     }
 }
