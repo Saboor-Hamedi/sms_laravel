@@ -1,7 +1,7 @@
 <div>
     <section>
         {{-- Information Header --}}
-        <livewire:parent.register-profile />
+        <livewire:parent.show-profile />
 
         {{-- Students Information --}}
     </section>

@@ -41,10 +41,18 @@
 
                 {{-- parent details  --}}
                 @can('parent')
-                    {{-- <x-admin-link :href="route('parent.register-profile')" :active="request()->routeIs('parent.register-profile')">
+                    <x-admin-link :href="route('parent.register-profile')" :active="request()->routeIs('parent.register-profile')">
                         <x-heroicon-o-document-text class="hero__icons" />
-                        {{ __('Update Profile') }}
-                    </x-admin-link> --}}
+                        {{ __('Register Profile') }}
+                    </x-admin-link>
+                    <x-admin-link :href="route('parent.profile')" :active="request()->routeIs('parent.profile')">
+                        <x-heroicon-o-document-text class="hero__icons" />
+                        {{ __('Profile') }}
+                    </x-admin-link>
+                    <x-admin-link :href="route('profile')" :active="request()->routeIs('profile')">
+                        <x-heroicon-o-document-text class="hero__icons" />
+                        {{ __('Update Details') }}
+                    </x-admin-link>
                 @endcan
                 {{-- admin --}}
                 @can('admin')
@@ -170,9 +178,17 @@
                     <img src="{{ asset('css/img/logo.png') }}" alt="Profile" class="profile__image">
                     <span class="profile__name">{{ Str::ucfirst(Auth::user()->name ?? 'Ananymous') }}</span>
                 </div>
-                <a href="{{ route('user-profile.index') }}" wire:navigate='user-profile'>
-                    {{ Str::ucfirst(Auth::user()->name ?? 'Ananymous') }}
-                </a>
+                @can('student')
+                    <a href="{{ route('user-profile.index') }}" wire:navigate='user-profile'>
+                        {{ Str::ucfirst(Auth::user()->name ?? 'Ananymous') }}
+                    </a>
+                @endcan
+                {{-- parent --}}
+                @can('parent')
+                    <a href="{{ route('parent.profile') }}" wire:navigate='profile'>
+                        {{ Str::ucfirst(Auth::user()->name ?? 'Ananymous') }}
+                    </a>
+                @endcan
                 <a href="{{ route('profile') }}" wire:navigate='profile'>Update Detailts</a>
                 <a href="#" wire:navigate='settings'>Settings</a>
                 @livewire('logout.logout')

@@ -15,10 +15,10 @@
                         <div class="">
                             <h3 class="text-base font-bold text-black sm:text-lg md:text-xl">
                                 {{ Str::ucfirst(Auth::user()->name ?? 'N/A') }}
-                                {{ $student->lastname ?? '' }}
+                                {{ $profile->lastname ?? '' }}
                             </h3>
                         </div>
-                        <div class="flex gap-2 ">
+                        {{-- <div class="flex gap-2 ">
                             <a href="{{ route('profile') }}" type="button" class="rounded default-button text-[10px]"
                                 wire:navigate='profile'>
                                 {{ __('Profile') }}
@@ -27,7 +27,7 @@
                                 wire:navigate='profile'>
                                 {{ __('Post') }}
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
 
                     {{-- bio --}}

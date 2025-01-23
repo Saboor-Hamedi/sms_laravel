@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Middleware\ParentMiddleware;
-use App\Livewire\Parent\RegisterProfile;
-use App\Livewire\Parent\StudentDetails;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
 // pdf print
@@ -45,6 +43,13 @@ use App\Livewire\Grades\Create as CreateGrades;
 use App\Livewire\Teachers\Register as RegisterTeacherProfile;
 use App\Livewire\Teachers\Profile as ShowTeacherProfile;
 
+
+// parent
+use App\Http\Middleware\ParentMiddleware;
+use App\Livewire\Parent\RegisterProfile;
+use App\Livewire\Parent\StudentDetails;
+use App\Livewire\Parent\Profile as ParentProfile;
+
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome'); // home
 
 // Teachers
@@ -84,7 +89,8 @@ Route::get('/reports.scores', ScoreReports::class)->name('reports.scores');
 // Parent
 Route::middleware([ParentMiddleware::class])->group(function () {
     Route::get('parent/student-details/{id}', StudentDetails::class)->name('parent.student-details');
-    // Route::get('parent/register-profile', RegisterProfile::class)->name('parent.register-profile');
+    Route::get('parent/profile', ParentProfile::class)->name('parent.profile');
+    Route::get('parent/register-profile', RegisterProfile::class)->name('parent.register-profile');
 });
 // end
 Route::view('dashboard', 'dashboard')

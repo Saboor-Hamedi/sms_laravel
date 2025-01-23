@@ -39,6 +39,8 @@
                 </a>
             </li>
 
+            {{-- parent --}}
+
             @can('admin')
                 <li class="mb-4">
                     <a href="{{ route('permissions.user-role-manager') }}"

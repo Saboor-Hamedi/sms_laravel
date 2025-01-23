@@ -19,6 +19,7 @@
         "laravel/ui": "^4.5",
         "livewire/livewire": "*",
         "livewire/volt": "^1.0",
+        "propaganistas/laravel-phone": "^5.3",
         "spatie/browsershot": "^4.3",
         "spatie/laravel-permission": "^6.10"
     },

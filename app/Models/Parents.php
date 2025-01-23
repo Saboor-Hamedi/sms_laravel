@@ -8,8 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Parents extends Model
 {
     use HasFactory;
-    protected $guarded = [
-        'id'
+    protected $fillable = [
+        'lastname',
+        'phone',
+        'address',
+        'bio',
+        'image'
     ];
     public $timestamps = true;
     /**

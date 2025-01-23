@@ -4,45 +4,59 @@ namespace App\Livewire\Parent;
 
 use App\Models\Parents;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Request;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Lazy;
 use Livewire\Component;
+use Propaganistas\LaravelPhone\Rules\Phone;
 
 class RegisterProfile extends Component
 {
 
     #[Layout('layouts.app')]
-    #[Lazy]
-
-    const CACHE_KEY = 'parents';
-    const CACHE_TIME = 600;
-
-    public $parents = '';
-
+    #[Lazy()]
+    public $lastname  = '';
+    public $phone = '';
+    public $address = '';
+    public $bio = '';
     public function mount()
     {
-        $this->parents =   $this->fetchParents() ?: collect();
+        $this->fetchParents();
     }
-
     public function fetchParents()
     {
-
-        // Query the parents data if not in cache
-        return Parents::with('user')
-            ->where('user_id', Auth::id())
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $parent = Parents::where('user_id', Auth::user()->id)->first();
+        $this->lastname = $parent->lastname ?? '';
+        $this->phone = $parent->phone ?? '';
+        $this->address = $parent->address ?? '';
+        $this->bio = $parent->bio ?? '';
     }
-
-    public function clearParentsCache()
+    public function save()
     {
-        // call this method on update and delete
-        Cache::forget(self::CACHE_KEY . Auth::id());
+        $parent = Parents::updateOrCreate(
+            ['user_id' => Auth::user()->id],
+            [
+                'lastname' => $this->lastname,
+                'phone' => $this->phone,
+                'address' => $this->address,
+                'bio' => $this->bio,
+            ]
+        );
+        session()->flash('success', $parent->wasRecentlyCreated ? 'Profile created successfully.' : 'Profile updated successfully.');
+    }
+    public function rules(Request $request)
+    {
+
+
+        return $this->validate([
+            'lastname' => 'required|string|max:30',
+            'phone' => 'required|regex:/(01)[0-9]{9}/',
+            'address' => 'nullable|string|max:150',
+            'bio' => 'nullable|string|max:150',
+        ]);
     }
     public function render()
     {
-
         return view('livewire.parent.register-profile');
     }
 }
