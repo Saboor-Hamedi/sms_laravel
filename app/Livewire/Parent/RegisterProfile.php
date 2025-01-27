@@ -3,6 +3,7 @@
 namespace App\Livewire\Parent;
 
 use App\Models\Parents;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Livewire\Attributes\Layout;
@@ -33,17 +34,44 @@ class RegisterProfile extends Component
     }
     public function save()
     {
-        $parent = Parents::updateOrCreate(
-            ['user_id' => Auth::user()->id],
-            [
+        try {
+            $parent = Parents::firstOrNew(['user_id' => Auth::id()]);
+            $originalAttributes  = $parent->getAttributes();
+            // parepare update data 
+            $updateData = [
+                'user_id'  => Auth::id(),
                 'lastname' => $this->lastname,
                 'phone' => $this->phone,
                 'address' => $this->address,
                 'bio' => $this->bio,
-            ]
-        );
-        session()->flash('success', $parent->wasRecentlyCreated ? 'Profile created successfully.' : 'Profile updated successfully.');
+            ];
+
+            // check if this is a new record 
+            if (!$parent->exists) {
+                $parent->fill($updateData)->save();
+                $message = 'Profile created successfully';
+            } else {
+                // check for actual message 
+                $changes = array_diff_assoc($updateData, $originalAttributes);
+                if (!empty($changes)) {
+                    $parent->update($updateData);
+                    $message = 'Profile updated successfully';
+                } else {
+                    $message = 'No changes detected';
+                }
+            }
+            session()->flash('status', [
+                'type' => 'success',
+                'message' => $message
+            ]);
+        } catch (Exception $e) {
+            session()->flash('status', [
+                'type' => 'error',
+                'message' => 'Operation failed. Please try again later.' . $e->getMessage()
+            ]);
+        }
     }
+
     public function rules(Request $request)
     {
 

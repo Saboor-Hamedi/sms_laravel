@@ -2,19 +2,16 @@
     <div class="flex flex-col flex-1 gap-2">
         <div class="flex flex-col gap-4 p-4 border rounded-md shadow-md lg:max-w-full">
             {{-- Flash message --}}
-            @if (session()->has('success'))
-                <div class="px-4 py-3 text-blue-700 bg-blue-100 border-t border-b border-blue-500" role="alert">
-                    <p class="font-bold">Informational message</p>
-                    <p class="text-[10px]">{{ session('success') }}.</p>
+            @if (session('status'))
+                <div
+                    class="p-3 mb-4 border rounded-lg
+                    {{ session('status.type') === 'success' ? 'bg-green-100 border-green-500 text-green-700' : '' }}
+                        {{ session('status.type') === 'error' ? 'bg-red-100 border-red-500 text-red-700' : '' }}">
+                    <p class="font-bold">{{ session('status.type') === 'success' ? '✓' : '!' }}
+                        {{ session('status.message') }}
+                    </p>
                 </div>
             @endif
-            @if (session()->has('error'))
-                <div class="px-4 py-3 text-red-700 bg-blue-100 border-t border-b border-red-500" role="alert">
-                    <p class="font-bold">Informational message</p>
-                    <p class="text-[10px]">{{ session('error') }}.</p>
-                </div>
-            @endif
-
             <form class="flex flex-col gap-2" wire:submit.prevent="save">
                 <!-- First Row -->
                 <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -66,7 +63,12 @@
 
                 <!-- Buttons -->
                 <div class="flex justify-start gap-2">
-                    <button class="rounded default-button" type="submit">
+                    <button class="rounded default-button flex items-center" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class=" hero__icons">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6A2.25 2.25 0 0 1 6 3.75h1.5m9 0h-9" />
+                        </svg>
                         Save
                     </button>
                 </div>

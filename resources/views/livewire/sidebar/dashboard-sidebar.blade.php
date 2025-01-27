@@ -30,6 +30,8 @@
                 @can('teacher')
                     <x-admin-link :href="route('teachers.profile')" :active="request()->routeIs('teachers.profile')">
                         <x-heroicon-o-document-text class="hero__icons" />
+
+
                         {{ __('Profile') }}
                     </x-admin-link>
 
@@ -41,16 +43,38 @@
 
                 {{-- parent details  --}}
                 @can('parent')
-                    <x-admin-link :href="route('parent.register-profile')" :active="request()->routeIs('parent.register-profile')">
-                        <x-heroicon-o-document-text class="hero__icons" />
-                        {{ __('Register Profile') }}
-                    </x-admin-link>
+                    {{-- Register Profile --}}
                     <x-admin-link :href="route('parent.profile')" :active="request()->routeIs('parent.profile')">
-                        <x-heroicon-o-document-text class="hero__icons" />
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-6 hero__icons">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        </svg>
                         {{ __('Profile') }}
                     </x-admin-link>
+
+
+                    <x-admin-link :href="route('parent.register-profile')" :active="request()->routeIs('parent.register-profile')">
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-6 hero__icons">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+
+                        {{ __('Register Profile') }}
+                    </x-admin-link>
+
+
                     <x-admin-link :href="route('profile')" :active="request()->routeIs('profile')">
-                        <x-heroicon-o-document-text class="hero__icons" />
+                        {{-- <x-heroicon-o-document-text class="hero__icons" /> --}}
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-6 hero__icons">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+                        </svg>
+
                         {{ __('Update Details') }}
                     </x-admin-link>
                 @endcan
@@ -172,7 +196,13 @@
 
         {{-- dropdown --}}
         <div class="dropdown" id="dropdownMenu">
-            <button class="rounded default-button">Profile</button>
+            <button class="rounded default-button flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="hero__icons">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
+                </svg>
+            </button>
             <div class="dropdown__content">
                 <div class="profile__item">
                     <img src="{{ asset('css/img/logo.png') }}" alt="Profile" class="profile__image">

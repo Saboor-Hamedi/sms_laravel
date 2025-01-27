@@ -3,6 +3,7 @@
 namespace App\Livewire\Parent;
 
 use App\Models\Parents;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Lazy;
@@ -26,10 +27,12 @@ class Profile extends Component
     public $phone = '';
 
     public $profile;
+    public $parent_kids = '';
 
     public function mount()
     {
         $this->profile = $this->fetchProfile();
+        $this->parent_kids = $this->fetchTheirKids();
     }
 
     public function fetchProfile()
@@ -37,7 +40,21 @@ class Profile extends Component
         return Parents::with('user')->where('user_id', Auth::id())->first();
     }
 
-
+    /**
+     * Summary of fetchTheirKids
+     * fetchTheirKids Basically we are refering to students
+     * Every parent has either multiple kids or at least one
+     * Parents are able to see their kids on the profile
+     * E.g @student_name
+     */
+    public function fetchTheirKids(): Collection
+    {
+        $parent = Parents::with(['students'])
+            ->where('user_id', Auth::id())
+            ->first()
+            ->students;
+        return $parent ? $parent : collect(); // Return on empty if not parent found
+    }
     public function render()
     {
         return view('livewire.parent.profile');

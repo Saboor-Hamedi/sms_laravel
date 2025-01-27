@@ -17,6 +17,7 @@
                                 {{ Str::ucfirst(Auth::user()->name ?? 'N/A') }}
                                 {{ $profile->lastname ?? '' }}
                             </h3>
+
                         </div>
                         {{-- <div class="flex gap-2 ">
                             <a href="{{ route('profile') }}" type="button" class="rounded default-button text-[10px]"
@@ -32,9 +33,9 @@
 
                     {{-- bio --}}
                     <div>
-                        <h4 class="font-medium leading-4 lg:text-lg text-slate-400 md:text-md sm:text-sm">Bio</h4>
+                        {{-- <h4 class="font-medium leading-4 lg:text-lg text-slate-400 md:text-md sm:text-sm">Bio</h4> --}}
                         <p class="lg:text-[14px] font-medium leading-4 text-slate-400 md:text-[13px] sm:text-[11px]">
-                            {!! $student->description ?? '' !!}
+                            {!! $profile->bio ?? '' !!}
                         </p>
                     </div>
                     {{-- end bio --}}
@@ -50,20 +51,25 @@
                         <div class="flex items-center justify-start text-center">
                             <x-heroicon-o-map class="hero__icons" />
                             <span class="mr-2 text-sm font-medium">Address: </span>
-                            {{ $student->address ?? 'Add address' }}
+                            {{ $profile->address ?? 'Add address' }}
                         </div>
+                        {{-- show students names --}}
+                        <ul class="list-dics">
+                            @foreach ($parent_kids as $kid)
+                                <li class="flex items-center ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        class="hero__icons" stroke-width="1.5" stroke="currentColor" class="size-15">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                    </svg>
+                                    <a href="{{ $kid->lastname }}"
+                                        class="hover:underline hover:text-blue-300">{{ $kid->lastname ?? '' }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
-                <div class="flex flex-wrap gap-3 ">
-                    <span class="px-3 py-1 text-xs font-medium text-yellow-800 bg-yellow-100 rounded-sm">
-                        {{ $student->country ?? 'no country' }}
-                    </span>
-                    <span class="px-3 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-sm">
-                        {{ $student->state ?? 'no state' }}
-                    </span>
-                    <span class="px-3 py-1 text-xs font-medium text-blue-800 bg-blue-100 rounded-sm">Management</span>
-                    <span class="px-3 py-1 text-xs font-medium text-indigo-800 bg-indigo-100 rounded-sm">Projects</span>
-                </div>
+
             </div>
         </div>
     </section>
