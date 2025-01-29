@@ -3,14 +3,13 @@
 namespace App\Livewire\Permissions;
 
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Lazy;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Spatie\Permission\Models\Permission as ModelsPermission;
-use Livewire\Attributes\Lazy;
 
 class Create extends Component
 {
-
     #[Lazy]
     #[Validate('required|unique:permissions,name')]
     public $name;
@@ -18,7 +17,6 @@ class Create extends Component
     public $permissionId = '';
 
     #[Layout('layouts.app')]
-
     public function save()
     {
         $this->validate();
@@ -31,16 +29,20 @@ class Create extends Component
             return redirect()->route('permissions.index');
         } catch (\Exception $e) {
             session()->flash('error', 'An error occurred while creating the permission. Please try again.');
+
             return redirect()->route('dashboard');
         }
     }
 
     public function delete($id) {}
+
     public function cancel()
     {
         $this->reset();
+
         return redirect()->route('permissions.index');
     }
+
     public function render()
     {
         return view('livewire.permissions.create');

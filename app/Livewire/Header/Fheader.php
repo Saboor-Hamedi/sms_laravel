@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Header;
 
-use Livewire\Component;
 use Livewire\Attributes\Lazy;
+use Livewire\Component;
 
 class Fheader extends Component
 {

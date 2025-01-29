@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Sidebar;
 
-use Livewire\Component;
 use Livewire\Attributes\Lazy;
+use Livewire\Component;
 
 class Sidebar extends Component
 {

@@ -3,14 +3,14 @@
 namespace App\Livewire\Parent;
 
 use App\Models\Student;
-use Livewire\Component;
 use Livewire\Attributes\Layout;
 use livewire\Attributes\Lazy;
+use Livewire\Component;
 
 class StudentDetails extends Component
 {
-
     public $studentId;
+
     public $student;
 
     #[Lazy]
@@ -21,6 +21,7 @@ class StudentDetails extends Component
         $this->studentId = $id;
         $this->student = Student::with('user')->findOrFail($this->studentId);
     }
+
     public function render()
     {
         return view('livewire.parent.student-details', ['student' => $this->student]);

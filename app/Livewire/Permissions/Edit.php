@@ -13,6 +13,7 @@ class Edit extends Component
     #[Lazy]
     #[Validate('required|string|max:50')]
     public $name = '';
+
     public $permissionId;
 
     #[Layout('layouts.app')]
@@ -23,12 +24,14 @@ class Edit extends Component
         // }
         $this->update($id);
     }
+
     public function update($id)
     {
         $permission = ModelsPermission::findOrFail($id);
         $this->permissionId = $permission->id;
-        $this->name  = $permission->name;
+        $this->name = $permission->name;
     }
+
     public function edit()
     {
         $this->validate();
@@ -38,12 +41,14 @@ class Edit extends Component
             'name' => $this->name,
         ]);
         session()->flash('success', 'Permission updated successfully');
+
         return redirect()->route('permissions.index');
     }
 
     public function cancel()
     {
         $this->reset();
+
         return redirect()->route('permissions.index');
     }
 

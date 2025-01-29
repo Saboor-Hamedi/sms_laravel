@@ -4,27 +4,33 @@ namespace App\Livewire\Scores;
 
 use App\Models\Scores as ModelsScores;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Lazy;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
-use Livewire\Attributes\Lazy;
 
 class Edit extends Component
 {
     #[Lazy]
     #[Validate('required|numeric|max:100')]
     public $assignment = '';
+
     #[Validate('required|numeric|max:100')]
     public $formative = '';
+
     #[Validate('required|numeric|max:100')]
     public $midterm = '';
+
     #[Validate('required|numeric|max:100')]
     public $final = '';
+
     #[Validate('nullable|numeric')]
     public $average = '';
+
     #[Validate('nullable|max:255')]
     public $report = '';
 
     public $scoreId;
+
     #[Layout('layouts.app')]
     public function mount($id)
     {
@@ -33,6 +39,7 @@ class Edit extends Component
         // }
         $this->update($id);
     }
+
     public function update($id)
     {
         $score = ModelsScores::findOrFail($id);
@@ -44,6 +51,7 @@ class Edit extends Component
         $this->average = $score->average;
         $this->report = $score->report;
     }
+
     public function edit()
     {
         $this->validate();
@@ -58,6 +66,7 @@ class Edit extends Component
 
         ]);
         session()->flash('success', 'Score updated successfully.');
+
         return redirect(route('dashboard'));
     }
 
@@ -65,6 +74,7 @@ class Edit extends Component
     {
         return redirect(route('dashboard'));
     }
+
     public function render()
     {
         return view('livewire.scores.edit');

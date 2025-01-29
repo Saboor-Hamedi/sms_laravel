@@ -4,19 +4,20 @@ namespace App\Livewire\Academic;
 
 use App\Models\Academics;
 use App\Models\Scores;
-use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Lazy;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
-use Livewire\Attributes\Lazy;
 
 class Show extends Component
 {
     // Show score by academic year
     #[Validate('required|digits:4|integer|min:2021|max:9999|unique:academics,year')]
-
     public $year = '';
+
     public $academic_year_id = '';
+
     #[Lazy]
     #[Layout('layouts.app')]
     public function mount($year)
@@ -29,6 +30,7 @@ class Show extends Component
             abort(404, 'Academic year not found');
         }
     }
+
     public function render()
     {
         $scores = Scores::with(['academic'])
@@ -36,6 +38,7 @@ class Show extends Component
             ->where('user_id', Auth::id())
             ->orderBy('created_at', 'desc')
             ->paginate(3);
+
         return view('livewire.academic.show', ['scores' => $scores]);
     }
 }

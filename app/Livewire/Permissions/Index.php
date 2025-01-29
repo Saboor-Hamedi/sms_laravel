@@ -9,10 +9,8 @@ use Spatie\Permission\Models\Permission;
 
 class Index extends Component
 {
-
     #[Lazy]
     #[Layout('layouts.app')]
-
     public function render()
     {
 

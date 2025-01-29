@@ -2,14 +2,12 @@
 
 namespace App\Livewire\Loader;
 
-use Livewire\Component;
 use Livewire\Attributes\Lazy;
+use Livewire\Component;
 
 class Spin extends Component
 {
-
     #[Lazy]
-
     protected $listeners = ['showLoader', 'hideLoader'];
 
     public $isLoading = false;

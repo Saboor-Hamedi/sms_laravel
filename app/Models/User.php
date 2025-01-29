@@ -12,7 +12,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, HasRoles, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -47,10 +47,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
     public static function countUsers()
     {
         return User::count();
     }
+
     public function post()
     {
         return $this->hasMany(Posts::class);
@@ -61,11 +63,13 @@ class User extends Authenticatable
     {
         return $this->hasOne(Teacher::class);
     }
+
     // student relationship
     public function student()
     {
         return $this->hasOne(Student::class);
     }
+
     // scores relationship
     public function scores()
     {
@@ -83,15 +87,15 @@ class User extends Authenticatable
             return 'Guest';
         }
     }
+
     public function userRoles($role): string
     {
-        return '<a href="javascript:viod()" class="btn btn-sm btn-primary">#' . Str::ucfirst($role) . '</a>';
+        return '<a href="javascript:viod()" class="btn btn-sm btn-primary">#'.Str::ucfirst($role).'</a>';
     }
-
-
 
     /**
      * This will help to get the parent of the user
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function parent()

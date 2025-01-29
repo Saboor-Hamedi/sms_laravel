@@ -4,10 +4,9 @@ namespace App\Livewire\Academic;
 
 use App\Models\Academics;
 use Livewire\Attributes\Layout;
-
+use Livewire\Attributes\Lazy;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
-use Livewire\Attributes\Lazy;
 
 class Create extends Component
 {
@@ -17,7 +16,6 @@ class Create extends Component
     #[Lazy]
 
     #[Layout('layouts.app')]
-
     public function save()
     {
         $this->validate();
@@ -26,11 +24,14 @@ class Create extends Component
         session()->flash('success', 'Academic year created successfully.');
         $this->reset();
     }
+
     public function cancel()
     {
         $this->reset();
+
         return redirect()->route('academics.index');
     }
+
     public function render()
     {
         return view('livewire.academic.create');

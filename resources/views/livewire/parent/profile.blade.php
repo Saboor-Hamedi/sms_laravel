@@ -44,26 +44,28 @@
                         <div class="flex items-center justify-start text-center">
                             <x-heroicon-c-code-bracket class="hero__icons" />
                             @if (Auth::check())
-                                <span class="mr-2 text-sm font-medium">Role: </span> {!! Auth::user()->displayRoles() !!}
+                                <span class="mr-1 text-sm font-medium">Role: </span> {!! Auth::user()->displayRoles() !!}
                             @endif
                         </div>
                         {{-- location --}}
                         <div class="flex items-center justify-start text-center">
                             <x-heroicon-o-map class="hero__icons" />
-                            <span class="mr-2 text-sm font-medium">Address: </span>
-                            {{ $profile->address ?? 'Add address' }}
+                            <span class="mr-1 text-sm font-medium">Address: </span>
+                            {!! $profile->address ?? '' !!}
                         </div>
                         {{-- show students names --}}
                         <ul class="list-dics">
-                            @foreach ($parent_kids as $kid)
-                                <li class="flex items-center ">
+                            @foreach ($kids as $kid)
+                                <li class="flex items-center text-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        class="hero__icons" stroke-width="1.5" stroke="currentColor" class="size-15">
+                                        class="hero__icons items-center" stroke-width="1.5" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                     </svg>
-                                    <a href="{{ $kid->lastname }}"
-                                        class="hover:underline hover:text-blue-300">{{ $kid->lastname ?? '' }}</a>
+                                    <span class="mr-1 text-sm font-medium">Child: </span>
+                                    <a href="{{ $kid->lastname }}" class="hover:underline hover:text-blue-300 ">
+                                        {!! $kid->lastname ?? '' !!}
+                                    </a>
                                 </li>
                             @endforeach
                         </ul>

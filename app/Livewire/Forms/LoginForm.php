@@ -7,13 +7,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Livewire\Attributes\Lazy;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
-use Livewire\Attributes\Lazy;
 
 class LoginForm extends Form
 {
-
     #[Lazy]
     #[Validate('required|string|email')]
     public string $email = '';
@@ -70,6 +69,6 @@ class LoginForm extends Form
      */
     protected function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->email) . '|' . request()->ip());
+        return Str::transliterate(Str::lower($this->email).'|'.request()->ip());
     }
 }

@@ -4,14 +4,15 @@ namespace App\Livewire\Card;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Cache;
-use Livewire\Component;
 use Livewire\Attributes\Lazy;
+use Livewire\Component;
 
 class Details extends Component
 {
-
     public $userCount = 0;
+
     const CACHE_KEY = 'userCount';
+
     const CACHE_TIME = 10;
 
     // #[Lazy]
@@ -20,6 +21,7 @@ class Details extends Component
     {
         $this->userLists();
     }
+
     public function userLists()
     {
         // $this->userCount = User::countUsers();
@@ -27,6 +29,7 @@ class Details extends Component
             return User::countUsers();
         });
     }
+
     public function render()
     {
         return view('livewire.card.details', ['userCount' => $this->userCount]);

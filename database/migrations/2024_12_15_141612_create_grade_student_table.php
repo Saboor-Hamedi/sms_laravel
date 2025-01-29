@@ -8,7 +8,7 @@ return new class extends Migration
 {
     /**
      * Grade and student relationship table.
-     * pivot table 
+     * pivot table
      */
     public function up(): void
     {

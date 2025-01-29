@@ -1,56 +1,47 @@
 <?php
 
-
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\WelcomeController;
-// pdf print
-use App\Livewire\Reports\Scores as ScoreReports;
+// Welcome: The default page, welcome
 use App\Http\Controllers\temp\PDFController;
-
-// middleware
+// PDF: Print into PDF format the table
+use App\Http\Controllers\WelcomeController;
 use App\Http\Middleware\AdminMiddleware;
-use App\Http\Middleware\TeacherMiddleware;
+// Middleware
+use App\Http\Middleware\ParentMiddleware;
 use App\Http\Middleware\StudentMiddleware;
-
-// permissions
-use App\Livewire\Permissions\Index as IndexPermissions;
-use App\Livewire\Permissions\Create as CreatePermissions;
-use App\Livewire\Permissions\Edit as EditPermissions;
-use App\Livewire\Permissions\UserRoleManager;
-
-// scores
-use App\Livewire\Scores\Create as CreateScores;
-use App\Livewire\Scores\ScoresAdmin;
-use App\Livewire\Scores\Edit as EditScores;
-
-// academic
+use App\Http\Middleware\TeacherMiddleware;
 use App\Livewire\Academic\Create as CreateAcademic;
+// Academic: Add Academic Years
 use App\Livewire\Academic\Index as IndexAcademic;
 use App\Livewire\Academic\Show as ShowAcademic;
-
-// students 
-use App\Livewire\Users\User as NewUser;
-
-// update profile 
-use App\Livewire\UserProfile\Index as UserProfileIndex;
-use App\Livewire\UserProfile\Update as UpdateUserProfile;
-
-// Grades/Clcass 
-use App\Livewire\Grades\Index as IndexGrades;
 use App\Livewire\Grades\Create as CreateGrades;
-
-// Teahcers: Only Teachers can see this
-use App\Livewire\Teachers\Register as RegisterTeacherProfile;
-use App\Livewire\Teachers\Profile as ShowTeacherProfile;
-
-
-// parent
-use App\Http\Middleware\ParentMiddleware;
+// Grade: Add grades/classes
+use App\Livewire\Grades\Index as IndexGrades;
+use App\Livewire\Parent\Profile as ParentProfile;
+// Parent: Create Parent profiles
 use App\Livewire\Parent\RegisterProfile;
 use App\Livewire\Parent\StudentDetails;
-use App\Livewire\Parent\Profile as ParentProfile;
+// Permissions: Create different permissions for different users, such as admin, teacher, student, and parents
+use App\Livewire\Permissions\Create as CreatePermissions;
+use App\Livewire\Permissions\Edit as EditPermissions;
+use App\Livewire\Permissions\Index as IndexPermissions;
+use App\Livewire\Permissions\UserRoleManager;
+use App\Livewire\Reports\Scores as ScoreReports;
+// Scores: Add scores to students
+use App\Livewire\Scores\Create as CreateScores;
+use App\Livewire\Scores\Edit as EditScores;
+// Scores: Admin can see all scores
+use App\Livewire\Scores\ScoresAdmin;
+// Teahcers: Only Teachers can see this
+use App\Livewire\Teachers\Profile as ShowTeacherProfile;
+use App\Livewire\Teachers\Register as RegisterTeacherProfile;
+// parent
+use App\Livewire\UserProfile\Index as UserProfileIndex;
+use App\Livewire\UserProfile\Update as UpdateUserProfile;
+use App\Livewire\Users\User as NewUser;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/', [WelcomeController::class, 'index'])->name('welcome'); // home
+// Welcome
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 // Teachers
 Route::middleware([TeacherMiddleware::class])->group(function () {
@@ -61,6 +52,7 @@ Route::middleware([TeacherMiddleware::class])->group(function () {
     Route::get('/teachers/register', RegisterTeacherProfile::class)->name('teachers.register');
     Route::get('/teachers/profile', ShowTeacherProfile::class)->name('teachers.profile');
 });
+
 // Admin
 Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('/permissions.index', IndexPermissions::class)->name('permissions.index'); // permissions index
@@ -70,21 +62,16 @@ Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('/academic.create', CreateAcademic::class)->name('academic.create');
     Route::get('/scores.scores-admin', ScoresAdmin::class)->name('scores.scores-admin');
     Route::get('/reports.scores-reports', [PDFController::class, 'scorePDF'])->name('reports.scores-reports');
-    // Register Students
     Route::get('users/user', NewUser::class)->name('users.user');
-
-    // grades 
     Route::get('grades/index', IndexGrades::class)->name('grades.index');
     Route::get('grades/create', CreateGrades::class)->name('grades.create');
 });
 
-// students 
+// students
 Route::middleware([StudentMiddleware::class])->group(function () {});
 Route::get('/user-profile.index', UserProfileIndex::class)->name('user-profile.index');
 Route::get('/user-profile.update', action: UpdateUserProfile::class)->name('user-profile.update');
 Route::get('/reports.scores', ScoreReports::class)->name('reports.scores');
-
-
 
 // Parent
 Route::middleware([ParentMiddleware::class])->group(function () {
@@ -92,7 +79,7 @@ Route::middleware([ParentMiddleware::class])->group(function () {
     Route::get('parent/profile', ParentProfile::class)->name('parent.profile');
     Route::get('parent/register-profile', RegisterProfile::class)->name('parent.register-profile');
 });
-// end
+
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
@@ -101,4 +88,4 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

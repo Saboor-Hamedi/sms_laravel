@@ -208,6 +208,13 @@
                     <img src="{{ asset('css/img/logo.png') }}" alt="Profile" class="profile__image">
                     <span class="profile__name">{{ Str::ucfirst(Auth::user()->name ?? 'Ananymous') }}</span>
                 </div>
+                {{-- admin --}}
+                @can('admin')
+                    <a href="{{ route('user-profile.index') }}" wire:navigate='user-profile'>
+                        {{ Str::ucfirst(Auth::user()->name ?? 'Ananymous') }}
+                    </a>
+                @endcan
+                {{-- student --}}
                 @can('student')
                     <a href="{{ route('user-profile.index') }}" wire:navigate='user-profile'>
                         {{ Str::ucfirst(Auth::user()->name ?? 'Ananymous') }}

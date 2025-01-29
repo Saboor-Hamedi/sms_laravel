@@ -4,9 +4,9 @@ namespace App\Livewire\Chat;
 
 use App\Models\Posts;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
-use Livewire\Attributes\Validate;
 use Livewire\Attributes\Lazy;
+use Livewire\Attributes\Validate;
+use Livewire\Component;
 
 class Create extends Component
 {
@@ -24,7 +24,7 @@ class Create extends Component
         $this->validate();
 
         // Only save and dispatch if name is not empty
-        if (!empty($this->name)) {
+        if (! empty($this->name)) {
             if (Auth::check()) {
                 Posts::create([
                     'user_id' => Auth::user()->id,
@@ -38,7 +38,6 @@ class Create extends Component
             }
         }
     }
-
 
     public function render()
     {

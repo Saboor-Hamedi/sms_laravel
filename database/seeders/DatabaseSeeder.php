@@ -9,8 +9,8 @@ use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
-
     protected static ?string $password;
+
     public function run(): void
     {
         $this->call(RolePermissionSeeder::class);

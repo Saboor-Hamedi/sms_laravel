@@ -5,29 +5,29 @@ namespace App\Livewire\Permissions;
 use App\Models\User;
 use Illuminate\Support\Facades\Cache;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Lazy;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
-use Livewire\Attributes\Lazy;
 
 class UserRoleManager extends Component
 {
-
-
     #[Lazy]
     #[Validate('required|email')]
-
     public $email;
+
     public $roles = [];
+
     public $permissions = [];
+
     public $userRoles = [];
+
     public $userPermissions = [];
 
     public $user;
 
     #[Layout('layouts.app')]
-
 
     // Fetch roles and permissions to populate the form
     public function mount()
@@ -41,6 +41,7 @@ class UserRoleManager extends Component
     /**
      * Summary of getRole
      * Fetch roles name
+     *
      * @return mixed
      */
     private function getRole()
@@ -49,9 +50,11 @@ class UserRoleManager extends Component
             return Role::pluck('name', 'id')->toArray();
         });
     }
+
     /**
      * Summary of getPermission
      * Fetch permissions name
+     *
      * @return mixed
      */
     private function getPermission()
@@ -60,13 +63,13 @@ class UserRoleManager extends Component
             return Permission::pluck('name', 'id')->toArray();
         });
     }
+
     // Method to load user roles and permissions based on email input
     public function rolesAndPermissions()
     {
         $this->validate();
         // $this->user = User::where('email', $this->email)->first();
         $this->user = User::with(['roles', 'permissions'])->where('email', $this->email)->first();
-
 
         if ($this->user) {
             $this->userRoles = $this->user->roles->pluck('name')->toArray();

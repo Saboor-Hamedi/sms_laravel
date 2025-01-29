@@ -8,15 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Parents extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'user_id',
         'lastname',
         'phone',
         'address',
         'bio',
-        'image'
+        'image',
     ];
+
     public $timestamps = true;
+
     /**
      * This method defines the many-to-many relationship between the parent and the student.
      * This relationship is defined by the pivot table `parent_students`.
@@ -34,13 +37,11 @@ class Parents extends Model
         )->withPivot('created_at');
     }
 
-
     /**
      * This method defines the relationship between the parent and the user model.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

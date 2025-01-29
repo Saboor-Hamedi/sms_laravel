@@ -11,18 +11,17 @@ use Livewire\Component;
 
 class ShowProfile extends Component
 {
-
     #[Layout('layouts.app')]
     #[Lazy]
-
     const CACHE_KEY = 'parents';
+
     const CACHE_TIME = 600;
 
     public $parents = '';
 
     public function mount()
     {
-        $this->parents =   $this->fetchParents() ?: collect();
+        $this->parents = $this->fetchParents() ?: collect();
     }
 
     public function fetchParents()
@@ -38,8 +37,9 @@ class ShowProfile extends Component
     public function clearParentsCache()
     {
         // call this method on update and delete
-        Cache::forget(self::CACHE_KEY . Auth::id());
+        Cache::forget(self::CACHE_KEY.Auth::id());
     }
+
     public function render()
     {
 

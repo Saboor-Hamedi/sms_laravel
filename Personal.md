@@ -53,3 +53,14 @@ https://github.com/Saboor-Hamedi/sms_laravel.git
 -   You can add grade/classes for teachers and students by adding them in the respective tables.
 -   Admins are responsible for adding teachers and students.
 -   At the moment teachers can only see their classes and students can only see their grades.
+
+### Students issues on parents profile
+
+-   If students are not showing on their parents profile, it is because they have not added their profile.
+-   It's also due to parents not updated their profile.
+-   Or, the ID which is called parent_id could be wrong.
+-   To solve this issue, you can add the student's profile by clicking on the "Add Student" button on the parent's profile page.
+
+To beautify the text, you can use the following code:
+
+-   composer require mews/purifier

@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class AcademicsFactory extends Factory
 {
-
     public function definition(): array
     {
         return [

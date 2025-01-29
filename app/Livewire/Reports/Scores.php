@@ -3,13 +3,12 @@
 namespace App\Livewire\Reports;
 
 use App\Models\Scores as ModelsScores;
+use Livewire\Attributes\Lazy;
 use Livewire\Component;
 use Spatie\Browsershot\Browsershot;
-use Livewire\Attributes\Lazy;
 
 class Scores extends Component
 {
-
     #[Lazy]
     public function downloadReport()
     {
@@ -24,7 +23,7 @@ class Scores extends Component
         $pdfPath = storage_path('app/public/reports/scores.pdf'); // Correct the path to save the PDF
 
         // Ensure the directory exists
-        if (!file_exists(dirname($pdfPath))) {
+        if (! file_exists(dirname($pdfPath))) {
             mkdir(dirname($pdfPath), 0755, true);
         }
 
@@ -39,7 +38,6 @@ class Scores extends Component
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
-
 
     public function render()
     {

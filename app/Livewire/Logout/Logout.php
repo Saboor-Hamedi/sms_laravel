@@ -3,8 +3,8 @@
 namespace App\Livewire\Logout;
 
 use App\Livewire\Actions\Logout as ActionsLogout;
-use Livewire\Component;
 use Livewire\Attributes\Lazy;
+use Livewire\Component;
 
 class Logout extends Component
 {
@@ -15,7 +15,6 @@ class Logout extends Component
 
         $this->redirect('/login', navigate: true);
     }
-
 
     public function render()
     {

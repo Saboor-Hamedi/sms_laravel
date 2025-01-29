@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /*
  * This is the Teacher model class
- * 
+ *
  * @author  <NAME>
  * @version 1.0.0
  * @since   2021-09-19
@@ -15,13 +15,14 @@ use Illuminate\Database\Eloquent\Model;
  * @package App\Models
  * @property Teacher
 
- * This class contents different information about the teachers 
+ * This class contents different information about the teachers
  * This class can be extended to add more information about the teachers
 */
 
 class Teacher extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'user_id',
         'lastname',
@@ -34,8 +35,8 @@ class Teacher extends Model
         'is_active',
         'created_at',
     ];
-    public $timestamps = false;
 
+    public $timestamps = false;
 
     /**
      * The user that this teacher belongs to
@@ -51,6 +52,7 @@ class Teacher extends Model
     {
         return $this->hasMany(Student::class);
     }
+
     public function grades()
     {
         return $this->hasMany(Grade::class, 'teacher_id');

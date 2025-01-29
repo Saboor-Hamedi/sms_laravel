@@ -2,39 +2,41 @@
 
 namespace App\Livewire\Teachers;
 
-use Livewire\Component;
 use App\Models\Teacher;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Lazy;
+use Livewire\Component;
 
 class Register extends Component
 {
     #[Layout('layouts.app')]
     #[Lazy]
-
-
     public $lastname;
-    public $birthdate;
-    public $phone;
-    public $country;
-    public $state;
-    public $address;
-    public $description;
 
+    public $birthdate;
+
+    public $phone;
+
+    public $country;
+
+    public $state;
+
+    public $address;
+
+    public $description;
 
     public function mount()
     {
         $teacher = Teacher::with('user')->where('user_id', Auth::id())->first();
         $this->lastname = $teacher->lastname ?? '';
-        $this->birthdate = $teacher->birthdate ??  '';
-        $this->phone = $teacher->phone ??  '';
-        $this->country = $teacher->country ??  '';
+        $this->birthdate = $teacher->birthdate ?? '';
+        $this->phone = $teacher->phone ?? '';
+        $this->country = $teacher->country ?? '';
         $this->state = $teacher->state ?? '';
         $this->address = $teacher->address ?? '';
         $this->description = $teacher->description ?? '';
     }
-
 
     public function update()
     {
@@ -71,10 +73,12 @@ class Register extends Component
             ]
         );
     }
+
     public function cancel()
     {
         return redirect()->route('dashboard');
     }
+
     public function render()
     {
         return view('livewire.teachers.register');

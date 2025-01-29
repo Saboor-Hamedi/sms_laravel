@@ -8,18 +8,18 @@ use App\Models\Student;
 use App\Models\Subject;
 use App\Models\Teacher;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
-use Livewire\Component;
 use Livewire\Attributes\Lazy;
+use Livewire\Component;
+
 /*
  * @author  <Abudul Saboor Hamedi>
  * @package App\Livewire\Grades
  * @version 1.0.0
  * @since   December 16, 2024
  * @link    https://github.com/Saboor-Hamedi/sms_laravel.git (fetch)
- TODO: 
-    - This class for create new grade/class, 
+ TODO:
+    - This class for create new grade/class,
     - At the moment, this class is accessible only by the admin.
     - this class will be used in the future for the admin to create new grade/class.
     - By no means this class is complete, it is just a starting point.
@@ -30,21 +30,28 @@ class Create extends Component
 {
     #[Lazy]
     #[Layout('layouts.app')]
-
     public $students = [];
+
     public $subjects = [];
+
     public $academics = [];
+
     public $teachers = [];
+
     public $roles = [];
 
     public $subject_name = '';
+
     public $student_name = '';
+
     public $academic_id = '';
+
     public $teacher_id = '';
+
     public $grade_id = '';
 
-
     protected $listeners = ['refresh_academic_year', 'fetchAcademicYear'];
+
     /**
      * Mount the component.
      *
@@ -55,6 +62,7 @@ class Create extends Component
     {
         $this->initializeData();
     }
+
     /**
      * This function is used to initialize the data for the livewire component.
      * It calls the following functions and assigns them to the public properties of the component:
@@ -62,7 +70,6 @@ class Create extends Component
      * - fetchStudents
      * - fetchAcademicYear
      */
-
     public function initializeData()
     {
         $this->subjects = $this->fetchSubjects();
@@ -70,6 +77,7 @@ class Create extends Component
         $this->academics = $this->fetchAcademicYear();
         $this->teachers = $this->fetchTeachers();
     }
+
     /**
      * Fetch all subjects from the database and return them as a collection.
      *
@@ -77,6 +85,7 @@ class Create extends Component
      * The name is the value and the id is the key.
      *
      * @return \Illuminate\Support\Collection
+     *
      * @author  <Abudul Saboor Hamedi>
      */
     public function fetchSubjects()
@@ -91,30 +100,38 @@ class Create extends Component
      * The name is the value and the id is the key.
      *
      * @return \Illuminate\Support\Collection
+     *
      * @author  <Abudul Saboor Hamedi>
      */
     public function fetchStudents()
     {
         return Student::pluck('lastname', 'id');
     }
+
     /**
      * Summary of fetchAcademicYear
+     *
      * @return \Illuminate\Support\Collection
-     * fetch academic year from the database and return it as a collection
-     * pluck year and id from the collection and return it.
+     *                                        fetch academic year from the database and return it as a collection
+     *                                        pluck year and id from the collection and return it.
+     *
      * @author  <Abudul Saboor Hamedi>
      */
     public function fetchAcademicYear()
     {
         return Academics::orderBy('year', 'desc')->pluck('year', 'id');
     }
+
     public function fetchTeachers()
     {
         return Teacher::pluck('lastname', 'id');
     }
+
     /**
      * Summary of save
+     *
      * @return void
+     *
      * @author  <Abudul Saboor Hamedi>
      * $grade->students()->attach($this->student_name); // insert on grade_student pivot table
      * $this->resetForm(); // reset form after submit
@@ -141,13 +158,13 @@ class Create extends Component
         $this->dispatch('refresh_academic_year');
     }
 
-
     /**
      * Resets the form fields to their default values.
      *
      * This method is called after submitting the form.
      *
      * @return void
+     *
      * @author  <Abudul Saboor Hamedi>
      */
     public function resetForm()
@@ -156,6 +173,7 @@ class Create extends Component
         $this->student_name = '';
         $this->academic_id = '';
     }
+
     public function cancel()
     {
         /**
@@ -164,10 +182,12 @@ class Create extends Component
          * This method is called when the user clicks the cancel button.
          *
          * @return \Illuminate\Http\RedirectResponse
+         *
          * @author  <Abudul Saboor Hamedi>
          */
         return redirect()->route('dashboard');
     }
+
     public function render()
     {
         /**
@@ -177,6 +197,7 @@ class Create extends Component
          * and a multiple select field for the students.
          *
          * @return \Illuminate\Contracts\View\View The rendered Livewire component.
+         *
          * @author  <Abudul Saboor Hamedi>
          */
         return view(
