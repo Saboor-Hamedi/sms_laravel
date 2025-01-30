@@ -64,3 +64,4 @@ https://github.com/Saboor-Hamedi/sms_laravel.git
 To beautify the text, you can use the following code:
 
 -   composer require mews/purifier
+-   php artisan vendor:publish --provider="Stevebauman\Purify\PurifyServiceProvider"

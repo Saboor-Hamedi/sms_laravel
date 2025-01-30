@@ -10,7 +10,7 @@ class Scores extends Model
     /** @use HasFactory<\Database\Factories\ScoresFactory> */
     use HasFactory;
 
-    protected $guarded = ['id'];
+    protected $fillable = ['assignment', 'formative', 'midterm', 'final', 'average', 'report', 'academic_year_id', 'user_id'];
 
     public function user()
     {

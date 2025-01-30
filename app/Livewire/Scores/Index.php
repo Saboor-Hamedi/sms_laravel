@@ -15,6 +15,7 @@ class Index extends Component
     use AuthorizesRequests;
 
     #[Layout('layouts.app')]
+
     #[Lazy]
     const CACHE_KEY = 'scores';
 
@@ -31,7 +32,6 @@ class Index extends Component
 
             return;
         }
-
         $score->delete();
         session()->flash('success', 'Score deleted successfully.');
     }

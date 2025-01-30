@@ -59,7 +59,7 @@ class Profile extends Component
         $parent = Parents::with('students')
             ->where('user_id', Auth::id())
             ->first()->students;
-        Log::info($parent);
+        // Log::info($parent);
 
         return $parent ? $parent : collect();
     }

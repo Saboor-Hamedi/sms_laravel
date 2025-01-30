@@ -4,10 +4,14 @@
             <div class="py-4 bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                 <h1 class="ml-1 text-xl font-bold text-gray-800 sm:text-md">New Score</h1>
             </div>
-            @if (session()->has('success'))
-                <div class="px-4 py-3 text-blue-700 bg-blue-100 border-t border-b border-blue-500" role="alert">
-                    <p class="font-bold">Informational message</p>
-                    <p class="text-sm">{{ session('success') }}.</p>
+            @if (session('status'))
+                <div
+                    class="p-3 mb-2 border rounded-lg
+                    {{ session('status.type') === 'success' ? 'bg-green-100 border-green-500 text-green-700' : '' }}
+                        {{ session('status.type') === 'error' ? 'bg-red-100 border-red-500 text-red-700' : '' }}">
+                    <p class="font-bold">{{ session('status.type') === 'success' ? '✓' : '!' }}
+                        {{ session('status.message') }}
+                    </p>
                 </div>
             @endif
 
@@ -15,7 +19,7 @@
                 <div class="flex gap-4">
                     <div class="w-full">
                         <input type="text" wire:model='assignment' name="assignment"
-                            class="w-full p-3 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            class="w-full p-2 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="The Score of Assignment">
                         @error('assignment')
                             <small class="text-xs text-red-600">{{ $message }}</small>
@@ -23,7 +27,7 @@
                     </div>
                     <div class="w-full">
                         <input type="text" wire:model='formative' name="formative"
-                            class="w-full p-3 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            class="w-full p-2 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="The Score for Formative Test">
                         @error('formative')
                             <small class="text-xs text-red-600">{{ $message }}</small>
@@ -33,7 +37,7 @@
                 <div class="flex gap-4">
                     <div class="w-full">
                         <input type="text" wire:model='midterm' name="midterm"
-                            class="w-full p-3 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            class="w-full p-2 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="The Score of Mid-Term Test">
                         @error('midterm')
                             <small class="text-xs text-red-600">{{ $message }}</small>
@@ -41,7 +45,7 @@
                     </div>
                     <div class="w-full">
                         <input type="text" wire:model='final' name="final"
-                            class="w-full p-3 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            class="w-full p-2 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="The Score of Final Test">
                         @error('final')
                             <small class="text-xs text-red-600">{{ $message }}</small>
@@ -52,7 +56,7 @@
                 <div class="flex gap-4">
                     <div class="w-full">
                         <input type="text" wire:model='average' name="average"
-                            class="w-full p-3 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            class="w-full p-2 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="The Average">
                         @error('average')
                             <small class="text-xs text-red-600">{{ $message }}</small>
@@ -60,10 +64,10 @@
                     </div>
                     <div class="w-full">
                         <select wire:model="academic_year_id" id="academic_year_id" name="academic_year_id"
-                            class="w-full p-3 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            class="w-full p-2 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option value="">Select Year</option>
-                            @foreach ($academic_years as $year)
-                                <option value="{{ $year->id }}">{{ $year->year }}</option>
+                            @foreach ($academic_years as $id => $year)
+                                <option value="{{ $id }}">{{ $year }}</option>
                             @endforeach
                         </select>
                         @error('academic_year_id')
@@ -74,7 +78,7 @@
 
                 <div class="w-full">
                     <textarea wire:model='report' name="report"
-                        class="w-full p-3 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="w-full p-2 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Report">
                         </textarea>
                     @error('report')
@@ -83,9 +87,23 @@
 
                 </div>
                 <div class="flex justify-start">
-                    <button class="rounded default-button text-[10px]" type="submit">Submit</button>
-                    <button class="ml-2 rounded default-button text-[10px] " type="submit"
-                        wire:click.prevent="cancel">Cancel</button>
+                    <button class="flex items-center rounded default-button" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="hero__icons">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6A2.25 2.25 0 0 1 6 3.75h1.5m9 0h-9" />
+                        </svg>
+                        Save
+
+                    </button>
+                    <button class="flex items-center ml-2 rounded default-button " type="submit"
+                        wire:click.prevent="cancel">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="hero__icons">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                        </svg>
+                        Cancel
+                    </button>
                 </div>
             </form>
         </div>
