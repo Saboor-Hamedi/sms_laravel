@@ -167,7 +167,7 @@
                             {{ __('Academic Year') }}
                         </h4>
                     </div>
-                    {{-- Academics  --}}
+                    {{-- Academic  --}}
                     <li class="mb-4">
                         <x-admin-link :href="route('academic.create')" :active="request()->routeIs('academic.create')">
                             <x-heroicon-o-academic-cap class="hero__icons" />

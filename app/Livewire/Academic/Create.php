@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Academic;
 
-use App\Models\Academics;
+use App\Models\Academic;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Lazy;
 use Livewire\Attributes\Validate;
@@ -20,7 +20,7 @@ class Create extends Component
     {
         $this->validate();
         // save the academic year to the database
-        Academics::create(['year' => $this->academic_year]);
+        Academic::create(['year' => $this->academic_year]);
         session()->flash('success', 'Academic year created successfully.');
         $this->reset();
     }

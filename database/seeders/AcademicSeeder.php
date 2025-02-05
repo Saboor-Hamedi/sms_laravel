@@ -2,16 +2,16 @@
 
 namespace Database\Seeders;
 
-use App\Models\Academics;
+use App\Models\Academic;
 use Illuminate\Database\Seeder;
 
-class AcademicsSeeder extends Seeder
+class AcademicSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Academics::factory(4)->create();
+        Academic::factory(4)->create();
     }
 }

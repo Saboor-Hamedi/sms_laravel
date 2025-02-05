@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Academic;
 
-use App\Models\Academics;
+use App\Models\Academic;
 use App\Models\Scores;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
@@ -23,7 +23,7 @@ class Show extends Component
     public function mount($year)
     {
         $this->year = $year;
-        $academic_year = Academics::where('year', $year)->first();
+        $academic_year = Academic::where('year', $year)->first();
         if ($academic_year) {
             $this->academic_year_id = $academic_year->id;
         } else {

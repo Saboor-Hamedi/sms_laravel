@@ -19,6 +19,6 @@ class Scores extends Model
 
     public function academic()
     {
-        return $this->belongsTo(Academics::class, 'academic_year_id');
+        return $this->belongsTo(Academic::class, 'academic_year_id');
     }
 }

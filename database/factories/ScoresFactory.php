@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Academics;
+use App\Models\Academic;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -26,7 +26,7 @@ class ScoresFactory extends Factory
             'final' => $this->faker->numberBetween(0, 100),
             'average' => $this->faker->numberBetween(0, 100),
             'report' => $this->faker->sentence,
-            'academic_year_id' => Academics::inRandomOrder()->first()->id,
+            'academic_year_id' => Academic::inRandomOrder()->first()->id,
         ];
     }
 }

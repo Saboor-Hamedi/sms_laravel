@@ -2,12 +2,11 @@
 
 namespace App\Livewire\Grades;
 
-use App\Models\Academics;
+use App\Models\Academic;
 use App\Models\Grade;
 use App\Models\Student;
 use App\Models\Subject;
 use App\Models\Teacher;
-use App\Models\User;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Lazy;
 use Livewire\Component;
@@ -119,7 +118,7 @@ class Create extends Component
      */
     public function fetchAcademicYear()
     {
-        return Academics::orderBy('year', 'desc')->pluck('year', 'id');
+        return Academic::orderBy('year', 'desc')->pluck('year', 'id');
     }
 
     public function fetchTeachers()

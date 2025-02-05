@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
         $parent->assignRole('parent');
 
         $this->call(PostsSeeder::class);
-        $this->call(AcademicsSeeder::class);
+        $this->call(AcademicSeeder::class);
         $this->call(ScoresSeeder::class);
         $this->call(StudentSeeder::class);
         $this->call(TeacherSeeder::class);

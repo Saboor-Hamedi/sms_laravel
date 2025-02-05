@@ -32,7 +32,7 @@
 
                                         @foreach ($grade->students as $student)
                                             <td class="px-4 py-2 border border-gray-300">
-                                                {{ Str::ucfirst($student->name) }}
+                                                {{ Str::ucfirst($student->lastname) }}
                                             </td>
                                         @endforeach
 

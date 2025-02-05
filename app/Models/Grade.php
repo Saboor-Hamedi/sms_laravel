@@ -35,6 +35,8 @@ class Grade extends Model
     // academic year, register students based on academic year
     public function academic()
     {
-        return $this->belongsTo(Academics::class, 'academic_id');
+        return $this->belongsTo(Academic::class, 'academic_id');
     }
+
+ 
 }

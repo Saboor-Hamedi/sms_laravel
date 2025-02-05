@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Scores;
 
-use App\Models\Academics;
+use App\Models\Academic;
 use App\Models\Scores as ModelsScores;
 use Exception;
 use Illuminate\Support\Facades\Auth;
@@ -30,6 +30,8 @@ class Create extends Component
 
     public $academic_years = [];
 
+    public $grades = [];
+
     protected $listeners = ['refresh_academic_year' => 'loadAcademicYears'];
 
     public function mount()
@@ -39,8 +41,11 @@ class Create extends Component
 
     public function loadAcademicYears(): void
     {
-        $this->academic_years = Academics::orderByDesc('year')
+        $this->academic_years = Academic::orderByDesc('year')
             ->pluck('year', 'id');
+    }
+    public function loadGrades(){
+
     }
 
     public function save()
