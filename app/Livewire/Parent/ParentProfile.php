@@ -4,7 +4,6 @@ namespace App\Livewire\Parent;
 
 use App\Models\Parents;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Lazy;
 use Livewire\Component;
@@ -24,10 +23,11 @@ use Livewire\Component;
  *
  * @copyright: Feel free to use this component in your project.
  */
-class Profile extends Component
+class ParentProfile extends Component
 {
-    #[Layout('layouts.app')]
     #[Lazy()]
+
+    #[Layout('layouts.app')]
     public $lastname = '';
 
     public $phone = '';
@@ -66,6 +66,6 @@ class Profile extends Component
 
     public function render()
     {
-        return view('livewire.parent.profile');
+        return view('livewire.parent.parent-profile');
     }
 }

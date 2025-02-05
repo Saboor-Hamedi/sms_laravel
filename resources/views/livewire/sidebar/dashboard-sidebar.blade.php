@@ -71,7 +71,7 @@
                 {{-- parent details  --}}
                 @can('parent')
                     {{-- Register Profile --}}
-                    <x-admin-link :href="route('parent.profile')" :active="request()->routeIs('parent.profile')">
+                    <x-admin-link :href="route('parent.parent-profile')" :active="request()->routeIs('parent.parent-profile')">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="hero__icons">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -81,13 +81,13 @@
                     </x-admin-link>
 
 
-                    <x-admin-link :href="route('parent.register-profile')" :active="request()->routeIs('parent.register-profile')">
+                    <x-admin-link :href="route('parent.parent-update-profile')" :active="request()->routeIs('parent.parent-update-profile')">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="hero__icons">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
-                        {{ __('Register Profile') }}
+                        {{ __('Update Profile') }}
                     </x-admin-link>
 
 
@@ -178,7 +178,7 @@
                     {{-- Add Grades/classes  --}}
                     <div>
                         <h4 class="lg:text-[20px] md:text[15px] sm:text-[12px] mb-3 ">
-                            {{ __('Grades') }}
+                            {{ __('Add Grades/classes') }}
                         </h4>
                     </div>
                     <li>
@@ -244,7 +244,7 @@
                 @endcan
                 {{-- parent --}}
                 @can('parent')
-                    <a href="{{ route('parent.profile') }}" wire:navigate='profile'>
+                    <a href="{{ route('parent.parent-profile') }}" wire:navigate='parent-profile'>
                         {{ Str::ucfirst(Auth::user()->name ?? 'Ananymous') }}
                     </a>
                 @endcan

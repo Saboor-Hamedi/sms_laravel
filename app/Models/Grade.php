@@ -37,6 +37,4 @@ class Grade extends Model
     {
         return $this->belongsTo(Academic::class, 'academic_id');
     }
-
- 
 }

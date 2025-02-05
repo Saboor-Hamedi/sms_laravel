@@ -19,16 +19,6 @@
                             </h3>
 
                         </div>
-                        {{-- <div class="flex gap-2 ">
-                            <a href="{{ route('profile') }}" type="button" class="rounded default-button text-[10px]"
-                                wire:navigate='profile'>
-                                {{ __('Profile') }}
-                            </a>
-                            <a href="{{ route('profile') }}" type="button" class="rounded default-button text-[10px]"
-                                wire:navigate='profile'>
-                                {{ __('Post') }}
-                            </a>
-                        </div> --}}
                     </div>
 
                     {{-- bio --}}
@@ -58,7 +48,7 @@
                             @foreach ($kids as $kid)
                                 <li class="flex items-center text-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        class="hero__icons items-center" stroke-width="1.5" stroke="currentColor">
+                                        class="items-center hero__icons" stroke-width="1.5" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                     </svg>

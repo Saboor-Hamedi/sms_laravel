@@ -15,11 +15,7 @@ use App\Livewire\Academic\Show as ShowAcademic;
 use App\Livewire\Grades\Create as CreateGrades;
 use App\Livewire\Grades\Index as IndexGrades;
 // Grade: Add grades/classes
-use App\Livewire\Parent\Profile as ParentProfile;
-use App\Livewire\Parent\RegisterProfile;
-// Parent: Create Parent profiles
-use App\Livewire\Parent\StudentDetails;
-use App\Livewire\Permissions\Create as CreatePermissions;
+
 // Permissions: Create different permissions for different users, such as admin, teacher, student, and parents
 use App\Livewire\Permissions\Edit as EditPermissions;
 use App\Livewire\Permissions\Index as IndexPermissions;
@@ -34,11 +30,15 @@ use App\Livewire\Teachers\Profile as ShowTeacherProfile;
 // Teahcers: Only Teachers can see this
 use App\Livewire\Teachers\Register as RegisterTeacherProfile;
 use App\Livewire\UserProfile\Index as UserProfileIndex;
-// Parent
-use App\Livewire\UserProfile\Update as UpdateUserProfile;
+// New Users 
 use App\Livewire\Users\User as RegisterNewUsers;
+// Parent: Create Parent profiles
+use App\Livewire\Parent\ParentProfile;
+use App\Livewire\UserProfile\Update as UpdateUserProfile;
+use App\Livewire\Parent\ParentUpdateProfile;
+use App\Livewire\Parent\StudentDetails;
+use App\Livewire\Permissions\Create as CreatePermissions;
 use Illuminate\Support\Facades\Route;
-
 // Welcome
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
@@ -74,9 +74,9 @@ Route::get('reports/scores', ScoreReports::class)->name('reports.scores');
 
 // Parent
 Route::middleware([ParentMiddleware::class])->group(function () {
+    Route::get('parent/parent-profile', ParentProfile::class)->name('parent.parent-profile');
     Route::get('parent/student-details/{id}', StudentDetails::class)->name('parent.student-details');
-    Route::get('parent/profile', ParentProfile::class)->name('parent.profile');
-    Route::get('parent/register-profile', RegisterProfile::class)->name('parent.register-profile');
+    Route::get('parent/parent-update-profile', ParentUpdateProfile::class)->name('parent.parent-update-profile');
 });
 
 Route::view('dashboard', 'dashboard')

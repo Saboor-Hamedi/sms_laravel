@@ -9,7 +9,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Lazy;
 use Livewire\Component;
 
-class ShowProfile extends Component
+class ParentShowProfile extends Component
 {
     #[Layout('layouts.app')]
     #[Lazy]
@@ -43,6 +43,6 @@ class ShowProfile extends Component
     public function render()
     {
 
-        return view('livewire.parent.show-profile');
+        return view('livewire.parent.parent-show-profile');
     }
 }

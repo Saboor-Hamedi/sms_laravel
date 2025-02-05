@@ -10,7 +10,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Lazy;
 use Livewire\Component;
 
-class RegisterProfile extends Component
+class ParentUpdateProfile extends Component
 {
     #[Layout('layouts.app')]
     #[Lazy()]
@@ -89,6 +89,6 @@ class RegisterProfile extends Component
 
     public function render()
     {
-        return view('livewire.parent.register-profile');
+        return view('livewire.parent.parent-update-profile');
     }
 }

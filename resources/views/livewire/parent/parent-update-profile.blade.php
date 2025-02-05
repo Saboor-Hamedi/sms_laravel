@@ -63,7 +63,7 @@
 
                 <!-- Buttons -->
                 <div class="flex justify-start gap-2">
-                    <button class="rounded default-button flex items-center" type="submit">
+                    <button class="flex items-center rounded default-button" type="submit">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class=" hero__icons">
                             <path stroke-linecap="round" stroke-linejoin="round"

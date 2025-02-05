@@ -44,9 +44,8 @@ class Create extends Component
         $this->academic_years = Academic::orderByDesc('year')
             ->pluck('year', 'id');
     }
-    public function loadGrades(){
 
-    }
+    public function loadGrades() {}
 
     public function save()
     {
