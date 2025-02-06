@@ -8,9 +8,10 @@ use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Spatie\Permission\Models\Permission as ModelsPermission;
 
-class Create extends Component
+class CreatePermission extends Component
 {
     #[Lazy]
+    
     #[Validate('required|unique:permissions,name')]
     public $name;
 
@@ -45,6 +46,6 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.permissions.create');
+        return view('livewire.permissions.create-permission');
     }
 }

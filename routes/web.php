@@ -19,7 +19,7 @@ use App\Livewire\Grades\Index as IndexGrades;
 // Permissions: Create different permissions for different users, such as admin, teacher, student, and parents
 use App\Livewire\Permissions\Edit as EditPermissions;
 use App\Livewire\Permissions\Index as IndexPermissions;
-use App\Livewire\Permissions\UserRoleManager;
+use App\Livewire\Permissions\GrantPermission;
 use App\Livewire\Reports\Scores as ScoreReports;
 use App\Livewire\Scores\Create as CreateScores;
 // Scores: Add scores to students
@@ -37,7 +37,7 @@ use App\Livewire\Parent\ParentProfile;
 use App\Livewire\UserProfile\Update as UpdateUserProfile;
 use App\Livewire\Parent\ParentUpdateProfile;
 use App\Livewire\Parent\StudentDetails;
-use App\Livewire\Permissions\Create as CreatePermissions;
+use App\Livewire\Permissions\CreatePermission;
 use Illuminate\Support\Facades\Route;
 // Welcome
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
@@ -55,9 +55,9 @@ Route::middleware([TeacherMiddleware::class])->group(function () {
 // Admin
 Route::middleware([AdminMiddleware::class])->group(function () {
     Route::get('permissions/index', IndexPermissions::class)->name('permissions.index'); // permissions index
-    Route::get('permissions/create', CreatePermissions::class)->name('permissions.create'); // new permissions
+    Route::get('permissions/create-permission', CreatePermission::class)->name('permissions.create-permission'); // new permissions
     Route::get('permissions/{id}/edit', EditPermissions::class)->name('permissions.edit'); // new permissions
-    Route::get('permissions/user-role-manager', UserRoleManager::class)->name('permissions.user-role-manager');
+    Route::get('permissions/grant-permission', GrantPermission::class)->name('permissions.grant-permission');
     Route::get('academic/create', CreateAcademic::class)->name('academic.create');
     Route::get('scores/scores-admin', ScoresAdmin::class)->name('scores.scores-admin');
     Route::get('reports/scores-reports', [PDFController::class, 'scorePDF'])->name('reports.scores-reports');

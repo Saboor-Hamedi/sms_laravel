@@ -1,7 +1,7 @@
 <section class="w-full p-2">
-    <div class="flex flex-col gap-4 p-6  rounded-md shadow-sm lg:max-w-full bg-white">
-        <div class=" py-4 bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-            <h1 class="ml-1 sm:text-md text-xl font-bold text-gray-800">Permissions Name</h1>
+    <div class="flex flex-col gap-4 p-6 bg-white rounded-md shadow-sm lg:max-w-full">
+        <div class="py-4 bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+            <h1 class="ml-1 text-xl font-bold text-gray-800 sm:text-md">Permissions Name</h1>
         </div>
         <form wire:submit.prevent="save" class="flex flex-col gap-4">
             <!-- Name Input -->

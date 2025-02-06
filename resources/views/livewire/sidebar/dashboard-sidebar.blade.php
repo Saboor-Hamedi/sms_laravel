@@ -145,17 +145,18 @@
                     </div>
                     {{-- drop down end --}}
                     <li class="mb-1">
-                        <x-admin-link :href="route('permissions.user-role-manager')" :active="request()->routeIs('permissions.user-role-manager')">
-                            <x-heroicon-o-home class="hero__icons" />
-                            <span class="ml-2">{{ __('Grant Permissions') }}</span>
-                        </x-admin-link>
-                    </li>
-                    <li class="mb-1">
-                        <x-admin-link :href="route('permissions.create')" :active="request()->routeIs('permissions.create')">
+                        <x-admin-link :href="route('permissions.grant-permission')" :active="request()->routeIs('permissions.grant-permission')">
                             <x-heroicon-o-cube class="hero__icons" />
                             <span class="ml-2">{{ __('Create Permission') }}</span>
                         </x-admin-link>
                     </li>
+                    <li class="mb-1">
+                        <x-admin-link :href="route('permissions.grant-permission')" :active="request()->routeIs('permissions.grant-permission')">
+                            <x-heroicon-o-home class="hero__icons" />
+                            <span class="ml-2">{{ __('Grant Permission') }}</span>
+                        </x-admin-link>
+                    </li>
+
                     <li class="mb-1">
                         <x-admin-link :href="route('permissions.index')" :active="request()->routeIs('permissions.index')">
                             <x-heroicon-o-cloud-arrow-up class="hero__icons" />

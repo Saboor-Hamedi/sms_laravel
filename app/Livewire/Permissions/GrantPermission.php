@@ -11,7 +11,7 @@ use Livewire\Component;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class UserRoleManager extends Component
+class GrantPermission extends Component
 {
     #[Lazy]
     #[Validate('required|email')]
@@ -157,6 +157,6 @@ class UserRoleManager extends Component
 
     public function render()
     {
-        return view('livewire.permissions.user-role-manager');
+        return view('livewire.permissions.grant-permission');
     }
 }
