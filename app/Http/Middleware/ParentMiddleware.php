@@ -16,12 +16,13 @@ class ParentMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(!Auth::check()){
+        if (! Auth::check()) {
             return redirect()->route('login');
         }
-        if(!Auth::user()->hasRole('parent')){
-            abort(403,'Unauthorized action.');
+        if (! Auth::user()->hasRole('parent')) {
+            abort(403, 'Unauthorized action.');
         }
+
         return $next($request);
     }
 }

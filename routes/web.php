@@ -17,28 +17,29 @@ use App\Livewire\Grades\Index as IndexGrades;
 // Grade: Add grades/classes
 
 // Permissions: Create different permissions for different users, such as admin, teacher, student, and parents
-use App\Livewire\Permissions\Edit as EditPermissions;
-use App\Livewire\Permissions\Index as IndexPermissions;
-use App\Livewire\Permissions\GrantPermission;
-use App\Livewire\Reports\Scores as ScoreReports;
-use App\Livewire\Scores\Create as CreateScores;
-// Scores: Add scores to students
-use App\Livewire\Scores\Edit as EditScores;
-use App\Livewire\Scores\ScoresAdmin;
-// Scores: Admin can see all scores
-use App\Livewire\Teachers\Profile as ShowTeacherProfile;
-// Teahcers: Only Teachers can see this
-use App\Livewire\Teachers\Register as RegisterTeacherProfile;
-use App\Livewire\UserProfile\Index as UserProfileIndex;
-// New Users 
-use App\Livewire\Users\User as RegisterNewUsers;
-// Parent: Create Parent profiles
 use App\Livewire\Parent\ParentProfile;
-use App\Livewire\UserProfile\Update as UpdateUserProfile;
 use App\Livewire\Parent\ParentUpdateProfile;
 use App\Livewire\Parent\StudentDetails;
 use App\Livewire\Permissions\CreatePermission;
+use App\Livewire\Permissions\Edit as EditPermissions;
+// Scores: Add scores to students
+use App\Livewire\Permissions\GrantPermission;
+use App\Livewire\Permissions\Index as IndexPermissions;
+// Scores: Admin can see all scores
+use App\Livewire\Reports\Scores as ScoreReports;
+// Teahcers: Only Teachers can see this
+use App\Livewire\Scores\Create as CreateScores;
+use App\Livewire\Scores\Edit as EditScores;
+// New Users
+use App\Livewire\Scores\ScoresAdmin;
+// Parent: Create Parent profiles
+use App\Livewire\Teachers\Profile as ShowTeacherProfile;
+use App\Livewire\Teachers\Register as RegisterTeacherProfile;
+use App\Livewire\UserProfile\Index as UserProfileIndex;
+use App\Livewire\UserProfile\Update as UpdateUserProfile;
+use App\Livewire\Users\User as RegisterNewUsers;
 use Illuminate\Support\Facades\Route;
+
 // Welcome
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 

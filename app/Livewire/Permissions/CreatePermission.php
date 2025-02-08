@@ -11,7 +11,7 @@ use Spatie\Permission\Models\Permission as ModelsPermission;
 class CreatePermission extends Component
 {
     #[Lazy]
-    
+
     #[Validate('required|unique:permissions,name')]
     public $name;
 
