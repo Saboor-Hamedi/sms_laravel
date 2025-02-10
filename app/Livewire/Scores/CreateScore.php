@@ -6,14 +6,25 @@ use App\Models\Academic;
 use App\Models\Scores as ModelsScores;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Lazy;
 use Livewire\Component;
 
-class Create extends Component
+/**
+ * Livewire Scores Create Component
+ *
+ * @author <Abdul Saboor Hamedi>
+ *
+ * @version 1.0.1
+ *
+ * @description Only teachers are allowed to create scores. By no means this code is perfect, it's just a starting point
+ */
+class CreateScore extends Component
 {
-    #[Layout('layouts.app')]
     #[Lazy]
+
+    #[Layout('layouts.app')]
     public $assignment = '';
 
     public $formative = '';
@@ -32,24 +43,43 @@ class Create extends Component
 
     public $grades = [];
 
+    const CACHE_KEY = 'scores';
+
     protected $listeners = ['refresh_academic_year' => 'loadAcademicYears'];
 
     public function mount()
     {
+
         $this->loadAcademicYears();
+
     }
 
     public function loadAcademicYears(): void
     {
+
         $this->academic_years = Academic::orderByDesc('year')
             ->pluck('year', 'id');
+
     }
 
-    public function loadGrades() {}
+    public function forgetCatches()
+    {
+
+        Cache::forget($this->getCacheKey());
+
+    }
+
+    public function getCacheKey()
+    {
+
+        return self::CACHE_KEY.'_'.Auth::id();
+
+    }
 
     public function save()
     {
         $this->validate($this->rules());
+
         try {
             ModelsScores::create([
                 'user_id' => Auth::user()->id,
@@ -66,12 +96,14 @@ class Create extends Component
 
             $this->reset();
             $this->dispatch('refresh_academic_year');
+            $this->forgetCatches();
 
         } catch (Exception $e) {
 
             session()->flash('error', 'Error saving scores'.$e->getMessage());
 
         }
+
     }
 
     public function rules()
@@ -96,6 +128,6 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.scores.create');
+        return view('livewire.scores.create-score');
     }
 }

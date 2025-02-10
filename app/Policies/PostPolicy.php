@@ -12,7 +12,7 @@ class PostPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -44,7 +44,7 @@ class PostPolicy
      */
     public function delete(User $user, Posts $posts): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -52,7 +52,7 @@ class PostPolicy
      */
     public function restore(User $user, Posts $posts): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -60,6 +60,6 @@ class PostPolicy
      */
     public function forceDelete(User $user, Posts $posts): bool
     {
-        //
+        return true;
     }
 }

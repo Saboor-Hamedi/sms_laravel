@@ -28,8 +28,8 @@
 
                                     <td class="px-4 py-2 border border-gray-300 ">
                                         <a class="default-button text-[10px] rounded"
-                                            href="{{ route('permissions.create') }}"
-                                            wire:navigate="permissions.create">Create</a>
+                                            href="{{ route('permissions.grant-permission') }}"
+                                            wire:navigate="permissions.grant-permission">Create</a>
                                     </td>
                                     <td class="px-4 py-2 border border-gray-300 ">
                                         <a class="default-button text-[10px] rounded"

@@ -1,7 +1,7 @@
-<section class="w-full p-2">
-    <div class="overflow-hidden bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg">
-        <div class="p-6 bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-            <h1 class="ml-2 text-xl font-bold text-gray-800 sm:text-md">New Academic Year</h1>
+<div class="w-full p-2">
+    <section class="flex flex-col gap-1 bg-white border border-gray-300 rounded-md shadow-md lg:max-w-full">
+        <div class="flex items-center justify-between p-2 bg-gray-900 ">
+            <h5 class="text-white lg:[22px] md:text-[18] sm:[14px]">New Academic Year</h1>
         </div>
         <div class="p-6 text-gray-900 dark:text-gray-100">
             @if (session()->has('success'))
@@ -12,19 +12,27 @@
             @endif
             <form wire:submit.prevent='save'>
                 <div class="w-full">
+                    <label for="academic_year" class="block text-[10px] text-gray-700 ">Academic Year</label>
                     <input type="text" wire:model="academic_year" id="academic_year" name="academic_year"
-                        class="w-full p-3 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="w-full p-2 mt-1 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         class="form-control" placeholder="Academic Year">
                     @error('academic_year')
                         <small class="text-xs text-red-600">{{ $message }}</small>
                     @enderror
                 </div>
                 <div class="mt-2">
-                    <button class="default-button rounded">Submit</button>
+                    <button class="default-button rounded flex justify-center items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-5 h-5 mr-1">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6A2.25 2.25 0 0 1 6 3.75h1.5m9 0h-9" />
+                        </svg>
+                        Save
+                    </button>
                 </div>
             </form>
         </div>
-    </div>
+    </section>
     <script>
         function initializeFlatpickr() {
             const element = document.querySelector("#academic_year");
@@ -47,4 +55,4 @@
         document.addEventListener('DOMContentLoaded', initializeFlatpickr);
         document.addEventListener('livewire:navigated', initializeFlatpickr);
     </script>
-</section>
+</div>

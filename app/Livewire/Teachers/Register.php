@@ -10,8 +10,9 @@ use Livewire\Component;
 
 class Register extends Component
 {
-    #[Layout('layouts.app')]
     #[Lazy]
+
+    #[Layout('layouts.app')]
     public $lastname;
 
     public $birthdate;

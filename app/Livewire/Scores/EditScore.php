@@ -3,12 +3,14 @@
 namespace App\Livewire\Scores;
 
 use App\Models\Scores as ModelsScores;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Lazy;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
-class Edit extends Component
+class EditScore extends Component
 {
     #[Lazy]
     #[Validate('required|numeric|max:100')]
@@ -31,12 +33,11 @@ class Edit extends Component
 
     public $scoreId;
 
+    const CACHE_KEY = 'scores';
+
     #[Layout('layouts.app')]
-    public function mount($id)
+    public function mount(int $id)
     {
-        // if (!Auth::user()->hasRole('manager')) {
-        //     return redirect()->route('dashboard');  // Redirect to home if not manager
-        // }
         $this->update($id);
     }
 
@@ -66,8 +67,19 @@ class Edit extends Component
 
         ]);
         session()->flash('success', 'Score updated successfully.');
+        $this->forgetCatches();
 
         return redirect(route('dashboard'));
+    }
+
+    public function forgetCatches()
+    {
+        Cache::forget($this->getCacheKey());
+    }
+
+    public function getCacheKey()
+    {
+        return self::CACHE_KEY.'_'.Auth::id();
     }
 
     public function cancel()
@@ -77,6 +89,6 @@ class Edit extends Component
 
     public function render()
     {
-        return view('livewire.scores.edit');
+        return view('livewire.scores.edit-score');
     }
 }

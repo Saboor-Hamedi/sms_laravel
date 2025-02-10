@@ -14,22 +14,20 @@ use App\Livewire\Academic\Index as IndexAcademic;
 use App\Livewire\Academic\Show as ShowAcademic;
 use App\Livewire\Grades\Create as CreateGrades;
 use App\Livewire\Grades\Index as IndexGrades;
-// Grade: Add grades/classes
-
 // Permissions: Create different permissions for different users, such as admin, teacher, student, and parents
 use App\Livewire\Parent\ParentProfile;
 use App\Livewire\Parent\ParentUpdateProfile;
 use App\Livewire\Parent\StudentDetails;
+// Permissions
 use App\Livewire\Permissions\CreatePermission;
 use App\Livewire\Permissions\Edit as EditPermissions;
-// Scores: Add scores to students
 use App\Livewire\Permissions\GrantPermission;
-use App\Livewire\Permissions\Index as IndexPermissions;
+use App\Livewire\Permissions\Index as IndexPermission;
 // Scores: Admin can see all scores
 use App\Livewire\Reports\Scores as ScoreReports;
 // Teahcers: Only Teachers can see this
-use App\Livewire\Scores\Create as CreateScores;
-use App\Livewire\Scores\Edit as EditScores;
+use App\Livewire\Scores\CreateScore;
+use App\Livewire\Scores\EditScore;
 // New Users
 use App\Livewire\Scores\ScoresAdmin;
 // Parent: Create Parent profiles
@@ -45,9 +43,9 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 // Teachers
 Route::middleware([TeacherMiddleware::class])->group(function () {
-    Route::get('academic/index', IndexAcademic::class)->name('academic.index'); // academic index
-    Route::get('scores', CreateScores::class)->name('scores.create'); // new scores
-    Route::get('scores/{id}/edit', EditScores::class)->name('scores.edit'); // edit scores
+    Route::get('academic/index', IndexAcademic::class)->name(name: 'academic.index'); // academic index
+    Route::get('scores/create-score', CreateScore::class)->name('scores.create-score'); // new scores
+    Route::get('scores/{id}/edit-score', action: EditScore::class)->name('scores.edit-score'); // edit scores
     Route::get('academic/{year}/show', ShowAcademic::class)->name('academic.show');
     Route::get('teachers/register', RegisterTeacherProfile::class)->name('teachers.register');
     Route::get('teachers/profile', ShowTeacherProfile::class)->name('teachers.profile');
@@ -55,13 +53,15 @@ Route::middleware([TeacherMiddleware::class])->group(function () {
 
 // Admin
 Route::middleware([AdminMiddleware::class])->group(function () {
-    Route::get('permissions/index', IndexPermissions::class)->name('permissions.index'); // permissions index
+    Route::get('permissions/index', IndexPermission::class)->name('permissions.index'); // permissions index
     Route::get('permissions/create-permission', CreatePermission::class)->name('permissions.create-permission'); // new permissions
     Route::get('permissions/{id}/edit', EditPermissions::class)->name('permissions.edit'); // new permissions
     Route::get('permissions/grant-permission', GrantPermission::class)->name('permissions.grant-permission');
+    // academic years
     Route::get('academic/create', CreateAcademic::class)->name('academic.create');
     Route::get('scores/scores-admin', ScoresAdmin::class)->name('scores.scores-admin');
     Route::get('reports/scores-reports', [PDFController::class, 'scorePDF'])->name('reports.scores-reports');
+    // create new users, like students, teachers, and parents
     Route::get('users/user', RegisterNewUsers::class)->name('users.user');
     Route::get('grades/index', IndexGrades::class)->name('grades.index');
     Route::get('grades/create', CreateGrades::class)->name('grades.create');

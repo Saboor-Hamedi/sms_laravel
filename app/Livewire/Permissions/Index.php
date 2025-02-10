@@ -13,8 +13,6 @@ class Index extends Component
     #[Layout('layouts.app')]
     public function render()
     {
-
-        // $permissions = Role::with('permissions')->latest()->paginate(3);
         $permissions = Permission::with('roles')->latest()->paginate(3);
 
         return view('livewire.permissions.index', ['permissions' => $permissions]);

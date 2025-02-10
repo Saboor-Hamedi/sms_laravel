@@ -1,21 +1,14 @@
-<div>
+<div class="p-2">
     @section('title', 'Scores')
-
-    <div class="py-4 bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-        <h1 class="ml-1 text-xl font-bold text-gray-800 sm:text-md">New Academic Year</h1>
-    </div>
-    {{-- show flash message --}}
-    @if (session()->has('success'))
-        <div class="px-4 py-3 text-blue-700 bg-blue-100 border-t border-b border-blue-500" role="alert">
-            <p class="font-bold">Informational message</p>
-            <p class="text-sm">{{ session('success') }}.</p>
+    <section class="flex flex-col gap-1 bg-white border border-gray-300 rounded-md shadow-md lg:max-w-full">
+        <div class="flex items-center justify-between p-2 bg-gray-900 text-white lg:[22px] md:text-[18] sm:[14px]">
+            <h5>Create Score</h5>
         </div>
-    @endif
-    <section class="w-full p-2 bg-white shadow-sm dark:bg-gray-800">
-
         @livewire('reports.scores')
         @foreach ($groupedScores as $year => $yearScores)
-            <h2 class="mt-4 text-lg font-bold">Academic Year: {{ $year }}</h2>
+            <h5 class="mb-2 ml-2 lg:text-[16px] md:text-[14px] sm:text-[12px] text-gray-900">
+                Academic Year: {{ $year }}
+            </h5>
             <div class="overflow-x-auto custom__scroll__x">
                 <table class="w-full border border-collapse border-gray-300 table-auto ">
                     <thead>
@@ -45,8 +38,8 @@
                                 <td class="px-4 py-2 border border-gray-300">{{ Str::limit($score->report, 20, '...') }}
                                 </td>
                                 <td class="px-2 py-2 border border-gray-300 ">
-                                    <a class="default-button text-[10px] rounded" wire:navigate='edit'
-                                        href="{{ route('scores.edit', $score->id) }}">Edit</a>
+                                    <a class="default-button text-[10px] rounded" wire:navigate='scores.edit-score'
+                                        href="{{ route('scores.edit-score', $score->id) }}">Edit</a>
                                 </td>
                                 <td class="px-2 py-2 border border-gray-300 ">
                                     <button type="submit" class="default-button text-[10px] rounded"
@@ -72,25 +65,4 @@
         @endforeach
     </section>
     {{ $scores->links() }}
-
-    <style>
-        .custom__scroll__x::-webkit-scrollbar {
-            width: 2px;
-            height: 5px;
-        }
-
-        .custom__scroll__x::-webkit-scrollbar-track {
-            background: #f3f4f6;
-            border-radius: 10px;
-        }
-
-        .custom__scroll__x::-webkit-scrollbar-thumb {
-            background: #000000;
-            border-radius: 10px;
-        }
-
-        /* .custom__scroll__x::-webkit-scrollbar-thumb:hover {
-            background: #2e2e2e;
-        } */
-    </style>
 </div>
