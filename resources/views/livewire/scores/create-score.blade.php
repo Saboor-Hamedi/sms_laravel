@@ -29,16 +29,37 @@
                 <!-- Form -->
                 <form wire:submit.prevent="save">
                     <!-- Search Input -->
-                    <div>
-                        <select wire:model="searchAuthor"
-                            class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                            <option value="0">Choose one Author</option>
-                            @foreach ($students as $id => $lastname)
-                                <option value="{{ $id }}"> {{ $lastname }} </option>
-                            @endforeach
-                        </select>
-                    </div>
+                    <div class="relative">
+                        <input type="text" wire:model.live="search" placeholder="Search students..."
+                            class="w-full p-2 mt-1 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            {{-- onkeydown="if(event.key === 'Enter') event.preventDefault();" --}} onkeydown="handleEscape(event);" />
 
+                        <!-- Dropdown Menu -->
+                        @if (!$studentSelected && !empty($search))
+                            <div
+                                class="absolute w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-100 max-h-48 overflow-y-auto">
+
+                                <!-- Loading Indicator inside the dropdown -->
+                                <small wire:loading class="block p-2 text-gray-500 text-center ">
+                                    Searching...
+                                </small>
+
+                                @if (!empty($students))
+                                    @foreach ($students as $student)
+                                        <div wire:click="selectStudent({{ $student['id'] }})"
+                                            class="p-2 hover:bg-blue-100 cursor-pointer transition-colors">
+                                            {{ $student['lastname'] }}
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <div id="noResultsMessage" class="p-2 text-gray-500 text-center">
+                                        No results found for <span class="font-medium">'{{ $search }}'</span>
+                                    </div>
+
+                                @endif
+                            </div>
+                        @endif
+                    </div>
                     <!-- Assignment & Formative Fields -->
 
                     <div class="flex flex-col gap-4 md:flex-row">
