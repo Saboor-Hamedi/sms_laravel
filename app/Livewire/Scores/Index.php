@@ -52,15 +52,24 @@ class Index extends Component
         return self::CACHE_KEY.'_'.Auth::id();
     }
 
-    public function render()
+    public function getScores()
     {
         $userId = Auth::id();
         $cacheKey = $this->getCacheKey();
-        $scores = Cache::remember($cacheKey, now()->addMinutes(self::CACHE_TIME), function () use ($userId) {
-            return Scores::with(['academic', 'user'])
+
+        return Cache::remember($cacheKey, now()->addMinutes(self::CACHE_TIME), function () use ($userId) {
+            return Scores::with(
+                [
+                    'academic', 'user', 'student.user', 'grade',
+                ])
                 ->where('user_id', $userId)
                 ->paginate(self::PAGINATE_SIZE);
         });
+    }
+
+    public function render()
+    {
+        $scores = $this->getScores();
 
         $groupedScores = $scores->groupBy('academic.year');
 

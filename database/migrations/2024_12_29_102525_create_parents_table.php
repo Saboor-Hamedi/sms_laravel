@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('address', 150)->nullable();
             $table->string('bio', 150)->nullable();
             $table->string('image')->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

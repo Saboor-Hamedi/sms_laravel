@@ -7,6 +7,7 @@ use App\Models\Grade;
 use App\Models\Student;
 use App\Models\Subject;
 use App\Models\Teacher;
+use Exception;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Lazy;
 use Livewire\Component;
@@ -28,6 +29,7 @@ use Livewire\Component;
 class Create extends Component
 {
     #[Lazy]
+
     #[Layout('layouts.app')]
     public $students = [];
 
@@ -49,7 +51,12 @@ class Create extends Component
 
     public $grade_id = '';
 
-    protected $listeners = ['refresh_academic_year', 'fetchAcademicYear'];
+    protected $listeners = [
+
+        'refresh_academic_year',
+        'fetchAcademicYear',
+
+    ];
 
     /**
      * Mount the component.
@@ -59,6 +66,7 @@ class Create extends Component
      */
     public function mount()
     {
+
         $this->initializeData();
     }
 
@@ -71,6 +79,7 @@ class Create extends Component
      */
     public function initializeData()
     {
+
         $this->subjects = $this->fetchSubjects();
         $this->roles = $this->fetchStudents();
         $this->academics = $this->fetchAcademicYear();
@@ -89,6 +98,7 @@ class Create extends Component
      */
     public function fetchSubjects()
     {
+
         return Subject::pluck('name', 'id');
     }
 
@@ -104,6 +114,7 @@ class Create extends Component
      */
     public function fetchStudents()
     {
+
         return Student::pluck('lastname', 'id');
     }
 
@@ -118,11 +129,13 @@ class Create extends Component
      */
     public function fetchAcademicYear()
     {
+
         return Academic::orderBy('year', 'desc')->pluck('year', 'id');
     }
 
     public function fetchTeachers()
     {
+
         return Teacher::pluck('lastname', 'id');
     }
 
@@ -139,38 +152,35 @@ class Create extends Component
      */
     public function save()
     {
-        $this->validate([
-            'teacher_id' => 'required',
-            'subject_name' => 'required',
-            'student_name' => 'required',
-            'academic_id' => 'required',
-        ]);
-        $grade = Grade::create([
-            'teacher_id' => $this->teacher_id,
-            'subject_name' => $this->subject_name,
-            'academic_id' => $this->academic_id,
-        ]);
-        $grade->students()->attach($this->student_name);
 
-        $this->resetForm();
-        session()->flash('success', 'Grade created successfully');
-        $this->dispatch('refresh_academic_year');
+        $this->validate([
+            'teacher_id' => 'required|exists:students,id',
+            'subject_name' => 'required|string|max:100',
+            'student_name' => 'required|exists:students,id',
+            'academic_id' => 'required|exists:academics,id',
+        ]);
+        try {
+            $grade = Grade::create([
+                'teacher_id' => $this->teacher_id,
+                'subject_name' => $this->subject_name,
+                'academic_id' => $this->academic_id,
+            ]);
+            $grade->students()->attach($this->student_name);
+            $this->resetFormt();
+            $this->dispatch('refresh_academic_year');
+            session()->flash('success', 'Grade created successfully');
+        } catch (Exception $e) {
+            session()->flash('error', 'Grade not created');
+        }
     }
 
-    /**
-     * Resets the form fields to their default values.
-     *
-     * This method is called after submitting the form.
-     *
-     * @return void
-     *
-     * @author  <Abudul Saboor Hamedi>
-     */
-    public function resetForm()
+    public function resetFormt()
     {
-        $this->subject_name = '';
+
         $this->student_name = '';
+        $this->subject_name = '';
         $this->academic_id = '';
+        $this->teacher_id = '';
     }
 
     public function cancel()

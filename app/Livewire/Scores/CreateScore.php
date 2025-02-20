@@ -4,6 +4,7 @@ namespace App\Livewire\Scores;
 
 use App\Models\Academic;
 use App\Models\Scores as ModelsScores;
+use App\Models\Student;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -43,6 +44,10 @@ class CreateScore extends Component
 
     public $grades = [];
 
+    public string $search = '';
+
+    public $students = [];
+
     const CACHE_KEY = 'scores';
 
     protected $listeners = ['refresh_academic_year' => 'loadAcademicYears'];
@@ -51,6 +56,7 @@ class CreateScore extends Component
     {
 
         $this->loadAcademicYears();
+        $this->searchStudents();
 
     }
 
@@ -76,6 +82,11 @@ class CreateScore extends Component
 
     }
 
+    public function searchStudents()
+    {
+        $this->students = Student::pluck('lastname', 'id');
+    }
+
     public function save()
     {
         $this->validate($this->rules());
@@ -99,9 +110,7 @@ class CreateScore extends Component
             $this->forgetCatches();
 
         } catch (Exception $e) {
-
             session()->flash('error', 'Error saving scores'.$e->getMessage());
-
         }
 
     }

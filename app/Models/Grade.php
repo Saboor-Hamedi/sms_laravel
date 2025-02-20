@@ -18,7 +18,11 @@ class Grade extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['subject_name', 'teacher_id', 'academic_id'];
+    protected $fillable = [
+        'subject_name',
+        'teacher_id',
+        'academic_id',
+    ];
 
     public $timestamps = true;
 

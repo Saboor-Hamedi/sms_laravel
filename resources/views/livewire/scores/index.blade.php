@@ -1,9 +1,13 @@
-<div class="p-2">
+<x-custom-section title="Create Score">
     @section('title', 'Scores')
-    <section class="flex flex-col gap-1 bg-white border border-gray-300 rounded-md shadow-md lg:max-w-full">
-        <div class="flex items-center justify-between p-2 bg-gray-900 text-white lg:[22px] md:text-[18] sm:[14px]">
-            <h5>Create Score</h5>
-        </div>
+    {{-- show flash message --}}
+    <div class="flex flex-col gap-2 p-4">
+        @if (session()->has('success'))
+            <div class="px-4 py-3 text-blue-700 bg-blue-100 border-t border-b border-blue-500" role="alert">
+                <p class="font-bold">Informational message</p>
+                <p class="text-sm">{{ session('success') }}.</p>
+            </div>
+        @endif
         @livewire('reports.scores')
         @foreach ($groupedScores as $year => $yearScores)
             <h5 class="mb-2 ml-2 lg:text-[16px] md:text-[14px] sm:text-[12px] text-gray-900">
@@ -13,6 +17,7 @@
                 <table class="w-full border border-collapse border-gray-300 table-auto ">
                     <thead>
                         <tr class="text-xs text-center bg-gray-100">
+                            <th class="px-4 py-2 border border-gray-300">Student Name</th>
                             <th class="px-4 py-2 border border-gray-300">Assignment</th>
                             <th class="px-4 py-2 border border-gray-300">Formative</th>
                             <th class="px-4 py-2 border border-gray-300">Mid-Term</th>
@@ -29,6 +34,9 @@
                     <tbody class="text-xs">
                         @foreach ($yearScores as $score)
                             <tr class="text-center odd:bg-gray-100 even:bg-gray-200">
+                                <td class="px-4 py-2 border border-gray-300">
+                                    {{ optional($score->student)->user->name ?? '' }}
+                                </td>
                                 <td class="px-4 py-2 border border-gray-300">{{ $score->assignment }}</td>
                                 <td class="px-4 py-2 border border-gray-300">{{ $score->formative }}</td>
                                 <td class="px-4 py-2 border border-gray-300">{{ $score->midterm }}</td>
@@ -50,19 +58,20 @@
                         @endforeach
                         <tr class="text-xs bg-gray-100">
                             @if ($scores->isNotEmpty() && $scores->first()->user_id == auth()->user()->id)
-                                <th colspan="9" class="p-3 text-left border border-gray-300 ">
+                                <th colspan="10" class="p-3 text-left border border-gray-300 ">
                                     {{ Str::ucfirst(auth()->user()->name) }}
                                 </th>
                             @else
-                                <th colspan="9" class="p-3 text-left border border-gray-300 ">
+                                <th colspan="10" class="p-3 text-left border border-gray-300 ">
                                     {{ __('N/A') }}
                                 </th>
                             @endif
                         </tr>
                     </tbody>
                 </table>
+
             </div>
         @endforeach
-    </section>
-    {{ $scores->links() }}
-</div>
+        {{ $scores->links() }}
+    </div>
+</x-custom-section>

@@ -13,15 +13,17 @@ return new class extends Migration
     {
         Schema::create('scores', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('academic_year_id')->constrained('academics')->cascadeOnDelete();
+            $table->foreignId('grade_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('student_id')->nullable()->constrained()->cascadeOnDelete();
             $table->integer('assignment')->nullable();
             $table->integer('formative')->nullable();
             $table->integer('midterm')->nullable();
             $table->integer('final')->nullable();
             $table->integer('average')->nullable();
             $table->string('report')->nullable();
-            $table->foreignId('academic_year_id')->constrained('academics')->onDelete('cascade');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

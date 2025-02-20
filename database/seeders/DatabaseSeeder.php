@@ -13,7 +13,9 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
+
         $this->call(RolePermissionSeeder::class);
+
         // admin
         $admin = User::create([
             'name' => 'admin',
@@ -53,14 +55,18 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('123'),
             'remember_token' => Str::random(10),
         ]);
+
         $parent->assignRole('parent');
 
-        $this->call(PostsSeeder::class);
-        $this->call(AcademicSeeder::class);
-        $this->call(ScoresSeeder::class);
-        $this->call(StudentSeeder::class);
-        $this->call(TeacherSeeder::class);
-        $this->call(GradeSeeder::class);
-        $this->call(SubjectSeeder::class);
+        $this->call([
+            PostsSeeder::class,
+            StudentSeeder::class,
+            TeacherSeeder::class,
+            AcademicSeeder::class,
+            GradeSeeder::class,
+            ScoresSeeder::class,
+            SubjectSeeder::class,
+
+        ]);
     }
 }

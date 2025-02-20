@@ -31,11 +31,7 @@ class Student extends Model
     }
 
     /**
-     * [grades description]
-     *
      * many to many relationship
-     *
-     * @return [type] [description]
      *
      * @author saboor
      *
@@ -53,8 +49,6 @@ class Student extends Model
     }
 
     /**
-     * [grades description]
-     *
      * many to many relationship
      *
      * @return [type] [description]
@@ -75,8 +69,6 @@ class Student extends Model
     }
 
     /**
-     * [grades description]
-     *
      * many to many relationship
      *
      * @return [type] [description]
@@ -94,5 +86,11 @@ class Student extends Model
     public function parents()
     {
         return $this->belongsToMany(Parents::class, 'parent_students', 'student_id', 'parent_id');
+    }
+
+    // Helper function to get the full name of the student
+    public function currentGrade()
+    {
+        return $this->grades()->orderBy('academic_id', 'desc')->first();
     }
 }

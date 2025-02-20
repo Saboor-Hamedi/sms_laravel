@@ -12,16 +12,20 @@ return new class extends Migration
      */
     public function up(): void
     {
+
         Schema::create('parent_students', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student_id')->constrained('students')->cascadeOnDelete();
             $table->foreignId('parent_id')->constrained('parents')->cascadeOnDelete();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
         });
+
     }
 
     public function down(): void
     {
+
         Schema::dropIfExists('parent_students');
+
     }
 };

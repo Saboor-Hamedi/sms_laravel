@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Academic;
+use App\Models\Grade;
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -26,6 +28,8 @@ class ScoresFactory extends Factory
             'final' => $this->faker->numberBetween(0, 100),
             'average' => $this->faker->numberBetween(0, 100),
             'report' => $this->faker->sentence,
+            'student_id' => Student::inRandomOrder()->first()->id,
+            'grade_id' => Grade::inRandomOrder()->first()->id,
             'academic_year_id' => Academic::inRandomOrder()->first()->id,
         ];
     }

@@ -1,8 +1,5 @@
-<section class="w-full p-2">
+<x-custom-section title="Permissions Name">
     <div class="overflow-hidden bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg">
-        <div class="px-6 py-4 bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-            <h1 class="ml-1 text-xl font-bold text-gray-800 sm:text-md">Permissions Name</h1>
-        </div>
         <div class="p-6 text-gray-900 dark:text-gray-100">
             @if (session()->has('success'))
                 <div class="px-4 py-3 text-blue-700 bg-blue-100 border-t border-b border-blue-500" role="alert">
@@ -56,4 +53,5 @@
             {{ $permissions->links() }}
         </div>
     </div>
-</section>
+
+</x-custom-section>

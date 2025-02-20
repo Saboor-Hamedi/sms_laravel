@@ -10,6 +10,8 @@ class Posts extends Model
     /** @use HasFactory<\Database\Factories\PostsFactory> */
     protected $fillable = ['name', 'user_id'];
 
+    public $timestamps = false;
+
     use HasFactory;
 
     public function user()
