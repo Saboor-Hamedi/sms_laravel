@@ -12,19 +12,9 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Lazy;
 use Livewire\Component;
 
-/**
- * Livewire Scores Create Component
- *
- * @author <Abdul Saboor Hamedi>
- *
- * @version 1.0.1
- *
- * @description Only teachers are allowed to create scores. By no means this code is perfect, it's just a starting point
- */
 class CreateScore extends Component
 {
     #[Lazy]
-
     #[Layout('layouts.app')]
     public $assignment = '';
 
@@ -56,75 +46,74 @@ class CreateScore extends Component
 
     public $studentSelected = false;
 
-
     const CACHE_KEY = 'scores';
 
     protected $listeners = ['refresh_academic_year' => 'loadAcademicYears'];
 
     public function mount()
     {
-
         $this->loadAcademicYears();
-
     }
 
     public function loadAcademicYears(): void
     {
-
         $this->academic_years = Academic::orderByDesc('year')
             ->pluck('year', 'id');
-
     }
 
     public function forgetCatches()
     {
-
         Cache::forget($this->getCacheKey());
-
     }
 
     public function getCacheKey()
     {
-
         return self::CACHE_KEY.'_'.Auth::id();
-
     }
 
     public function searchStudents()
     {
-
         if (strlen($this->search) < 2) {
             $this->students = [];
 
             return;
         }
+
         $this->loading = true;
 
         usleep(100000);
-        $this->students = Student::where('lastname', 'like', '%'.$this->search.'%')
+        $this->students = Student::query()
+            ->where('lastname', 'like', '%'.$this->search.'%')
+            ->orWhere('id', $this->search)
             ->orderBy('lastname')
             ->limit(5)
-            ->pluck('lastname', 'id')
+            ->get()
+            ->mapWithKeys(function ($student) {
+                return [$student->id => $student->lastname];
+            })
             ->toArray();
 
         $this->loading = false;
-
     }
-
-    public function updatedSearch()
+    public function setStudentIdFromSearch()
     {
-        if ($this->ignoreSearchUpdate) {
-            $this->ignoreSearchUpdate = false;
-
+        if (empty($this->search)) {
             return;
         }
 
-        $this->studentSelected = false;
-        $this->selectedStudentId = null;
-        $this->searchStudents();
+        $student = Student::find($this->search);
 
+        if ($student) {
+            $this->selectStudent($student->id);
+        } else {
+            session()->flash('status',
+                ['type' => 'error', 'message' => 'Student ID not found']);
+
+            $this->handleEscape();
+        }
     }
 
+    
     public function selectStudent($id)
     {
         if ($student = Student::find($id)) {
@@ -133,7 +122,36 @@ class CreateScore extends Component
             $this->selectedStudentId = $student->id;
             $this->students = [];
             $this->studentSelected = true;
+
         }
+    }
+    public function updatedSearch()
+    {
+        if ($this->ignoreSearchUpdate) {
+            $this->ignoreSearchUpdate = false;
+            return;
+        }
+
+        $this->studentSelected = false;
+        $this->selectedStudentId = null;
+
+        $this->searchStudents();
+    }
+
+
+    public function handleEscape()
+    {
+        $this->search = '';
+        $this->students = [];
+        $this->studentSelected = false;
+        $this->selectedStudentId = null;
+    }
+
+    
+
+    public function handleEscapeAndCloseResult()
+    {
+        $this->handleEscape();
     }
 
     public function save()
@@ -161,21 +179,17 @@ class CreateScore extends Component
         } catch (Exception $e) {
             session()->flash('error', 'Error saving scores'.$e->getMessage());
         }
-
     }
-
-  
 
     public function rules()
     {
         return [
-            'selectedStudentId' => ['required', 'exists:students,id'], // Validate Student ID
-
-            'assignment' => ['required', 'numeric', 'max:100'],
-            'formative' => ['required', 'numeric', 'max:100'],
-            'midterm' => ['required', 'numeric', 'max:100'],
-            'final' => ['nullable', 'numeric', 'max:100'],
-            'average' => ['nullable', 'numeric'],
+            'selectedStudentId' => ['required', 'exists:students,id'],
+            'assignment' => ['required', 'numeric', 'between:0,999.99'], // Allows decimals up to 2 places
+            'formative' => ['required', 'numeric', 'between:0,999.99'],
+            'midterm' => ['required', 'numeric', 'between:0,999.99'],
+            'final' => ['nullable', 'numeric', 'between:0,999.99'],
+            'average' => ['nullable', 'numeric', 'between:0,999.99'],
             'report' => ['nullable', 'max:255'],
             'academic_year_id' => ['required'],
         ];
