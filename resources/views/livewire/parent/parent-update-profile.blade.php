@@ -12,14 +12,14 @@
                     </p>
                 </div>
             @endif
-            <form class="flex flex-col gap-2" wire:submit.prevent="save">
+            <form class="flex flex-col gap-2" wire:submit="save">
                 <!-- First Row -->
                 <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div class="w-full">
                         <label for="lastname" class="block  text-[10px] font-medium text-gray-700">
                             Last Name
                         </label>
-                        <input type="text" wire:model='lastname' id="lastname" name="lastname"
+                        <input type="text" wire:model.live='lastname' id="lastname" name="lastname"
                             class="w-full p-2 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Your Lastname">
                         @error('lastname')
@@ -30,7 +30,7 @@
                         <label for="phone" class="block text-[10px] font-medium text-gray-700">
                             Phone
                         </label>
-                        <input type="text" wire:model='phone' id="phone" name="phone"
+                        <input type="text" wire:model.live='phone' id="phone" name="phone"
                             class="w-full p-2 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Your Phone Number">
                         @error('phone')
@@ -41,7 +41,7 @@
                 <!-- Average -->
                 <div class="w-full">
                     <label for="address" class="block  text-[10px] font-medium text-gray-700">Address</label>
-                    <input type="text" wire:model='address' id="address" name="address"
+                    <input type="text" wire:model.live='address' id="address" name="address"
                         class="w-full p-2 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Your Address">
                     @error('address')
@@ -52,7 +52,7 @@
                 <!-- Report -->
                 <div class="w-full">
                     <label for="bio" class="block text-[10px] font-medium text-gray-700">Bio</label>
-                    <textarea wire:model='bio' id="bio" name="bio"
+                    <textarea wire:model.live='bio' id="bio" name="bio"
                         class="w-full p-2 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Your Bio">
                     </textarea>

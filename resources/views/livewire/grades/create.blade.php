@@ -23,10 +23,10 @@
                         <p class="text-sm">{{ session('success') }}.</p>
                     </div>
                 @endif
-                <form wire:submit.prevent="save">
+                <form wire:submit="save">
                     <div class="flex flex-col gap-2 md:flex-row">
                         <div class="flex-1">
-                            <select wire:model.defer="teacher_id" id="teacher_id" name="teacher_id"
+                            <select wire:model="teacher_id" id="teacher_id" name="teacher_id"
                                 class="w-full p-2 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option value="0">Select A Teacher</option>
                                 @foreach ($teachers as $id => $lastname)
@@ -39,7 +39,7 @@
 
                         </div>
                         <div class="flex-1">
-                            <select wire:model.defer="student_name" id="student_name" name="student_name"
+                            <select wire:model="student_name" id="student_name" name="student_name"
                                 class="w-full p-2 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option value="0">Select A Student</option>
                                 @foreach ($roles as $id => $lastname)
@@ -53,7 +53,7 @@
                     </div>
                     <div class="flex flex-col gap-2 mt-2 md:flex-row">
                         <div class="flex-1">
-                            <select wire:model.defer="academic_id" id="academic_id" name="academic_id"
+                            <select wire:model="academic_id" id="academic_id" name="academic_id"
                                 class="w-full p-2 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option value="0">Select Academic Year</option>
                                 @foreach ($academics as $id => $year)
@@ -65,7 +65,7 @@
                             @enderror
                         </div>
                         <div class="flex-1">
-                            <select wire:model.defer="subject_name" id="subject_name" name="subject_name"
+                            <select wire:model="subject_name" id="subject_name" name="subject_name"
                                 class="w-full p-2 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option value="0">Select A Subject</option>
                                 @foreach ($subjects as $id => $name)

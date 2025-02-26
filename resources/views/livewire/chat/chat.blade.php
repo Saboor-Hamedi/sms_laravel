@@ -4,8 +4,8 @@
         <div class="flex flex-col gap-4 p-4 bg-white border border-gray-200 rounded-md shadow-md">
 
             @if ($editingPostId === $post->id)
-                <form wire:submit.prevent="save" class="space-y-2">
-                    <textarea wire:model.defer="name" id="name" placeholder="Edit the message..."
+                <form wire:submit="save" class="space-y-2">
+                    <textarea wire:model="name" id="name" placeholder="Edit the message..."
                         class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-indigo-500"></textarea>
                     @error('name')
                         <small class="text-xs text-red-600">{{ $message }}</small>

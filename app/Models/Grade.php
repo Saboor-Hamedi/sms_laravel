@@ -24,7 +24,7 @@ class Grade extends Model
         'academic_id',
     ];
 
-    public $timestamps = true;
+    public $timestamps = false;
 
     public function teacher()
     {
@@ -33,7 +33,7 @@ class Grade extends Model
 
     public function students()
     {
-        return $this->belongsToMany(Student::class, 'grade_student', 'grade_id', 'student_id')->withTimestamps();
+        return $this->belongsToMany(Student::class, 'grade_student', 'grade_id', 'student_id');
     }
 
     // academic year, register students based on academic year

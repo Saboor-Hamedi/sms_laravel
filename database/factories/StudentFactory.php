@@ -27,7 +27,6 @@ class StudentFactory extends Factory
             'description' => $this->faker->text,
             'is_active' => true,
             'created_at' => now(),
-            'updated_at' => now(),
         ];
     }
 }

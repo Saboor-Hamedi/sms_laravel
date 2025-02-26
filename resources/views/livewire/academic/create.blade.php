@@ -6,10 +6,10 @@
                 <p class="text-sm">{{ session('success') }}.</p>
             </div>
         @endif
-        <form wire:submit.prevent='save'>
+        <form wire:submit='save'>
             <div class="w-full">
                 <label for="academic_year" class="block text-[10px] text-gray-700 ">Academic Year</label>
-                <input type="text" wire:model="academic_year" id="academic_year" name="academic_year"
+                <input type="text" wire:model.live="academic_year" id="academic_year" name="academic_year"
                     class="w-full p-2 mt-1 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     class="form-control" placeholder="Academic Year">
                 @error('academic_year')

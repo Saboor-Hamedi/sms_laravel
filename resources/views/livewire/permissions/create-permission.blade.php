@@ -4,9 +4,9 @@
             <h5 class="text-white lg:[22px] md:text-[18] sm:[14px]">Permissions Name</ht>
         </div>
         <div class="p-2 flex flex-col gap-2">
-            <form wire:submit.prevent="save">
+            <form wire:submit="save">
                 <div class="w-full">
-                    <input type="text" name="name" id="name" wire:model="name"
+                    <input type="text" name="name" id="name" wire:model.live="name"
                         class="w-full p-2 mt-1 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Enter permission name" />
                     @error('name')

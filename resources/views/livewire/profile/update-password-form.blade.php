@@ -48,19 +48,19 @@ new class extends Component {
 
     <form wire:submit="updatePassword">
         <div class="mb-4">
-            <x-text-input wire:model="current_password" id="update_password_current_password" name="current_password"
+            <x-text-input wire:model.live="current_password" id="update_password_current_password" name="current_password"
                 type="password" class="mt-1 block w-full" placeholder="Current Password" autocomplete="current-password" />
             <x-input-error :messages="$errors->get('current_password')" class="mt-2" />
         </div>
 
         <div class="mb-4">
-            <x-text-input wire:model="password" id="update_password_password" name="password" type="password"
+            <x-text-input wire:model.live="password" id="update_password_password" name="password" type="password"
                 class="mt-1 block w-full" placeholder="New Password" autocomplete="new-password" />
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
         <div class="mb-4">
-            <x-text-input wire:model="password_confirmation" id="update_password_password_confirmation"
+            <x-text-input wire:model.live="password_confirmation" id="update_password_password_confirmation"
                 placeholder="Confirm Password" name="password_confirmation" type="password" class="mt-1 block w-full"
                 autocomplete="new-password" />
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />

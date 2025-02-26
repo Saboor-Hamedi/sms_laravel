@@ -1,7 +1,7 @@
 <div class="w-full ">
-    <form wire:submit.prevent="save">
+    <form wire:submit="save">
 
-        <textarea wire:model.defer="name" id="name" placeholder="Type your message here..."
+        <textarea wire:model="name" id="name" placeholder="Type your message here..."
             @keydown.enter.exact.prevent="save()">
         </textarea>
         @if (session()->has('error'))

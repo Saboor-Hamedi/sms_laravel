@@ -18,7 +18,7 @@
 
                 <div class="mb-4">
                     <label for="email" class="block text-gray-700">User Email:</label>
-                    <input type="email" id="email" wire:model="email" placeholder='Enter user email'
+                    <input type="email" id="email" wire:model.live="email" placeholder='Enter user email'
                         class="w-full p-2 border border-gray-300 rounded">
                     @error('email')
                         <small class="text-xs text-red-600">{{ $message }}</small>

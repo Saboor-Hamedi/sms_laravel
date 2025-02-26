@@ -1,5 +1,5 @@
 @php
-$model = $attributes->whereStartsWith('wire:model')->first();
+$model = $attributes->whereStartsWith('wire:model.live')->first();
 $isLive = filled($attributes->whereStartsWith('wire:model.live')->first()) ? 'true' : 'false';
 @endphp
 

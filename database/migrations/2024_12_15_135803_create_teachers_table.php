@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('address', 100)->nullable();
             $table->string('description', 100);
             $table->boolean('is_active')->default(true);
-            $table->timestamp('created_at')->useCurrent();
+            $table->timestamps();
         });
     }
 

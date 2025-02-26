@@ -12,6 +12,13 @@ class AcademicSeeder extends Seeder
      */
     public function run(): void
     {
-        Academic::factory(4)->create();
+        // Academic::factory(20)->create();
+        $years = collect(range(2000, 2025))
+            ->shuffle()
+            ->take(20);
+
+        $years->each(function ($year) {
+            Academic::updateOrCreate(['year' => $year]);
+        });
     }
 }

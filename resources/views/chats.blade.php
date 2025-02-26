@@ -25,7 +25,7 @@
     </section>
 
     <script>
-        document.addEventListener('livewire:load', function() {
+        document.addEventListener('livewire:init', function() {
             // Scroll chat box to the bottom
             const chatBox = document.getElementById('posts');
             chatBox.scrollTop = chatBox.scrollHeight;

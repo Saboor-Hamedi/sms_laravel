@@ -15,13 +15,13 @@
                 </div>
             @endif
 
-            <form wire:submit.prevent="edit">
+            <form wire:submit="edit">
                 <!-- First Row -->
                 <div class="flex flex-col gap-4 md:flex-row">
                     <div class="w-full">
                         <label for="assignment" class="block text-[10px]  text-gray-700 mb-1">Assignment
                             Score</label>
-                        <input type="text" wire:model='assignment' id="assignment" name="assignment"
+                        <input type="text" wire:model.live='assignment' id="assignment" name="assignment"
                             class="w-full p-2 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Enter Assignment Score">
                         @error('assignment')
@@ -31,7 +31,7 @@
                     <div class="w-full">
                         <label for="formative" class="block text-[10px]  text-gray-700 mb-1">Formative Test
                             Score</label>
-                        <input type="text" wire:model='formative' id="formative" name="formative"
+                        <input type="text" wire:model.live='formative' id="formative" name="formative"
                             class="w-full p-2 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Enter Formative Test Score">
                         @error('formative')
@@ -45,7 +45,7 @@
                     <div class="w-full">
                         <label for="midterm" class="block text-[10px]  text-gray-700 mb-1">Midterm Test
                             Score</label>
-                        <input type="text" wire:model='midterm' id="midterm" name="midterm"
+                        <input type="text" wire:model.live='midterm' id="midterm" name="midterm"
                             class="w-full p-2 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Enter Midterm Test Score">
                         @error('midterm')
@@ -55,7 +55,7 @@
                     <div class="w-full">
                         <label for="final" class="block text-[10px]  text-gray-700 mb-1">Final Test
                             Score</label>
-                        <input type="text" wire:model='final' id="final" name="final"
+                        <input type="text" wire:model.live='final' id="final" name="final"
                             class="w-full p-2 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Enter Final Test Score">
                         @error('final')
@@ -67,7 +67,7 @@
                 <!-- Average -->
                 <div class="w-full">
                     <label for="average" class="block text-[10px]  text-gray-700 mb-1">Average</label>
-                    <input type="text" wire:model='average' id="average" name="average"
+                    <input type="text" wire:model.live='average' id="average" name="average"
                         class="w-full p-2 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Enter Average">
                     @error('average')
@@ -78,7 +78,7 @@
                 <!-- Report -->
                 <div class="w-full mb-0">
                     <label for="report" class="block text-[10px]  text-gray-700 mb-1">Report</label>
-                    <textarea wire:model='report' id="report" name="report"
+                    <textarea wire:model.live='report' id="report" name="report"
                         class="w-full p-2 bg-white border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Enter Report"></textarea>
                     @error('report')

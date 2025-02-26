@@ -23,7 +23,7 @@ class Student extends Model
         'updated_at',
     ];
 
-    public $timestamps = true;
+    public $timestamps = false;
 
     public function user()
     {

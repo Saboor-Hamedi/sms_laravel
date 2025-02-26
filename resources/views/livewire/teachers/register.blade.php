@@ -12,14 +12,14 @@
                     <p class="text-sm">{{ session('success') }}</p>
                 </div>
             @endif
-            <form wire:submit.prevent="update">
+            <form wire:submit="update">
                 <div class="flex flex-col gap-4 md:flex-row">
                     {{-- NAME --}}
                     <div class="w-full">
                         <label for="lastname" class="block text-[10px] text-gray-700 ">
                             Last Name
                         </label>
-                        <input type="text" wire:model.defer="lastname" id="lastname" name="lastname"
+                        <input type="text" wire:model="lastname" id="lastname" name="lastname"
                             placeholder="Last Name"
                             class="@error('lastname') is-invalid  @enderror w-full p-2 mt-1 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                         @error('lastname')
@@ -32,7 +32,7 @@
                         <label for="birthdate" class="block text-[10px] text-gray-700 ">
                             Birthdate
                         </label>
-                        <input type="text" id="birthdate" name="birthdate" wire:model.defer="birthdate"
+                        <input type="text" id="birthdate" name="birthdate" wire:model="birthdate"
                             placeholder="Birthdate"
                             class="@error('birthdate') is-invalid  @enderror w-full p-2 mt-1 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                         @error('country')
@@ -47,7 +47,7 @@
                         <label for="phone" class="block text-[10px] text-gray-700 ">
                             Phone
                         </label>
-                        <input type="text" id="phone" name="phone" wire:model.defer="phone"
+                        <input type="text" id="phone" name="phone" wire:model="phone"
                             placeholder="Phone Number"
                             class="@error('phone') is-invalid  @enderror w-full p-2 mt-1 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                         @error('phone')
@@ -59,7 +59,7 @@
                         <label for="country" class="block text-[10px] text-gray-700 ">
                             Country
                         </label>
-                        <input type="text" id="country" name="country" wire:model.defer="country"
+                        <input type="text" id="country" name="country" wire:model="country"
                             placeholder="Country"
                             class="@error('country') is-invalid  @enderror 
                             w-full p-2 mt-1 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -76,7 +76,7 @@
                         <label for="state" class="block text-[10px] text-gray-700 ">
                             State
                         </label>
-                        <input type="text" id="state" name="state" wire:model.defer="state" placeholder="State"
+                        <input type="text" id="state" name="state" wire:model="state" placeholder="State"
                             class="@error('state') is-invalid  @enderror 
                             w-full p-2 mt-1 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                         @error('state')
@@ -88,7 +88,7 @@
                         <label for="address" class="block text-[10px] text-gray-700 ">
                             Address
                         </label>
-                        <input type="text" id="address" name="address" wire:model.defer="address"
+                        <input type="text" id="address" name="address" wire:model="address"
                             placeholder="Address"
                             class="@error('address') is-invalid  @enderror 
                             w-full p-2 mt-1 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -104,7 +104,7 @@
                     <label for="description" class="block text-[10px] text-gray-700 ">
                         description
                     </label>
-                    <textarea wire:model.defer="description" id="description" placeholder="About Me..."
+                    <textarea wire:model="description" id="description" placeholder="About Me..."
                         class="w-full p-2 mt-1 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
                     @error('description')
                         <small class="text-xs text-red-600">{{ $message }}</small>

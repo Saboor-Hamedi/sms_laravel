@@ -71,13 +71,13 @@ new class extends Component {
 
     <form wire:submit="updateProfileInformation">
         <div class="mb-4">
-            <x-text-input wire:model="name" id="name" name="name" type="text" class="mt-1 block w-full" required
+            <x-text-input wire:model.live="name" id="name" name="name" type="text" class="mt-1 block w-full" required
                 autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
         <div>
-            <x-text-input wire:model="email" id="email" name="email" type="email" class="mt-1 block w-full"
+            <x-text-input wire:model.live="email" id="email" name="email" type="email" class="mt-1 block w-full"
                 required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 

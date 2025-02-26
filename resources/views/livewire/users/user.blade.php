@@ -21,12 +21,12 @@
             </div>
         @endif
 
-        <form wire:submit.prevent="save">
+        <form wire:submit="save">
             <div class="flex flex-col gap-2 md:flex-row">
                 {{-- NAME --}}
                 <div class="flex-1">
                     <label for="name" class="block text-[10px] text-gray-700 ">Name</label>
-                    <input type="text" placeholder="First Name" id="name" name="name" wire:model.defer="name"
+                    <input type="text" placeholder="First Name" id="name" name="name" wire:model="name"
                         class=" @error('name') is-invalid border-red-500 @enderror w-full p-2 mt-1 bg-white border  rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     @error('name')
                         <small class="text-xs text-red-600">{{ $message }}</small>
@@ -37,7 +37,7 @@
 
                 <div class="flex-1">
                     <label for="email" class="block text-[10px] text-gray-700 ">Email</label>
-                    <input type="text" placeholder="Email" id="email" wire:model.defer="email"
+                    <input type="text" placeholder="Email" id="email" wire:model="email"
                         class=" @error('email') is-invalid border-red-500 @enderror w-full p-2 mt-1 bg-white border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     @error('email')
                         <small class="text-xs text-red-600">{{ $message }}</small>
@@ -50,7 +50,7 @@
                 <div class="flex-1">
                     <label for="password" class="block text-[10px] text-gray-700 ">Password</label>
 
-                    <input type="password" placeholder="Password" id="password" wire:model.defer="password"
+                    <input type="password" placeholder="Password" id="password" wire:model="password"
                         class="@error('password') is-invalid border-red-500 @enderror w-full p-2 mt-1 bg-white border  rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     @error('password')
                         <small class="text-xs text-red-600">{{ $message }}</small>
@@ -62,7 +62,7 @@
                     <label for="password" class="block text-[10px] text-gray-700 ">Confirm Password</label>
 
                     <input type="password" placeholder="Confirm Password" id='password_confirmation'
-                        wire:model.defer='password_confirmation'
+                        wire:model='password_confirmation'
                         class=" @error('password_confirmation') is-invalid border-red-500 @enderror 
                             w-full p-2 mt-1 bg-white border  rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     @error('password_confirmation')
@@ -74,7 +74,7 @@
             {{-- PERMISSIONS --}}
             <div class="flex-1 mt-2">
                 <label for="permission_name" class="block text-[10px] text-gray-700 ">Rule</label>
-                <select wire:model.defer="permission_name" id="permission_name" name="permission_name"
+                <select wire:model="permission_name" id="permission_name" name="permission_name"
                     class="w-full p-2 mt-1 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="0">Select A Role</option>
                     @if ($permissions->isNotEmpty())

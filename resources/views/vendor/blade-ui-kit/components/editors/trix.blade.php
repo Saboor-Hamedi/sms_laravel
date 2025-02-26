@@ -1,9 +1,9 @@
 @php
-$model = $attributes->whereStartsWith('wire:model');
+$model = $attributes->whereStartsWith('wire:model.live');
 $key = uniqid();
 @endphp
 
-<div {{ $attributes->whereDoesntStartWith('wire:model') }} wire:ignore>
+<div {{ $attributes->whereDoesntStartWith('wire:model.live') }} wire:ignore>
     <input name="{{ $name }}" id="{{ $id }}" value="{{ old($name, $slot) }}" type="hidden">
 
     <trix-editor
@@ -12,7 +12,7 @@ $key = uniqid();
             x-on:trix-change="$dispatch('input', event.target.value)"
             x-ref="trix"
             wire:key="{{ $key }}"
-            {{ $attributes->whereStartsWith('wire:model') }}
+            {{ $attributes->whereStartsWith('wire:model.live') }}
         @endif
         input="{{ $id }}"
         class="{{ $styling }}"

@@ -14,7 +14,7 @@
                     </p>
                 </div>
             @endif
-            <form wire:submit.prevent="save">
+            <form wire:submit="save">
                 <!-- Search Input -->
                 <div class="relative" x-data="{ isOpen: false }"
                     @keydown.escape.window="isOpen = false; $refs.searchInput.blur()">
@@ -54,7 +54,7 @@
                 <div class="flex flex-col gap-4 md:flex-row">
                     <div class="w-full">
                         <label for="assignment" class="block text-[10px] text-gray-700 ">Assignment Score</label>
-                        <input id="assignment" type="text" wire:model="assignment" name="assignment"
+                        <input id="assignment" type="text" wire:model.live="assignment" name="assignment"
                             class="w-full p-2 mt-1 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Enter assignment score">
                         @error('assignment')
@@ -65,7 +65,7 @@
                         <label for="formative" class="block text-[10px] text-gray-700 ">Formative Test
                             Score
                         </label>
-                        <input id="formative" type="text" wire:model="formative" name="formative"
+                        <input id="formative" type="text" wire:model.live="formative" name="formative"
                             class="w-full p-2 mt-1 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Enter formative test score">
                         @error('formative')
@@ -79,7 +79,7 @@
                     <div class="w-full">
                         <label for="midterm" class="block text-[10px] text-gray-700 ">Mid-Term Test
                             Score</label>
-                        <input id="midterm" type="text" wire:model="midterm" name="midterm"
+                        <input id="midterm" type="text" wire:model.live="midterm" name="midterm"
                             class="w-full p-2 mt-1 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Enter mid-term test score">
                         @error('midterm')
@@ -88,7 +88,7 @@
                     </div>
                     <div class="w-full">
                         <label for="final" class="block text-[10px] text-gray-700 ">Final Test Score</label>
-                        <input id="final" type="text" wire:model="final" name="final"
+                        <input id="final" type="text" wire:model.live="final" name="final"
                             class="w-full p-2 mt-1 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Enter final test score">
                         @error('final')
@@ -101,7 +101,7 @@
                 <div class="flex flex-col gap-4 md:flex-row">
                     <div class="w-full">
                         <label for="average" class="block text-[10px] text-gray-700 ">Average Score</label>
-                        <input id="average" type="text" wire:model="average" name="average"
+                        <input id="average" type="text" wire:model.live="average" name="average"
                             class="w-full p-2 mt-1 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Enter average score">
                         @error('average')
@@ -111,7 +111,7 @@
                     <div class="w-full">
                         <label for="academic_year_id" class="block text-[10px] text-gray-700 ">Academic
                             Year</label>
-                        <select id="academic_year_id" wire:model="academic_year_id" name="academic_year_id"
+                        <select id="academic_year_id" wire:model.live="academic_year_id" name="academic_year_id"
                             class="w-full p-2 mt-1 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option value="">Select Year</option>
                             @foreach ($academic_years as $id => $year)
@@ -127,7 +127,7 @@
                 <!-- Report Field -->
                 <div class="w-full">
                     <label for="report" class="block text-[10px] text-gray-700 ">Report</label>
-                    <textarea id="report" wire:model="report" name="report"
+                    <textarea id="report" wire:model.live="report" name="report"
                         class="w-full p-2 mt-1 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Enter report"></textarea>
                     @error('report')

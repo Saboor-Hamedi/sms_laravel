@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,59 +12,18 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        $this->call(RolePermissionSeeder::class);
-
-        // admin
-        $admin = User::create([
-            'name' => 'admin',
-            'email' => 'admin@gmail.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('123'),
-            'remember_token' => Str::random(10),
-        ]);
-
-        $admin->assignRole('admin');
-        // teacher
-        $teacher = User::create([
-            'name' => 'teacher',
-            'email' => 'teacher@gmail.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('123'),
-            'remember_token' => Str::random(10),
-        ]);
-        $teacher->assignRole('teacher');
-
-        // student
-        $student = User::create([
-            'name' => 'student',
-            'email' => 'student@gmail.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('123'),
-            'remember_token' => Str::random(10),
-        ]);
-
-        $student->assignRole('student');
-
-        // parent
-        $parent = User::create([
-            'name' => 'parent',
-            'email' => 'parent@gmail.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('123'),
-            'remember_token' => Str::random(10),
-        ]);
-
-        $parent->assignRole('parent');
-
-        $this->call([
-            PostsSeeder::class,
-            StudentSeeder::class,
-            TeacherSeeder::class,
-            AcademicSeeder::class,
-            GradeSeeder::class,
-            ScoresSeeder::class,
-            SubjectSeeder::class,
-
-        ]);
+        DB::transaction(function () {
+            $this->call(RolePermissionSeeder::class);
+            $this->call(UserSeeder::class);
+            $this->call([
+                PostsSeeder::class,
+                StudentSeeder::class,
+                TeacherSeeder::class,
+                AcademicSeeder::class,
+                GradeSeeder::class,
+                ScoresSeeder::class,
+                SubjectSeeder::class,
+            ]);
+        });
     }
 }

@@ -95,6 +95,7 @@ class CreateScore extends Component
 
         $this->loading = false;
     }
+
     public function setStudentIdFromSearch()
     {
         if (empty($this->search)) {
@@ -113,7 +114,6 @@ class CreateScore extends Component
         }
     }
 
-    
     public function selectStudent($id)
     {
         if ($student = Student::find($id)) {
@@ -125,10 +125,12 @@ class CreateScore extends Component
 
         }
     }
+
     public function updatedSearch()
     {
         if ($this->ignoreSearchUpdate) {
             $this->ignoreSearchUpdate = false;
+
             return;
         }
 
@@ -138,7 +140,6 @@ class CreateScore extends Component
         $this->searchStudents();
     }
 
-
     public function handleEscape()
     {
         $this->search = '';
@@ -146,8 +147,6 @@ class CreateScore extends Component
         $this->studentSelected = false;
         $this->selectedStudentId = null;
     }
-
-    
 
     public function handleEscapeAndCloseResult()
     {

@@ -13,7 +13,7 @@ class AcademicFactory extends Factory
     {
         return [
             // 'year' => $this->faker->numberBetween(2010, 2024)
-            'year' => $this->faker->unique()->year,
+            // 'year' => $this->faker->unique()->year,
         ];
     }
 }

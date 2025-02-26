@@ -30,6 +30,10 @@ use App\Livewire\Scores\CreateScore;
 use App\Livewire\Scores\EditScore;
 // New Users
 use App\Livewire\Scores\ScoresAdmin;
+
+// Students 
+use App\Livewire\Student\Profile;
+use App\Livewire\Student\Update;
 // Parent: Create Parent profiles
 use App\Livewire\Teachers\Profile as ShowTeacherProfile;
 use App\Livewire\Teachers\Register as RegisterTeacherProfile;
@@ -68,7 +72,10 @@ Route::middleware([AdminMiddleware::class])->group(function () {
 });
 
 // students
-Route::middleware([StudentMiddleware::class])->group(function () {});
+Route::middleware([StudentMiddleware::class])->group(function () {
+    Route::get('student/profile', Profile::class)->name('student.profile');
+    Route::get('student/update', Update::class)->name('student.update');
+});
 Route::get('user-profile/index', UserProfileIndex::class)->name('user-profile.index');
 Route::get('user-profile/update', action: UpdateUserProfile::class)->name('user-profile.update');
 Route::get('reports/scores', ScoreReports::class)->name('reports.scores');

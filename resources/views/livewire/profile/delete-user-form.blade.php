@@ -54,7 +54,7 @@ new class extends Component
                 <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
 
                 <x-text-input
-                    wire:model="password"
+                    wire:model.live="password"
                     id="password"
                     name="password"
                     type="password"
