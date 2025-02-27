@@ -13,7 +13,6 @@ class Edit extends Component
     #[Lazy]
     #[Validate('required|string|max:50')]
     public $name = '';
-
     public $permissionId;
 
     #[Layout('layouts.app')]
