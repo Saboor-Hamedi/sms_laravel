@@ -1,0 +1,29 @@
+/* Footer Styling */
+.footer {
+    grid-area: footer;
+    background-color: var(--primary-dark);
+    color: var(--text-light);
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: var(--footer-height);
+    z-index: 900;
+}
+
+.footer-links a {
+    color: var(--text-light);
+    margin-left: 15px;
+    text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.footer-links a:hover {
+    opacity: 1;
+}

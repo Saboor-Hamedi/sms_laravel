@@ -1,4 +1,8 @@
+/* Global Styles */
 :root {
+    --input-bg: #ffffff;
+    --input-text: #374151;
+    --input-border: #d1d5db;
     --primary: #1a237e;
     --primary-light: #534bae;
     --primary-dark: #000051;
@@ -51,225 +55,8 @@ body {
     height: 100vh;
 }
 
-/* Header styling */
-.header {
-    grid-area: header;
-    background-color: var(--primary);
-    color: var(--text-light);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    box-shadow: var(--shadow-sm);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: var(--header-height);
-    z-index: 1000;
-}
-
-.left-section {
-    display: flex;
-    padding: 10px;
-    align-items: center;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    font-weight: 700;
-}
-
-.logo-icon {
-    margin-right: 8px;
-    font-size: 20px;
-}
-
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.search-bar {
-    display: flex;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: var(--radius);
-    padding: 6px 12px;
-    width: 300px;
-}
-
-.search-bar input {
-    background: transparent;
-    border: none;
-    color: var(--text-light);
-    flex: 1;
-    outline: none;
-    padding: 5px;
-}
-
-.search-bar input::placeholder {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.search-icon {
-    margin-right: 8px;
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.notification-icon {
-    position: relative;
-    cursor: pointer;
-}
-
-.notification-badge {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background-color: var(--danger);
-    color: white;
-    border-radius: 50%;
-    width: 16px;
-    height: 16px;
-    font-size: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.user-profile {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    position: relative;
-}
-
-.avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background-color: var(--primary-light);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    margin-right: 10px;
-}
-
-.profile-dropdown {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    margin-top: 8px;
-    background-color: var(--card-bg);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-md);
-    width: 200px;
-    display: none;
-    z-index: 1001;
-}
-
-.profile-dropdown.active {
-    display: block;
-}
-
-.dropdown-item {
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: var(--text-dark);
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.dropdown-item:hover {
-    background-color: var(--gray-light);
-}
-
-.dropdown-item i {
-    font-size: 16px;
-    opacity: 0.7;
-}
-
-.dropdown-divider {
-    height: 1px;
-    background-color: var(--gray-light);
-    margin: 5px 0;
-}
-
-/* Sidebar styling */
-.sidebar {
-    grid-area: sidebar;
-    background-color: var(--card-bg);
-    position: fixed;
-    left: 0;
-    top: var(--header-height);
-    bottom: var(--footer-height);
-    width: var(--sidebar-width);
-    overflow-y: auto;
-    box-shadow: var(--shadow-sm);
-    z-index: 900;
-}
-
-.sidebar-menu {
-    padding: 15px 0;
-}
-
-.menu-section {
-    margin-bottom: 15px;
-}
-
-.menu-title {
-    padding: 8px 20px;
-    text-transform: uppercase;
-    color: var(--gray-dark);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-}
-
-.menu-item {
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    color: var(--text-dark);
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.menu-item:hover {
-    background-color: var(--gray-light);
-}
-
-.menu-item.active {
-    background-color: rgba(26, 35, 126, 0.1);
-    color: var(--primary);
-    font-weight: 500;
-    border-left: 3px solid var(--primary);
-}
-
-.menu-item i {
-    margin-right: 10px;
-    width: 20px;
-    text-align: center;
-    opacity: 0.7;
-}
-
-.menu-badge {
-    margin-left: auto;
-    background-color: var(--secondary);
-    color: white;
-    font-size: 11px;
-    padding: 2px 6px;
-    border-radius: 10px;
-}
-
-/* Main content area */
+/* main content */
+/* Main Content Styling */
 .main-content {
     grid-area: main-content;
     padding: 10px;
@@ -280,7 +67,6 @@ body {
 
 .page-title {
     display: flex;
-
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
@@ -564,43 +350,9 @@ body {
     color: white;
     border-color: var(--primary);
 }
-
-/* Footer */
-.footer {
-    grid-area: footer;
-    background-color: var(--primary-dark);
-    color: var(--text-light);
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 12px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: var(--footer-height);
-    z-index: 900;
-}
-
-.footer-links a {
-    color: var(--text-light);
-    margin-left: 15px;
-    text-decoration: none;
-    opacity: 0.8;
-    transition: opacity 0.2s;
-}
-
-.footer-links a:hover {
-    opacity: 1;
-}
-
+/* end */
 /* Responsive adjustments */
 @media (max-width: 992px) {
-    .search-bar {
-        width: 200px;
-    }
-
     .card-grid {
         grid-template-columns: 1fr 1fr;
     }
@@ -615,58 +367,16 @@ body {
         grid-template-columns: 1fr;
     }
 
-    .sidebar {
-        position: fixed;
-        left: -100%;
-        transition: left 0.3s ease;
-    }
-
-    .sidebar.active {
-        left: 0;
+    .main-content {
+        margin-left: 5px;
+        margin-right: 5px;
     }
 
     .main-content {
         margin-left: 5px;
         margin-right: 5px;
     }
-
-    .menu-toggle {
-        display: block !important;
-    }
-
     .card-grid {
         grid-template-columns: 1fr;
     }
-
-    .search-bar {
-        display: none;
-    }
-
-    .logo {
-        font-weight: 500px;
-    }
-}
-
-/* Mobile menu toggle */
-.menu-toggle {
-    display: none;
-    cursor: pointer;
-    margin-right: 15px;
-    font-size: 20px;
-}
-
-/* Overlay for mobile sidebar */
-.sidebar-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 899;
-    display: none;
-}
-
-.sidebar-overlay.active {
-    display: block;
 }

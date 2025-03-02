@@ -5,7 +5,7 @@
           </div>
           <div class="logo">
               <i class="fas fa-cube logo-icon"></i>
-              <span>Enterprise Admin</span>
+              <span>Dashboard</span>
           </div>
       </div>
 
@@ -46,5 +46,10 @@
                   </div>
               </div>
           </div>
+          <!-- Dark Mode Toggle Button -->
+          <button id="dark-mode-toggle" class="btn btn-outline">
+              <i class="fas fa-moon"></i> <!-- Moon icon for dark mode -->
+          </button>
+
       </div>
   </header>

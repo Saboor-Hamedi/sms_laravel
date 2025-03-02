@@ -6,63 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enterprise Admin Dashboard</title>
     @vite(entrypoints: ['resources/css/app.css'])
-    <link href="{{ URL::asset('assets/main.css') }}" rel="stylesheet">
-
-
+    <link href="{{ URL::asset('assets/css/main.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/css/header.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/css/sidebar.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/css/footer.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/css/darkTheme.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
-<body>
+<body data-theme="dark">
     <div class="dashboard">
-        <!-- Header -->
 
-        @include('components.header')
-
-        <!-- Sidebar -->
-        @include('components.sidebar')
-
-        <!-- Main content -->
-        @include('components.main-content')
-
-        <!-- Footer -->
-        @include('components.footer')
+        {{ $slot }}
     </div>
-
-    <script>
-        // JavaScript for interactivity
-        document.addEventListener('DOMContentLoaded', function() {
-            // Toggle sidebar on mobile
-            const menuToggle = document.getElementById('menu-toggle');
-            const sidebar = document.getElementById('sidebar');
-            const sidebarOverlay = document.getElementById('sidebar-overlay');
-
-            menuToggle.addEventListener('click', () => {
-                sidebar.classList.toggle('active');
-                sidebarOverlay.classList.toggle('active');
-            });
-
-            sidebarOverlay.addEventListener('click', () => {
-                sidebar.classList.remove('active');
-                sidebarOverlay.classList.remove('active');
-            });
-
-            // Toggle profile dropdown
-            const userProfile = document.getElementById('user-profile');
-            const profileDropdown = document.getElementById('profile-dropdown');
-
-            userProfile.addEventListener('click', () => {
-                profileDropdown.classList.toggle('active');
-            });
-
-            // Close dropdown when clicking outside
-            document.addEventListener('click', (event) => {
-                if (!userProfile.contains(event.target)) {
-                    profileDropdown.classList.remove('active');
-                }
-            });
-        });
-    </script>
     @vite('resources/js/app.js')
+    <script src="{{ asset('assets/js/sidebar.js') }}"></script>
+    <script src="{{ asset('assets/js/profile.js') }}"></script>
+    <script src="{{ asset('assets/js/darkTheme.js') }}"></script>
 </body>
 
 </html>

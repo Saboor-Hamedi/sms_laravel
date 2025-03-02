@@ -5,10 +5,18 @@
             <div class="sidebar-menu">
                 <div class="menu-section">
                     <div class="menu-title">Main</div>
-                    <div class="menu-item active">
+                    {{-- dashboard --}}
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         <i class="fas fa-home"></i>
                         <span>Dashboard</span>
-                    </div>
+                    </x-nav-link>
+
+                    {{-- profile --}}
+
+                    <x-nav-link :href="route('profile')" :active="request()->routeIs('profile')">
+                        <i class="fas fa-user"></i>
+                        <span>Profil</span>
+                    </x-nav-link>
                     <div class="menu-item">
                         <i class="fas fa-chart-line"></i>
                         <span>Analytics</span>
