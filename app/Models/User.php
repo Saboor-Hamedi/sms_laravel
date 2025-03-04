@@ -11,17 +11,28 @@ class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
-
+protected $fillable = [
+        'name',
+        'email',
+        'password',
+    ];
+    // One-to-One Relationship with Profile
+    public function profile()
+    {
+        return $this->hasOne(UserProfile::class);
+    }
+    // One-to-Many Relationship with Post
+    
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    
 
     /**
      * The attributes that should be hidden for serialization.

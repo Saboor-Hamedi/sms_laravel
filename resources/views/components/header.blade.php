@@ -42,7 +42,7 @@
                   <div class="dropdown-divider"></div>
                   <div class="dropdown-item">
                       <i class="fas fa-sign-out-alt"></i>
-                      <span>Logout</span>
+                      @livewire('logout')
                   </div>
               </div>
           </div>
@@ -50,6 +50,5 @@
           <button id="dark-mode-toggle" class="btn btn-outline">
               <i class="fas fa-moon"></i> <!-- Moon icon for dark mode -->
           </button>
-
       </div>
   </header>

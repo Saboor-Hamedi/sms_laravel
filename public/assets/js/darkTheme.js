@@ -1,28 +1,29 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const darkModeToggle = document.getElementById("dark-mode-toggle");
-    const body = document.body;
-
-    // Check for saved theme in localStorage
+function initializeDarkTheme() {
+    const $darkModeToggle = $("#dark-mode-toggle"); // Select toggle button
+    const $body = $("body"); // Select body element
+    // Check saved theme
     const savedTheme = localStorage.getItem("theme");
-
     if (savedTheme === "dark") {
-        body.setAttribute("data-theme", "dark");
-        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>'; // Sun icon for light mode
+        $body.attr("data-theme", "dark");
+        $darkModeToggle.html('<i class="fas fa-sun"></i>');
     } else {
-        body.removeAttribute("data-theme");
-        darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>'; // Moon icon for dark mode
+        $body.removeAttr("data-theme");
+        $darkModeToggle.html('<i class="fas fa-moon"></i>');
     }
 
-    // Toggle dark mode
-    darkModeToggle.addEventListener("click", () => {
-        if (body.getAttribute("data-theme") === "dark") {
-            body.removeAttribute("data-theme");
+    // Toggle theme on click
+    $darkModeToggle.on("click", function () {
+        if ($body.attr("data-theme") === "dark") {
+            $body.removeAttr("data-theme");
             localStorage.setItem("theme", "light");
-            darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>'; // Moon icon for dark mode
+            $darkModeToggle.html('<i class="fas fa-moon"></i>');
         } else {
-            body.setAttribute("data-theme", "dark");
+            $body.attr("data-theme", "dark");
             localStorage.setItem("theme", "dark");
-            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>'; // Sun icon for light mode
+            $darkModeToggle.html('<i class="fas fa-sun"></i>');
         }
     });
+}
+$(document).ready(function () {
+    initializeDarkTheme();
 });

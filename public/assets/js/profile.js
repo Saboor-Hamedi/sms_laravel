@@ -1,16 +1,27 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Toggle profile dropdown
-    const userProfile = document.getElementById("user-profile");
-    const profileDropdown = document.getElementById("profile-dropdown");
+function initializeProfile() {
+    // 1. Remove nested DOMContentLoaded since we're already using $(document).ready()
+    const $userProfile = $("#user-profile");
+    const $profileDropdown = $("#profile-dropdown");
 
-    userProfile.addEventListener("click", () => {
-        profileDropdown.classList.toggle("active");
+    if (!$userProfile.length || !$profileDropdown.length) {
+        return;
+    }
+
+    $userProfile.on("click", function (e) {
+        e.stopPropagation(); // 5. Added to prevent event bubbling
+        $profileDropdown.toggleClass("active");
     });
 
-    // Close dropdown when clicking outside
-    document.addEventListener("click", (event) => {
-        if (!userProfile.contains(event.target)) {
-            profileDropdown.classList.remove("active");
+    $(document).on("click", function (event) {
+        if (
+            !$userProfile.is(event.target) &&
+            $userProfile.has(event.target).length === 0
+        ) {
+            $profileDropdown.removeClass("active");
         }
     });
+}
+
+$(document).ready(function () {
+    initializeProfile();
 });

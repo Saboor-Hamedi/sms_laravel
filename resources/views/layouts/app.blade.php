@@ -12,17 +12,19 @@
     <link href="{{ URL::asset('assets/css/footer.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/css/darkTheme.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
 
-<body data-theme="dark">
+<body>
     <div class="dashboard">
 
         {{ $slot }}
     </div>
     @vite('resources/js/app.js')
-    <script src="{{ asset('assets/js/sidebar.js') }}"></script>
-    <script src="{{ asset('assets/js/profile.js') }}"></script>
-    <script src="{{ asset('assets/js/darkTheme.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script rel="text/javascript" src="{{ asset('assets/js/sidebar.js') }}"></script>
+    <script rel="text/javascript" src="{{ asset('assets/js/profile.js') }}"></script>
+    <script rel="text/javascript" src="{{ asset('assets/js/darkTheme.js') }}"></script>
 </body>
 
 </html>

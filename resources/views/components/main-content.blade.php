@@ -1,5 +1,8 @@
 <main class="main-content">
     <div class="page-title">
+        {{-- <button id="dark-mode-toggle" class="btn btn-outline">
+            <i class="fas fa-moon"></i> <!-- Moon icon for dark mode -->
+        </button> --}}
         <h1 class="title">Dashboard Overview</h1>
         <div class="actions">
             <button class="btn btn-outline">
