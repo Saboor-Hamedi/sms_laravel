@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class PostFactory extends Factory
 {
+    protected $model = Post::class;
+
     /**
      * Define the model's default state.
      *
@@ -20,17 +22,17 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => User::inRandomOrder()->first()->id, 
-            'title' => fake()->title(), 
-            'paragraph' => fake()->paragraph(),
-            'is_published' => 1,
+            'user_id' => User::factory(),
+            'title' => $this->faker->sentence,
+            'paragraph' => $this->faker->paragraph,
+            'is_published' => $this->faker->boolean,
         ];
-
     }
+
     public function configure()
     {
         return $this->afterCreating(function (Post $post) {
-            $tags = Tag::inRandomOrder()->take(rand(1, 100))->pluck('id');
+            $tags = Tag::inRandomOrder()->take(rand(1, 50))->pluck('id');
             $post->tags()->attach($tags);
         });
     }

@@ -11,9 +11,10 @@ class UserProfile extends Model
     use HasFactory;
 
     public $timestamps = true;
-     protected $fillable = [
-        'user_id', 'lastname', 'bio', 'profile_image', 'background_profile', 'school_name', 'universty_name'
-        ];
+
+    protected $fillable = [
+        'user_id', 'lastname', 'bio', 'profile_image', 'background_profile', 'school_name', 'universty_name',
+    ];
 
     // Inverse of the One-to-One Relationship
     public function user()

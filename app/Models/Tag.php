@@ -9,9 +9,11 @@ class Tag extends Model
 {
     /** @use HasFactory<\Database\Factories\TagFactory> */
     use HasFactory;
-    protected $fillable = ['tag_name'];
 
-    public function posts(){
-        return $this->belongsToMany(Post::class);
+    public $timestamps = false;
+
+    public function posts()
+    {
+        return $this->belongsToMany(Post::class)->withPivot('tag_id', 'post_id');
     }
 }

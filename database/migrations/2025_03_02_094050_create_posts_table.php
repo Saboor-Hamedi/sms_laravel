@@ -18,8 +18,7 @@ return new class extends Migration
             $table->text('paragraph');
             $table->text('image')->nullable();
             $table->boolean('is_published')->default(false);
-
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

@@ -7,12 +7,13 @@ use Livewire\Component;
 
 class Logout extends Component
 {
-     public function logout(ActionsLogout $logout): void
+    public function logout(ActionsLogout $logout): void
     {
         $logout();
 
         $this->redirect('/', navigate: true);
     }
+
     public function render()
     {
         return view('livewire.logout');

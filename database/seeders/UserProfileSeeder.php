@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use App\Models\UserProfile;
 use Illuminate\Database\Seeder;
 

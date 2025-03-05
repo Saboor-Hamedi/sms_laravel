@@ -9,16 +9,23 @@ class Post extends Model
 {
     /** @use HasFactory<\Database\Factories\PostFactory> */
     use HasFactory;
-    protected $fillable = ['user_id', 'title', 'paragraph', 'image', 'is_published'];
 
-    // Inverse of One-to-Many Relationship with User 
-    public function user(){
+    public $timestamps = false;
+
+    // Inverse of One-to-Many Relationship with User
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    // Many-to-Many Relationship with tags 
-    public function tags(){
-        return $this->belongsToMany(Tag::class);
+    public function authorName()
+    {
+        return $this->user->name; // get the user name
     }
 
+    // Many-to-Many Relationship with tags
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'post_tag', 'post_id', 'tag_id');
+    }
 }

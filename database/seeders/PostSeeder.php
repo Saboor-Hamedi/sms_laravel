@@ -7,11 +7,10 @@ use Illuminate\Database\Seeder;
 
 class PostSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
+    protected $model = Post::class;
+
     public function run(): void
     {
-       Post::factory()->count(1000)->create(); 
+        Post::factory(1000)->create();
     }
 }

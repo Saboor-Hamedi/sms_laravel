@@ -17,10 +17,11 @@
                 <i class="fas fa-user"></i>
                 <span>Profil</span>
             </x-nav-link>
-            <div class="menu-item">
-                <i class="fas fa-chart-line"></i>
-                <span>Analytics</span>
-            </div>
+            {{-- Post --}}
+            <x-nav-link :href="route('post.index')" :active="request()->routeIs('post.index')">
+                <i class="fas fa-user"></i>
+                {{ __('Posts') }}
+            </x-nav-link>
             <div class="menu-item">
                 <i class="fas fa-file-alt"></i>
                 <span>Reports</span>
