@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Post;
 
 use App\Http\Controllers\Controller;
-use App\Models\Post;
+use App\Services\PostService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,9 +12,11 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(PostService $postService)
     {
-        $posts = Post::with('user')->orderBy('title')->where('user_id', Auth::user()->id)->get();
+
+        $posts = $postService->fetch(Auth::user()->id);
+
         return view('post.index', ['posts' => $posts]);
     }
 
@@ -23,20 +25,23 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('post.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, PostService $postService)
     {
-        $posts = Post::create([
-            'user_id' => Auth::user()->id,
-            'title' => 'This is my title',
-            'paragraph' => 'This is my paragraph',
-            'is_published' => 1]);
-        $posts->tags()->attach($request['tag_id']);
+        $validate = $request->validate([
+        'title' => 'required|max:100', 
+        'paragraph' => 'required|string',
+        'is_published' => 'sometimes|boolean',
+        ]);
+        $validate['is_published'] = $request->has('is_published');
+        $post = $postService->insert($validate);
+        $post->tags()->attach($request['tag_id']);
+        return redirect()->route('post.create')->with('status', 'Post created successfully');
     }
 
     /**
