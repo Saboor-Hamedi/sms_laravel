@@ -14,7 +14,9 @@ Route::get('profile', [Profile::class, 'profile'])->middleware(('auth'))->name('
 // Posts
 
 Route::resource('post', PostController::class)->middleware(['auth']);
-// Route::view('profile', 'profile')
+Route::get('/post.show/{slug}', [PostController::class, 'show'])->name('post.show');
+Route::delete('/posts/{slug}', [PostController::class, 'destroy'])->name('post.destroy');
+// Route::view('profile', 'profile');
 //     ->middleware(['auth'])
 //     ->name('profile');
 require __DIR__.'/auth.php';

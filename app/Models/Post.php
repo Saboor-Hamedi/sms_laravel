@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 class Post extends Model
 {
     /** @use HasFactory<\Database\Factories\PostFactory> */
     use HasFactory;
+    // HasSlug
 
     public $timestamps = false;
 
@@ -17,6 +19,15 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+    // composer require spatie/laravel-sluggable
+    // public function getSlugOptions(): SlugOptions{
+    //     return SlugOptions::create()
+    //         ->generateSlugsFrom('title')
+    //         ->saveSlugsTo('slug')
+    //         ->allowDuplicateSlugs()
+    //         ->usingLanguage('nl')
+    //         ->slugsShouldBeNoLongerThan(50);
+    // }
 
     public function authorName()
     {

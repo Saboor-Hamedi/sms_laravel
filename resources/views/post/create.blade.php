@@ -20,7 +20,7 @@
             </div>
         @endif
         {{-- form --}}
-        <form action="{{ route('post.store') }}" method="POST">
+        <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mt-2 ">
                 <input type="text"
@@ -34,7 +34,6 @@
             </div>
             <div class="mt-2">
                 <textarea type="text"
-                    
                     class="w-full text-sm transition duration-300 bg-transparent border rounded-md shadow-sm dark:text-slate-700 focus:outline-none dark:hover:border-slate-300 focus:shadow"
                     row="3" id="paragraph" name="paragraph" placeholder="Write something...">{{ old('paragraph') }}</textarea>
                 <small class="p-0 mt-0 text-xs text-red-500">
@@ -42,6 +41,12 @@
                         {{ $message }}
                     @enderror
                 </small>
+            </div>
+            <div class="mt-2">
+                <input type="file" id='image' name="image" >
+                @error('image')
+                    <small class="p-0 mt-0 text-xs text-red-500">{{ $message }}</small>
+                @enderror
             </div>
             {{-- check box --}}
             <div class="mt-2">
@@ -52,7 +57,6 @@
                         class="text-sm font-medium text-gray-900 ms-2 dark:text-gray-300">Publish</label>
                 </div>
             </div>
-
             <div>
                 <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Submit</button>
             </div>
