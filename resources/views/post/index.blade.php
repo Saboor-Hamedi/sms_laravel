@@ -19,7 +19,7 @@
                         @else
                             <img src="{{ asset('storage/default/default-profile.png') }}" alt="Default Profile">
                         @endif
-                        <span>{{ $post->user->name ?? 'Anonymous' }}</span>
+                        <span>{{ Str::ucfirst($post->user->name ?? 'Anonymous' )}}</span>
                     </div>
 
                     <!-- Image Section -->
@@ -37,16 +37,11 @@
                         <p>
                             {{ Str::limit($post->paragraph, 20, '...') }}
                             <a href="{{ route('post.show', $post->slug ?? $post->id) }}"
-                                class="text-sm text-blue-500 hover:underline">Show</a>
+                                class="text-sm text-blue-500 hover:underline">Read more</a>
                         </p>
-                        <x-splade-toggle>
-                        <div v-show="toggled">{{ $post->title }}</div>
-                    
-                        <div v-show="!toggled">
-                            <p>{{ $post->paragraph }}</p>
-                            <button @click="toggle">Expand</button>
-                        </div>
-                        </x-splade-toggle>
+                        <a href="{{ route('post.edit', $post->slug ?? $post->id) }}"
+                                class="text-sm text-blue-500 hover:underline">edit</a>
+                        
                     </div>
                    {{-- delete --}}
                     <form action="{{ route('post.destroy', $post->slug ?? $post->id) }}" method="POST"

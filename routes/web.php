@@ -15,7 +15,9 @@ Route::get('profile', [Profile::class, 'profile'])->middleware(('auth'))->name('
 
 Route::resource('post', PostController::class)->middleware(['auth']);
 Route::get('/post.show/{slug}', [PostController::class, 'show'])->name('post.show');
-Route::delete('/posts/{slug}', [PostController::class, 'destroy'])->name('post.destroy');
+Route::delete('/post/{slug}', [PostController::class, 'destroy'])->name('post.destroy');
+Route::get('/post/{slug}/edit', [PostController::class, 'edit'])->name('post.edit');
+Route::put('/post/{slug}', [PostController::class, 'update'])->name('post.update');
 // Route::view('profile', 'profile');
 //     ->middleware(['auth'])
 //     ->name('profile');

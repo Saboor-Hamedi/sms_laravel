@@ -19,7 +19,7 @@
             </x-nav-link>
             {{-- Post --}}
             <x-nav-link :href="route('post.index')" :active="request()->routeIs('post.index')">
-                    <i class="fa-solid fa-plus"></i>
+                    <i class="fa-solid fa-file"></i>
                 {{ __('Posts') }}
             </x-nav-link>
             <div class="menu-item">

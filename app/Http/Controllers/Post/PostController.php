@@ -3,22 +3,27 @@
 namespace App\Http\Controllers\Post;
 
 use App\Http\Controllers\Controller;
-use App\Models\Post;
 use App\Services\PostService;
 use App\Services\UploadImages;
+use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Display a listing of the resource.
      */
     public function index(PostService $postService)
     {
 
-        $posts = $postService->fetch(Auth::user()->id, 'desc');
+        $posts = $postService->fetchPost(Auth::user()->id, 'desc');
+
         return view('post.index', ['posts' => $posts]);
     }
 
@@ -38,17 +43,22 @@ class PostController extends Controller
         $validate = $request->validate([
             'title' => 'required|max:100',
             'paragraph' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',// Max 2MB
-            'slug' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Max 2MB
             'is_published' => 'sometimes|boolean',
         ]);
         // Handle image upload
         $validate['image'] = $uploadImages->uploadImage($request->file('image'));
         $validate['is_published'] = $request->has('is_published');
         $validate['slug'] = $request->input('slug', Str::slug($request->title));
-        $post = $postService->insert($validate);
+        $post = $postService->insertPost($validate);
         $post->tags()->attach($request['tag_id']);
-        flash()->success('Operation completed successfully.');
+        flash()
+            ->options([
+                'timeout' => 3000,
+                'position' => 'top-center',
+            ])
+            ->success('Operation completed successfully.');
+
         return redirect()->route('post.create');
     }
 
@@ -57,24 +67,66 @@ class PostController extends Controller
      */
     public function show(string $slug, PostService $postService)
     {
-        $post = $postService->show($slug);
-        return view('post.show', ['post' => $post]);
+
+        try {
+            $post = $postService->showPost($slug);
+            $this->authorize('view', $post);
+
+            return view('post.show', ['post' => $post]);
+        } catch (AuthorizationException $e) {
+            flash()->options([
+                'timeout' => 3000,
+                'position' => 'top-center',
+            ])->info('You have no permission.');
+        }
+
+        return redirect()->route('post.index');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $slug, PostService $postService)
     {
-        //
+        $post = $postService->showPost($slug);
+        $this->authorize('update', $post);
+
+        return view('post.edit', ['post' => $post]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $slug, PostService $postService, UploadImages $uploadImages)
     {
-        //
+        $post = $postService->showPost($slug);
+        $this->authorize('update', $post);
+        $validate = $request->validate([
+            'title' => 'required|max:100',
+            'paragraph' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Max 2MB
+            'is_published' => 'sometimes|boolean',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $validate['image'] = $uploadImages->uploadImage($request->file('image'));
+        }
+        try {
+            $validate['is_published'] = $request->has('is_published');
+            $postService->updatePost($slug, $validate);
+            flash()->options([
+                'timeout' => 3000,
+                'position' => 'top-center',
+            ])->success('Operation completed successfully.');
+        } catch (Exception $e) {
+            flash()->options([
+                'timeout' => 3000,
+                'position' => 'top-center',
+            ])->info('Operation failed');
+        }
+
+        return redirect()->route('post.index');
+
     }
 
     /**
@@ -82,7 +134,21 @@ class PostController extends Controller
      */
     public function destroy(string $slug, PostService $postService)
     {
-        $postService->deletePost($slug);
+        try {
+            $post = $postService->showPost($slug);
+            $this->authorize('delete', $post);
+            $postService->deletePost($slug);
+            flash()->options([
+                'timeout' => 3000,
+                'position' => 'top-center',
+            ])->info('Operation completed successfully.');
+        } catch (AuthorizationException $e) {
+            flash()->options([
+                'timeout' => 3000,
+                'position' => 'top-center',
+            ])->warning('Operation failed.');
+        }
+
         return redirect()->route('post.index');
     }
 }
