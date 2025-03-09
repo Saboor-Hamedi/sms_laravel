@@ -43,17 +43,14 @@ class PostController extends Controller
             'is_published' => 'sometimes|boolean',
         ]);
         // Handle image upload
-
         $validate['image'] = $uploadImages->uploadImage($request->file('image'));
         $validate['is_published'] = $request->has('is_published');
         $validate['slug'] = $request->input('slug', Str::slug($request->title));
         $post = $postService->insert($validate);
         $post->tags()->attach($request['tag_id']);
-
-        return redirect()->route('post.create')->with('status', 'Post created successfully');
+        flash()->success('Operation completed successfully.');
+        return redirect()->route('post.create');
     }
-
-  
 
     /**
      * Display the specified resource.

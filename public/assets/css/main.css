@@ -43,7 +43,9 @@ body {
     height: 100vh;
     overflow: hidden;
 }
-
+.dashboard{
+    background-color: var(--card-bg);
+}
 /* Layout structure */
 .dashboard {
     display: grid;
@@ -62,6 +64,7 @@ body {
     grid-area: main-content;
     padding: 10px;
     overflow-y: auto;
+    /* background-color: var(--card-bg); */
     margin-top: var(--header-height);
     margin-bottom: var(--footer-height);
 }
@@ -365,7 +368,7 @@ body {
             "header"
             "main-content"
             "footer";
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr ;
     }
 
     .main-content {
@@ -378,6 +381,14 @@ body {
         margin-right: 5px;
     }
     .card-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr ;
     }
+}
+
+/* Toastr */
+#toast-container {
+    z-index: 9999 !important;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
 }

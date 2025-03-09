@@ -45,7 +45,9 @@
 
 .menu-item.active {
     background-color: rgba(26, 35, 126, 0.1);
-    color: var(--primary);
+    /* background-color: var(--card-bg); */
+    /* color: var(--primary); */
+    color: var(--text-dark);
     font-weight: 500;
     border-left: 3px solid var(--primary);
 }

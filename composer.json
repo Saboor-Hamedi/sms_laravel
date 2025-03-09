@@ -18,7 +18,9 @@
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.4",
         "livewire/volt": "^1.0",
-        "spatie/laravel-sluggable": "^3.7"
+        "protonemedia/laravel-splade": "^1.4",
+        "spatie/laravel-sluggable": "^3.7",
+        "yoeunes/toastr": "^3.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.15",

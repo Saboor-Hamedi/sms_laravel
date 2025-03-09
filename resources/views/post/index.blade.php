@@ -39,6 +39,14 @@
                             <a href="{{ route('post.show', $post->slug ?? $post->id) }}"
                                 class="text-sm text-blue-500 hover:underline">Show</a>
                         </p>
+                        <x-splade-toggle>
+                        <div v-show="toggled">{{ $post->title }}</div>
+                    
+                        <div v-show="!toggled">
+                            <p>{{ $post->paragraph }}</p>
+                            <button @click="toggle">Expand</button>
+                        </div>
+                        </x-splade-toggle>
                     </div>
                    {{-- delete --}}
                     <form action="{{ route('post.destroy', $post->slug ?? $post->id) }}" method="POST"
