@@ -6,11 +6,11 @@
     <div class="main-content">
         <div>
             <a href="{{ route('post.index') }}" class="btn btn-primary">
-                <i class="fa-solid fa-arrow-left"></i> 
+                <i class="fa-solid fa-arrow-left"></i>
             </a>
         </div>
         {{-- flash card here --}}
-   
+
         {{-- form --}}
         <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -26,15 +26,28 @@
             </div>
             <div class="mt-2">
                 <textarea type="text"
-                    class="w-full border-gray-300 rounded-md shadow-sm dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600" row="3" id="paragraph" name="paragraph" placeholder="Write something...">{{ old('paragraph') }}</textarea>
+                    class="w-full border-gray-300 rounded-md shadow-sm dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600"
+                    row="3" id="paragraph" name="paragraph" placeholder="Write something...">{{ old('paragraph') }}</textarea>
                 <small class="p-0 mt-0 text-xs text-red-500">
                     @error('paragraph')
                         {{ $message }}
                     @enderror
                 </small>
             </div>
+            {{-- tags --}}
             <div class="mt-2">
-                <input type="file" id='image' name="image" >
+                <input type="text"
+                    class="w-full border-gray-300 rounded-md shadow-sm dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600"
+                    id="tags" name="tags" value="{{ old('tags') }}"  placeholder="Tag" autofocus>
+                <small class="p-0 mt-0 text-xs text-red-500">
+                    @error('tags')
+                        {{ $message }}
+                    @enderror
+                </small>
+            </div>
+            {{-- end --}}
+            <div class="mt-2">
+                <input type="file" id='image' name="image">
                 @error('image')
                     <small class="p-0 mt-0 text-xs text-red-500">{{ $message }}</small>
                 @enderror

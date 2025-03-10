@@ -3,9 +3,9 @@
 namespace App\Services;
 
 use App\Models\Post;
+use App\Models\Tag;
 use Exception;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -42,15 +42,15 @@ final class PostService
                 'title' => $data['title'] ?? null,
                 'paragraph' => $data['paragraph'] ?? null,
                 'image' => $data['image'] ?? null,
-                'slug' => $uniqueSlug, // Use the unique slug here
+                'slug' => $uniqueSlug,
                 'is_published' => $data['is_published'] ?? false,
             ]);
 
         } catch (Exception $e) {
             flash()
                 ->options([
-                    'timeout' => 3000,
-                    'position' => 'top-center',
+                    'timeout' => config('customconfig.timetime'),
+                    'position' => config('customconfig.position'),
                 ])
                 ->error('Operation failed.');
 
@@ -59,10 +59,24 @@ final class PostService
 
     }
 
+    public function handleTags($tags)
+    {
+        $tagsId = [];
+        foreach (explode(',', $tags) as $tag) {
+            $tag = trim($tag);
+            if (! empty($tag)) {
+                $tagModel = Tag::firstOrCreate(['name' => $tag]);
+                $tagsId[] = $tagModel->id;
+            }
+        }
+
+        return $tagsId;
+    }
+
     public function showPost(string $slug): ?Post
     {
         return Post::query()
-            ->with('user')
+            ->with(['user', 'tags'])
             ->where('slug', $slug)
             ->firstOrFail();
     }
@@ -74,11 +88,8 @@ final class PostService
         if (array_key_exists('image', $data)) {
             if ($post->image && $data['image'] !== $post->image && $data['image'] !== null) {
                 Storage::disk('public')->delete($post->image);
-                Log::info('Deleted old image: '.$post->image);
             }
-            // Update the image field (could be null if no new image)
             $post->image = $data['image'];
-            Log::info('Updated image to: '.$data['image']);
         }
         // Update other fields
         $post->title = $data['title'];
@@ -100,11 +111,6 @@ final class PostService
         }
 
         $post->save();
-
-        // Update tags if provided
-        if (isset($data['tag_id'])) {
-            $post->tags()->sync($data['tag_id']);
-        }
 
         return $post;
     }

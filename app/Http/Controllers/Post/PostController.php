@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
+use function Flasher\Prime\flash;
+
 class PostController extends Controller
 {
     use AuthorizesRequests;
@@ -45,21 +47,26 @@ class PostController extends Controller
             'paragraph' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Max 2MB
             'is_published' => 'sometimes|boolean',
+            'tags' => 'nullable|string',
         ]);
         // Handle image upload
         $validate['image'] = $uploadImages->uploadImage($request->file('image'));
         $validate['is_published'] = $request->has('is_published');
         $validate['slug'] = $request->input('slug', Str::slug($request->title));
         $post = $postService->insertPost($validate);
-        $post->tags()->attach($request['tag_id']);
+
+        if ($request->has('tags')) {
+            $post->tags()->attach($postService->handleTags($request->tags));
+        }
+
         flash()
             ->options([
-                'timeout' => 3000,
-                'position' => 'top-center',
+                'timeout' => config('customconfig.timetime'),
+                'position' => config('customconfig.position'),
             ])
             ->success('Operation completed successfully.');
 
-        return redirect()->route('post.create');
+        return redirect()->route('post.index');
     }
 
     /**
@@ -75,8 +82,8 @@ class PostController extends Controller
             return view('post.show', ['post' => $post]);
         } catch (AuthorizationException $e) {
             flash()->options([
-                'timeout' => 3000,
-                'position' => 'top-center',
+                'timeout' => config('customconfig.timetime'),
+                'position' => config('customconfig.position'),
             ])->info('You have no permission.');
         }
 
@@ -91,6 +98,8 @@ class PostController extends Controller
         $post = $postService->showPost($slug);
         $this->authorize('update', $post);
 
+        // $post->load('tags');
+
         return view('post.edit', ['post' => $post]);
     }
 
@@ -104,7 +113,8 @@ class PostController extends Controller
         $validate = $request->validate([
             'title' => 'required|max:100',
             'paragraph' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Max 2MB
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'tags' => 'nullable|string',
             'is_published' => 'sometimes|boolean',
         ]);
 
@@ -113,15 +123,22 @@ class PostController extends Controller
         }
         try {
             $validate['is_published'] = $request->has('is_published');
+
+            if ($request->has('tags')) {
+                $post->tags()->sync($postService->handleTags($request->tags));
+            } else {
+                $post->tags()->sync([]);
+            }
             $postService->updatePost($slug, $validate);
+
             flash()->options([
-                'timeout' => 3000,
-                'position' => 'top-center',
+                'timeout' => config('customconfig.timetime'),
+                'position' => config('customconfig.position'),
             ])->success('Operation completed successfully.');
         } catch (Exception $e) {
             flash()->options([
-                'timeout' => 3000,
-                'position' => 'top-center',
+                'timeout' => config('customconfig.timetime'),
+                'position' => config('customconfig.position'),
             ])->info('Operation failed');
         }
 
@@ -139,13 +156,13 @@ class PostController extends Controller
             $this->authorize('delete', $post);
             $postService->deletePost($slug);
             flash()->options([
-                'timeout' => 3000,
-                'position' => 'top-center',
+                'timeout' => config('customconfig.timetime'),
+                'position' => config('customconfig.position'),
             ])->info('Operation completed successfully.');
         } catch (AuthorizationException $e) {
             flash()->options([
-                'timeout' => 3000,
-                'position' => 'top-center',
+                'timeout' => config('customconfig.timetime'),
+                'position' => config('customconfig.position'),
             ])->warning('Operation failed.');
         }
 

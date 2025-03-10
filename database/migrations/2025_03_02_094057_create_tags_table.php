@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
-            $table->string('tag_name', 100)->nullable();
+            $table->string('name', 100)
+                ->nullable();
             $table->timestamp('created_at')->useCurrent();
         });
     }
