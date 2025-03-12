@@ -23,7 +23,6 @@ class PostController extends Controller
      */
     public function index(PostService $postService)
     {
-
         $posts = $postService->fetchPost(Auth::user()->id, 'desc');
 
         return view('post.index', ['posts' => $posts]);
@@ -96,9 +95,8 @@ class PostController extends Controller
     public function edit(string $slug, PostService $postService)
     {
         $post = $postService->showPost($slug);
-        $this->authorize('update', $post);
 
-        // $post->load('tags');
+        $this->authorize('update', $post);
 
         return view('post.edit', ['post' => $post]);
     }

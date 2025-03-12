@@ -12,13 +12,9 @@ Route::get('/dashboard', [Dashboard::class, 'dashboard'])->middleware(['auth', '
 Route::get('profile', [Profile::class, 'profile'])->middleware(('auth'))->name('profile');
 
 // Posts
+Route::middleware(['auth'])->group(function () {
+    Route::resource('post', PostController::class);
 
-Route::resource('post', PostController::class)->middleware(['auth']);
-Route::get('/post.show/{slug}', [PostController::class, 'show'])->name('post.show');
-Route::delete('/post/{slug}', [PostController::class, 'destroy'])->name('post.destroy');
-Route::get('/post/{slug}/edit', [PostController::class, 'edit'])->name('post.edit');
-Route::put('/post/{slug}', [PostController::class, 'update'])->name('post.update');
-// Route::view('profile', 'profile');
-//     ->middleware(['auth'])
-//     ->name('profile');
+});
+
 require __DIR__.'/auth.php';

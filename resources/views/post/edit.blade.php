@@ -2,15 +2,22 @@
     @include('components.header')
     <!-- Sidebar -->
     @include('components.sidebar')
-
+    
     <div class="main-content">
         <div>
             <a href="{{ route('post.index') }}" class="btn btn-primary">
                 <i class="fa-solid fa-arrow-left"></i>
             </a>
         </div>
-        {{-- flash card here --}}
-
+        @if(isset($errors) && $errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
         {{-- form --}}
         <form action="{{ route('post.update', $post->slug ?? $post->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
