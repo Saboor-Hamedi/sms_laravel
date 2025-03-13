@@ -42,7 +42,14 @@
                   <div class="dropdown-divider"></div>
                   <div class="dropdown-item">
                       <i class="fas fa-sign-out-alt"></i>
-                      @livewire('logout')
+                      {{-- @livewire('logout') --}}
+
+                      @auth
+                          <form method="POST" action="{{ route('logout') }}" class="inline">
+                              @csrf
+                              <button type="submit" class="front-nav-link logout-btn">Logout</button>
+                          </form>
+                      @endauth
                   </div>
               </div>
           </div>

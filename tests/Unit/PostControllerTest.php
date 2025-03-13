@@ -64,7 +64,7 @@ class PostControllerTest extends TestCase
         $user = User::factory()->create();
         $category = Category::factory()->create();
         $this->actingAs($user);
-        $post = Post::factory()->create(['user_id' => $user->id, 'category_id' => $user->id]);
+        $post = Post::factory()->create(['user_id' => $user->id]);
         $response = $this->put(route('post.update', $post->slug), [
             'title' => 'Updated Title',
             'paragraph' => 'Updated Paragraph',

@@ -13,6 +13,10 @@ class Post extends Model
     // HasSlug
 
     public $timestamps = false;
+    protected $casts = [
+        'created_at' => 'datetime', // Cast 'created_at' to a Carbon instance
+        'updated_at' => 'datetime',
+    ];
 
     // Inverse of One-to-Many Relationship with User
     public function user()
