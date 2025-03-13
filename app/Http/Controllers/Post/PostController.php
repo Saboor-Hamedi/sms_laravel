@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Post;
 
 use App\Http\Controllers\Controller;
+use App\Services\CategoryService;
 use App\Services\PostService;
 use App\Services\UploadImages;
 use Exception;
@@ -31,9 +32,11 @@ class PostController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(CategoryService $categoryService)
     {
-        return view('post.create');
+        $categories = $categoryService->fetchCategory();
+
+        return view('post.create', ['categories' => $categories]);
     }
 
     /**
@@ -47,11 +50,13 @@ class PostController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Max 2MB
             'is_published' => 'sometimes|boolean',
             'tags' => 'nullable|string',
+            'category_id' => 'nullable|exists:categories,id',
         ]);
         // Handle image upload
         $validate['image'] = $uploadImages->uploadImage($request->file('image'));
         $validate['is_published'] = $request->has('is_published');
         $validate['slug'] = $request->input('slug', Str::slug($request->title));
+        $validate['category_id'] = $request->input('category_id', null);
         $post = $postService->insertPost($validate);
 
         if ($request->has('tags')) {
@@ -92,13 +97,13 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $slug, PostService $postService)
+    public function edit(string $slug, PostService $postService, CategoryService $categoryService)
     {
         $post = $postService->showPost($slug);
-
+        $categories = $categoryService->fetchCategory();
         $this->authorize('update', $post);
 
-        return view('post.edit', ['post' => $post]);
+        return view('post.edit', ['post' => $post, 'categories' => $categories]);
     }
 
     /**
@@ -114,6 +119,7 @@ class PostController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'tags' => 'nullable|string',
             'is_published' => 'sometimes|boolean',
+            'category_id' => 'nullable|exists:categories,id',
         ]);
 
         if ($request->hasFile('image')) {
@@ -121,6 +127,7 @@ class PostController extends Controller
         }
         try {
             $validate['is_published'] = $request->has('is_published');
+            $validate['category_id'] = $request->input('category_id', null);
 
             if ($request->has('tags')) {
                 $post->tags()->sync($postService->handleTags($request->tags));

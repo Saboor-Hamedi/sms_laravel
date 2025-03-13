@@ -15,6 +15,21 @@
         <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mt-2">
+                {{-- category --}}
+                <select name="category_id" id="category_id" class="w-full border-gray-300 rounded-md shadow-sm dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600">
+                    <option value="">Select Category</option>
+                    @foreach ($categories as $id => $name)
+                        <option value="{{ $id }}">{{ $name }}</option>
+                    @endforeach
+                </select>
+                
+                <small class="p-0 mt-0 text-xs text-red-500">
+                    @error('category_id')
+                        {{ $message }}
+                    @enderror
+                </small>
+            </div>
+            <div class="mt-2">
                 <input type="text"
                     class="w-full border-gray-300 rounded-md shadow-sm dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600"
                     id="title" value="{{ old('title') }}" name="title" placeholder="Title">

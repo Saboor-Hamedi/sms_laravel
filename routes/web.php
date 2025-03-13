@@ -14,7 +14,6 @@ Route::get('profile', [Profile::class, 'profile'])->middleware(('auth'))->name('
 // Posts
 Route::middleware(['auth'])->group(function () {
     Route::resource('post', PostController::class);
-
 });
 
 require __DIR__.'/auth.php';

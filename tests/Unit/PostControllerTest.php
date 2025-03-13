@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -27,6 +28,7 @@ class PostControllerTest extends TestCase
     public function test_store()
     {
         $user = User::factory()->create();
+        $category = Category::factory()->create();
         Storage::fake('public');
         $file = UploadedFile::fake()->image('avatar.jpg');
         $response = $this->actingAs($user)->post('/post', [
@@ -35,12 +37,13 @@ class PostControllerTest extends TestCase
             'image' => $file,
             'is_published' => true,
             'tags' => 'tag1,tag2',
-            //'_token' => csrf_token(), 
+            'category_id' => $category->id,
         ]);
         $this->assertDatabaseHas('posts', [
             'title' => 'Test Post',
             'paragraph' => 'This is a test post.',
             'is_published' => true,
+            'category_id' => $category->id,
         ]);
         $response->assertRedirect(route('post.index'));
     }
@@ -59,19 +62,21 @@ class PostControllerTest extends TestCase
     public function test_update()
     {
         $user = User::factory()->create();
+        $category = Category::factory()->create();
         $this->actingAs($user);
-        $post = Post::factory()->create(['user_id' => $user->id]);
+        $post = Post::factory()->create(['user_id' => $user->id, 'category_id' => $user->id]);
         $response = $this->put(route('post.update', $post->slug), [
             'title' => 'Updated Title',
             'paragraph' => 'Updated Paragraph',
             'is_published' => true,
-            '_token' => csrf_token(), // Add CSRF token if needed
+            'category_id' => $category->id,
         ]);
         $response->assertRedirect(route('post.index'));
         $this->assertDatabaseHas('posts', [
             'title' => 'Updated Title',
             'paragraph' => 'Updated Paragraph',
             'is_published' => true,
+            'category_id' => $category->id,
         ]);
     }
 

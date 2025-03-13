@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
@@ -30,6 +31,7 @@ class PostFactory extends Factory
             'paragraph' => $this->faker->paragraph,
             'slug' => Str::slug($title),
             'is_published' => $this->faker->boolean,
+            'category_id' => Category::inRandomOrder()->first()->id ?? null,
         ];
     }
 

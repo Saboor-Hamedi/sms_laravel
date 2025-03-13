@@ -2,26 +2,34 @@
     @include('components.header')
     <!-- Sidebar -->
     @include('components.sidebar')
-    
+
     <div class="main-content">
         <div>
             <a href="{{ route('post.index') }}" class="btn btn-primary">
                 <i class="fa-solid fa-arrow-left"></i>
             </a>
         </div>
-        @if(isset($errors) && $errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+        @if (isset($errors) && $errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         {{-- form --}}
         <form action="{{ route('post.update', $post->slug ?? $post->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
+            {{-- category --}}
+            <select name="category_id" id="category_id"
+                class="w-full border-gray-300 rounded-md shadow-sm dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600">
+                <option value="">Select Category</option>
+                @foreach ($categories as $id => $name)
+                    <option value="{{ $id }}" {{ old("category_id", $post->category_id) == $id ? "selected": "" }}>{{ $name ?? '' }}</option>
+                @endforeach
+            </select>
             <div class="mt-2">
                 <input type="text"
                     class="w-full border-gray-300 rounded-md shadow-sm dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600"
@@ -47,7 +55,8 @@
             <div class="mt-2">
                 <input type="text"
                     class="w-full border-gray-300 rounded-md shadow-sm dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600"
-                    id="tags" name="tags" value="{{ old('tags',$post->tags->pluck('name')->implode(','))}} "  placeholder="Tag" autofocus>
+                    id="tags" name="tags" value="{{ old('tags', $post->tags->pluck('name')->implode(',')) }} "
+                    placeholder="Tag" autofocus>
                 <small class="p-0 mt-0 text-xs text-red-500">
                     @error('tags')
                         {{ $message }}

@@ -24,6 +24,9 @@
     --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     --radius: 4px;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+
     --header-height: 60px;
     --sidebar-width: 240px;
     --footer-height: 40px;
@@ -43,7 +46,7 @@ body {
     height: 100vh;
     overflow: hidden;
 }
-.dashboard{
+.dashboard {
     background-color: var(--card-bg);
 }
 /* Layout structure */
@@ -56,6 +59,7 @@ body {
     grid-template-columns: var(--sidebar-width) 1fr;
     grid-template-rows: var(--header-height) 1fr var(--footer-height);
     height: 100vh;
+    /* height: auto; */
 }
 
 /* main content */
@@ -368,7 +372,7 @@ body {
             "header"
             "main-content"
             "footer";
-        grid-template-columns: 1fr ;
+        grid-template-columns: 1fr;
     }
 
     .main-content {
@@ -381,7 +385,7 @@ body {
         margin-right: 5px;
     }
     .card-grid {
-        grid-template-columns: 1fr ;
+        grid-template-columns: 1fr;
     }
 }
 

@@ -25,6 +25,11 @@ class Post extends Model
         return $this->user->name; // get the user name
     }
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
     // Many-to-Many Relationship with tags
     public function tags()
     {

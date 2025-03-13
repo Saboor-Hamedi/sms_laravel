@@ -11,14 +11,16 @@ use Illuminate\Support\Str;
 
 final class PostService
 {
+    const PAGINATE_LENGHT = 10;
+
     public function fetchPost(string $user, string $orderBy = 'asc')
     {
         return Post::query()
-            ->with('user')
+            ->with(['user', 'tags', 'category'])
             ->orderBy('created_at', $orderBy)
             ->where('user_id', $user)
-            ->paginate(10);
-
+            ->paginate(self::PAGINATE_LENGHT)->withPath(route('post.index', ['user' => $user]))
+            ->fragment('users');
     }
 
     public function insertPost(array $data): ?Post
@@ -44,6 +46,7 @@ final class PostService
                 'image' => $data['image'] ?? null,
                 'slug' => $uniqueSlug,
                 'is_published' => $data['is_published'] ?? false,
+                'category_id' => $data['category_id'] ?? null,
             ]);
 
         } catch (Exception $e) {
@@ -95,6 +98,7 @@ final class PostService
         $post->title = $data['title'];
         $post->paragraph = $data['paragraph'];
         $post->is_published = $data['is_published'];
+        $post->category_id = $data['category_id'];
 
         // Handle slug update if provided (optional)
         if (! empty($data['slug']) && $data['slug'] !== $post->slug) {

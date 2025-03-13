@@ -19,7 +19,10 @@
                         @else
                             <img src="{{ asset('storage/default/default-profile.png') }}" alt="Default Profile">
                         @endif
-                        <span>{{ Str::ucfirst($post->user->name ?? 'Anonymous' )}}</span>
+                        <div class="card-author">
+                            <span class="author-name">{{ Str::ucfirst($post->user->name ?? 'Anonymous') }}</span>
+                            <span class="post-time">{{ $post->created_at }}</span>
+                        </div>
                     </div>
 
                     <!-- Image Section -->
@@ -33,34 +36,63 @@
 
                     <!-- Text Section -->
                     <div class="card-text">
-                        <h2>{{ Str::limit($post->title, 20, '...') }}</h2>
-                        <p>
-                            {{ Str::limit($post->paragraph, 20, '...') }}
+                        @if (!empty($post->category->name))
+                            <small class="category">
+                                Category:
+                                <a href="#" class="text-blue-500 hover:underline">
+                                    {{ Str::ucfirst($post->category->name) }}
+                                </a>
+                            </small>
+                        @endif
+                        <h2 class="card-title">{{ Str::limit($post->title, 20, '...') }}</h2>
+                        <p class="card-body-paragraph">
+                            {{ Str::limit($post->paragraph, 100, '...') }}
                             <a href="{{ route('post.show', $post->slug ?? $post->id) }}"
-                                class="text-sm text-blue-500 hover:underline">Read more</a>
+                                class="text-blue-500 hover:underline">
+                                Read more
+                            </a>
                         </p>
-                        <a href="{{ route('post.edit', $post->slug ?? $post->id) }}"
-                                class="text-sm text-blue-500 hover:underline">edit</a>
-                        
+
+                        <!-- Tags -->
+                        <div class="card-tags">
+                            @foreach ($post->tags as $tag)
+                                <span class="tag">
+                                    <a href="#" class="text-blue-500 hover:underline">
+                                        #{{ $tag->name ?? '' }}
+                                    </a>
+                                </span>
+                            @endforeach
+                        </div>
+
+                        <!-- Edit and Delete Buttons -->
+                        <div class="card-actions">
+                            <a href="{{ route('post.edit', $post->slug ?? $post->id) }}" class="btn-edit">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            <form action="{{ route('post.destroy', $post->slug ?? $post->id) }}" method="POST"
+                                onsubmit="return confirm('Are you sure you want to delete this post?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn-delete">
+                                    <i class="fas fa-trash"></i> Delete
+                                </button>
+                            </form>
+                        </div>
                     </div>
-                   {{-- delete --}}
-                    <form action="{{ route('post.destroy', $post->slug ?? $post->id) }}" method="POST"
-                        onsubmit="return confirm('Are you sure you want to delete this post?');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="mb-2 ml-4 text-sm text-red-500 hover:underline">
-                            Delete
-                        </button>
-                    </form>
-                    {{-- card footer  --}}
+
+                    <!-- Card Footer -->
                     <div class="card-footer">
-                        <small class="text-muted">Private: {{ $post->is_published ? 'Yes' : 'No' }}</small>
+                        <small>Private: {{ $post->is_published ? 'Yes' : 'No' }}</small>
                     </div>
                 </div>
             @empty
                 <p>No posts found.</p>
             @endforelse
         </div>
+        {{-- {{ $posts->links() }} --}}
+        {{ $posts->onEachSide(5)->links() }}
+
+
     </div>
     {{-- footer --}}
     @include('components.footer')
