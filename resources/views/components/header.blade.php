@@ -4,8 +4,8 @@
               <i class="fas fa-bars"></i>
           </div>
           <div class="logo">
-              <i class="fas fa-cube logo-icon"></i>
-              <span>Dashboard</span>
+              
+              <a href="{{ route('welcome') }}"><i class="fa-solid fa-arrow-left"></i></a>
           </div>
       </div>
 

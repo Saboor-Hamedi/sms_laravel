@@ -4,8 +4,8 @@
     @include('components.sidebar')
 
     <div class="main-content">
-        <div>
-            <a href="{{ route('post.index') }}" class="btn btn-primary">
+        <div class="action-header">
+            <a href="{{ route('post.index') }}" class="default-button">
                 <i class="fa-solid fa-arrow-left"></i>
             </a>
         </div>

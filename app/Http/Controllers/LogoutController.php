@@ -11,11 +11,13 @@ class LogoutController extends Controller
     {
         return view('logout'); // Render logout confirmation page
     }
+
     public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
         return redirect('/');
     }
 }

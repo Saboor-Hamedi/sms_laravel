@@ -1,5 +1,5 @@
 .action-header{
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 }
 /* Cards Container */
 .cards-container {
@@ -127,23 +127,6 @@
     transition: background-color 0.3s ease;
 }
 
-.btn-edit {
-    background-color: #3b82f6;
-    color: #fff;
-}
-
-.btn-edit:hover {
-    background-color: #2563eb;
-}
-
-.btn-delete {
-    background-color: #ef4444;
-    color: #fff;
-}
-
-.btn-delete:hover {
-    background-color: #dc2626;
-}
 
 /* Card Footer */
 .card-footer {

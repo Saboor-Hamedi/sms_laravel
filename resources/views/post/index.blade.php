@@ -5,7 +5,7 @@
 
     <div class="main-content">
         <div class="action-header">
-            <a href="{{ route('post.create') }}" class="btn btn-primary">
+            <a href="{{ route('post.create') }}" class="default-button">
                 <i class="fa-solid fa-plus"></i>
             </a>
         </div>
@@ -15,7 +15,7 @@
                     <!-- Profile Section -->
                     <div class="card-profile">
                         @if ($post->image)
-                            <img src="{{ asset('storage/' . $post->image) }}" alt="Profile">
+                            <img src="{{ asset('storage/' . $post->image) }}" alt="No Image">
                         @else
                             <img src="{{ asset('storage/default/default-profile.png') }}" alt="Default Profile">
                         @endif
@@ -66,15 +66,15 @@
 
                         <!-- Edit and Delete Buttons -->
                         <div class="card-actions">
-                            <a href="{{ route('post.edit', $post->slug ?? $post->id) }}" class="btn-edit">
-                                <i class="fas fa-edit"></i> Edit
+                            <a href="{{ route('post.edit', $post->slug ?? $post->id) }}" class="default-button" >
+                                <i class="mr-2 fas fa-edit"></i>Edit
                             </a>
                             <form action="{{ route('post.destroy', $post->slug ?? $post->id) }}" method="POST"
                                 onsubmit="return confirm('Are you sure you want to delete this post?');">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn-delete">
-                                    <i class="fas fa-trash"></i> Delete
+                                <button type="submit" class=" default-button" style="background: rgba(255, 0, 0, 0.368)">
+                                    <i class="mr-2 fas fa-trash"></i>Delete
                                 </button>
                             </form>
                         </div>

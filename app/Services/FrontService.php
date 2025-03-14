@@ -1,13 +1,15 @@
-<?php 
+<?php
 
 namespace App\Services;
 
 use App\Models\Post;
 
-class FrontService{
-    public function fetchPost(){
+class FrontService
+{
+    public function fetchPost()
+    {
         return Post::with(['user', 'tags', 'category'])
-                ->latest()
-                ->paginate(10);
+            ->latest()
+            ->paginate(10);
     }
 }

@@ -4,11 +4,13 @@
     @include('components.sidebar')
 
     <div class="main-content">
-        <div>
-            <a href="{{ route('post.index') }}" class="btn btn-primary">
+        <div class="action-header">
+            <a href="{{ route('post.index') }}" class="default-button">
                 <i class="fa-solid fa-arrow-left"></i>
             </a>
         </div>
+        
+       
         @if (isset($errors) && $errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -91,7 +93,9 @@
                 </div>
             </div>
             <div>
-                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Submit</button>
+                <button type="submit" class="default-button">
+                    <i class="mr-2 fa-solid fa-floppy-disk"></i>Save
+                </button>
             </div>
         </form>
     </div>

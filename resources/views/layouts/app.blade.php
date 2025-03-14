@@ -13,6 +13,7 @@
     <link href="{{ URL::asset('assets/css/card.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/css/darkTheme.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/css/tagify.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/css/default-button.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
