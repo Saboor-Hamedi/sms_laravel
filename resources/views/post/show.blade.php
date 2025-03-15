@@ -4,8 +4,8 @@
     @include('components.sidebar')
 
     <div class="main-content">
-        <div class="">
-            <a href="{{ route('post.create') }}" class="btn btn-primary">
+        <div class="action-header">
+            <a href="{{ route('post.create') }}" class="default-button" style="font-size: 14px">
                 <i class="fa-solid fa-plus"></i>
             </a>
         </div>
@@ -21,14 +21,14 @@
             </div>
             <!-- Image Section -->
             <div class="flex-1 min-h-0 overflow-hidden">
-    @if ($post->image)
-        <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}"
-            class="object-cover w-full aspect-[4/3]"> <!-- 4:3 aspect ratio -->
-    @else
-        <img src="{{ asset('storage/default/default-post-image.png') }}" alt="No Image"
-            class="object-cover w-full aspect-[4/3]"> <!-- 4:3 aspect ratio -->
-    @endif
-</div>
+                @if ($post->image)
+                    <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}"
+                        class="object-cover w-full aspect-[4/3]"> <!-- 4:3 aspect ratio -->
+                @else
+                    <img src="{{ asset('storage/default/default-post-image.png') }}" alt="No Image"
+                        class="object-cover w-full aspect-[4/3]"> <!-- 4:3 aspect ratio -->
+                @endif
+            </div>
 
             <!-- Text Section -->
             <div class="p-4 sm:p-6">

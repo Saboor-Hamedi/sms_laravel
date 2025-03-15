@@ -5,7 +5,7 @@
 
     <div class="main-content">
         <div class="action-header">
-            <a href="{{ route('post.index') }}" class="default-button">
+            <a href="{{ route('post.index') }}" class="default-button" style="font-size: 14px">
                 <i class="fa-solid fa-arrow-left"></i>
             </a>
         </div>
@@ -77,7 +77,8 @@
                 </div>
             </div>
             <div>
-                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Submit</button>
+                <button type="submit" class="default-button" style="font-size: 14px">
+                <i class="mr-2 fa-solid fa-floppy-disk"></i> Submit</button>
             </div>
         </form>
     </div>

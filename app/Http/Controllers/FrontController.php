@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Services\FrontService;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
@@ -13,8 +12,9 @@ class FrontController extends Controller
      */
     public function index(FrontService $frontService)
     {
-        $posts = $frontService->fetchPost();
-        return view('welcome', ['posts' => $posts]);
+        $frontPost = $frontService->fetchPost();
+
+        return view('welcome', ['frontPost' => $frontPost]);
     }
 
     /**
@@ -36,9 +36,12 @@ class FrontController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $slug, FrontService $frontService)
     {
-        //
+        $post = $frontService->showPost($slug);
+        $relatedPost = $frontService->relatedPosts($post);
+
+        return view('front.show', ['post' => $post, 'relatedPost' => $relatedPost]);
     }
 
     /**

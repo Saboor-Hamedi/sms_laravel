@@ -99,6 +99,7 @@ class PostController extends Controller
      */
     public function edit(string $slug, PostService $postService, CategoryService $categoryService)
     {
+         session(['previous_url' => url()->previous()]);
         $post = $postService->showPost($slug);
         $categories = $categoryService->fetchCategory();
         $this->authorize('update', $post);
@@ -111,6 +112,7 @@ class PostController extends Controller
      */
     public function update(Request $request, string $slug, PostService $postService, UploadImages $uploadImages)
     {
+        
         $post = $postService->showPost($slug);
         $this->authorize('update', $post);
         $validate = $request->validate([
@@ -146,8 +148,9 @@ class PostController extends Controller
                 'position' => config('customconfig.position'),
             ])->info('Operation failed');
         }
+       
 
-        return redirect()->route('post.index');
+        return redirect(session('previous_url', route('post.index')));
 
     }
 

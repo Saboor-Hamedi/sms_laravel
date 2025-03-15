@@ -8,7 +8,7 @@
     color: #ffffff;
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); /* Gradient effect */
     border: none;
-    border-radius: 8px; /* Slightly rounded */
+    border-radius: 5px; /* Slightly rounded */
     box-shadow: var(--shadow-sm); /* Subtle shadow */
     cursor: pointer;
     transition: all 0.3s ease; /* Smooth transitions */

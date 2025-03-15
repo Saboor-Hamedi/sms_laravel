@@ -21,7 +21,7 @@
                         @endif
                         <div class="card-author">
                             <span class="author-name">{{ Str::ucfirst($post->user->name ?? 'Anonymous') }}</span>
-                            <span class="post-time">{{ $post->created_at }}</span>
+                            <span class="post-time">{{ $post->created_at->diffForHumans() }}</span>
                         </div>
                     </div>
 
@@ -36,6 +36,10 @@
 
                     <!-- Text Section -->
                     <div class="card-text">
+                        <div class="views">
+                            <small><i class="far fa-eye"></i> 1.2k</small>
+                            <small><i class="far fa-heart"></i> 45</small>
+                        </div>
                         @if (!empty($post->category->name))
                             <small class="category">
                                 Category:
@@ -44,6 +48,7 @@
                                 </a>
                             </small>
                         @endif
+
                         <h2 class="card-title">{{ Str::limit($post->title, 20, '...') }}</h2>
                         <p class="card-body-paragraph">
                             {{ Str::limit($post->paragraph, 100, '...') }}
@@ -54,26 +59,26 @@
                         </p>
 
                         <!-- Tags -->
-                        <div class="card-tags">
-                            @foreach ($post->tags as $tag)
-                                <span class="tag">
-                                    <a href="#" class="text-blue-500 hover:underline">
-                                        #{{ $tag->name ?? '' }}
-                                    </a>
-                                </span>
-                            @endforeach
+                        <div class="tags-cad">
+                            <span>
+                                @foreach ($post->tags as $tag)
+                                    <a href="#" class="tag">#{{ $tag->name ?? '' }}</a>
+                                @endforeach
+                            </span>
                         </div>
 
                         <!-- Edit and Delete Buttons -->
                         <div class="card-actions">
-                            <a href="{{ route('post.edit', $post->slug ?? $post->id) }}" class="default-button" >
+                            <a href="{{ route('post.edit', $post->slug ?? $post->id) }}" class="default-button"
+                                style="font-size:14px;">
                                 <i class="mr-2 fas fa-edit"></i>Edit
                             </a>
                             <form action="{{ route('post.destroy', $post->slug ?? $post->id) }}" method="POST"
                                 onsubmit="return confirm('Are you sure you want to delete this post?');">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class=" default-button" style="background: rgba(255, 0, 0, 0.368)">
+                                <button type="submit" class=" default-button"
+                                    style="background: rgba(255, 0, 0, 0.368); font-size:14px;">
                                     <i class="mr-2 fas fa-trash"></i>Delete
                                 </button>
                             </form>

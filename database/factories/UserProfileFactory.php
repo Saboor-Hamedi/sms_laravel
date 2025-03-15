@@ -24,7 +24,8 @@ class UserProfileFactory extends Factory
         $faker = Faker::create();
 
         return [
-            'user_id' => User::inRandomOrder()->first()->id,
+            'user_id' => User::factory(),
+            // 'user_id' => User::inRandomOrder()->first()->id,
             'lastname' => $faker->lastName(),
             'bio' => $faker->word(10),
             'school_name' => $faker->word(10),

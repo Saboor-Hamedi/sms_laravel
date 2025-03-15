@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 // Route::view('/', 'welcome');
 Route::get('/', [FrontController::class, 'index'])->name('welcome');
+Route::get('front/{slug}', [FrontController::class, 'show'])->name('front.show');
 // dashboard
 Route::get('/dashboard', [Dashboard::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 // profile

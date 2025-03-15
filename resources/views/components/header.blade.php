@@ -4,7 +4,6 @@
               <i class="fas fa-bars"></i>
           </div>
           <div class="logo">
-              
               <a href="{{ route('welcome') }}"><i class="fa-solid fa-arrow-left"></i></a>
           </div>
       </div>
