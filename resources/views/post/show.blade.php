@@ -4,46 +4,89 @@
     @include('components.sidebar')
 
     <div class="main-content">
-        <div class="action-header">
-            <a href="{{ route('post.create') }}" class="default-button" style="font-size: 14px">
-                <i class="fa-solid fa-plus"></i>
+
+        <div class="pt-2 dark:bg-gray-900">
+            <div class="flex justify-between max-w-screen-xl mx-auto ">
+                <article
+                    class="w-full max-w-2xl mx-auto format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
+                    <div class="action-header">
+            <a href="{{ route('post.index') }}" class="default-button" style="font-size: 14px">
+                <i class="fa-solid fa-arrow-left"></i>
             </a>
         </div>
-        <div class="flex flex-col mt-2 ">
-            <!-- Profile Section -->
-            <div class="card-profile">
-                @if ($post->image)
-                    <img src="{{ asset('storage/' . $post->image) }}" alt="Profile">
-                @else
-                    <img src="{{ asset('storage/default/default-profile.png') }}" alt="Default Profile">
-                @endif
-                <span>{{ Str::ucfirst($post->user->name ?? 'Anonymous') }}</span>
-            </div>
-            <!-- Image Section -->
-            <div class="flex-1 min-h-0 overflow-hidden">
-                @if ($post->image)
-                    <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}"
-                        class="object-cover w-full aspect-[4/3]"> <!-- 4:3 aspect ratio -->
-                @else
-                    <img src="{{ asset('storage/default/default-post-image.png') }}" alt="No Image"
-                        class="object-cover w-full aspect-[4/3]"> <!-- 4:3 aspect ratio -->
-                @endif
-            </div>
+                    <header class="mb-4 lg:mb-6 not-format">
+                        <address class="flex items-center mb-6 not-italic">
+                            <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
+                                @if ($post->image)
+                                    <img class="w-16 h-16 mr-4 rounded-full"
+                                        src="{{ asset('storage/' . $post->image) }}" alt="No Image">
+                                @else
+                                    <img class="w-16 h-16 mr-4 rounded-full"
+                                        src="{{ asset('storage/default/default-profile.png') }}" alt="No Image">
+                                @endif
 
-            <!-- Text Section -->
-            <div class="p-4 sm:p-6">
-                <h2 class="mb-2 text-xl font-bold truncate sm:text-2xl md:text-3xl sm:mb-4 dark:text-gray-100">
-                    {!! $post->title !!}
-                </h2>
-                <p class="text-base leading-relaxed sm:text-lg md:text-xl">
-                    {!! $post->paragraph !!}
-                </p>
-            </div>
-            <!-- Footer Section -->
-            <div class="card-footer">
-                <small class="text-muted">Private: {{ $post->is_published ? 'Yes' : 'No' }}</small>
+                                <div>
+                                    <a href="#" rel="author"
+                                        class="text-xl font-bold text-gray-900 dark:text-white">{{ Str::ucfirst($post->user->name ?? '') }}</a>
+                                    <p class="text-base text-gray-500 dark:text-gray-400">
+                                        @if (!empty($post->category->name))
+                                            <span class="front-card-category">
+                                                <a href="#"
+                                                    class="front-link">{{ Str::ucfirst($post->category->name) }}</a>
+                                            </span>
+                                        @endif
+                                    </p>
+
+                                    <p class="text-base text-gray-500 dark:text-gray-400">
+                                        <time pubdate datetime="2022-02-08" title="February 8th, 2022">
+                                            {{ $post->created_at->diffForHumans() }}
+                                        </time>
+                                    </p>
+                                </div>
+                            </div>
+                        </address>
+                        <h1
+                            class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">
+                            {{ Str::ucfirst($post->title ?? '') }}
+                        </h1>
+                    </header>
+                    <p class="lead">{{ $post->paragraph }}</p>
+                    <div class="tags-cad">
+                        <span>
+                            @foreach ($post->tags as $tag)
+                                <a href="#" class="text-blue-400">#{{ $tag->name ?? '' }}</a>
+                            @endforeach
+                        </span>
+                    </div>
+                    <div class="flex justify-end gap-2 p-2 ">
+                        @auth
+                            @if ($post->user_id == Auth::user()->id)
+                                <a href="{{ route('post.edit', $post->slug ?? $post->id) }}">
+                                    <i class="text-blue-500 fas fa-edit"></i>
+                                </a>
+                                <form action="{{ route('post.destroy', $post->slug ?? $post->id) }}" method="POST"
+                                    onsubmit="return confirm('Are you sure?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-300">
+                                        <i class="text-red-500 fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            @endif
+                        @endauth
+                    </div>
+                    <div class="views">
+                        <small><i class="far fa-eye"></i> 1.2k</small>
+                        <small><i class="far fa-heart"></i> 45</small>
+                    </div>
+                </article>
             </div>
         </div>
     </div>
-    @include('components.footer')
+    {{-- <x-footer /> --}}
+    <script>
+        document.querySelector('.front-menu-toggle').addEventListener('click', () => {
+            document.querySelector('.front-nav').classList.toggle('active');
+        });
+    </script>
 </x-app-layout>

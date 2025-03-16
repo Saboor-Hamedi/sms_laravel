@@ -5,5 +5,5 @@
     <!-- Main content -->
     @include('components.main-content')
     <!-- Footer -->
-    @include('components.footer')
+    {{-- @include('components.footer') --}}
 </x-app-layout>

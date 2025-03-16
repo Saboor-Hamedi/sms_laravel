@@ -11,8 +11,9 @@
             </div>
             <nav class="front-nav">
                 @if(!Auth::check())
-                    <a href="{{ route(name: 'login') }}" class="front-nav-link">{{ __('Login') }}</a>
-                    <a href="{{ route('register') }}" class="front-nav-link">{{ __('Register') }}</a>
+                    <a href="{{ route(name: 'login') }}" class="front-nav-link">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i> </a>
+                    <a href="{{ route('register') }}" class="front-nav-link"><i class="fa-solid fa-registered"></i></a>
                 @endif
                 @if(Auth::check())
                 <a href="{{ route('dashboard') }}" class="front-nav-link">{{ __('Dashboard') }}</a>

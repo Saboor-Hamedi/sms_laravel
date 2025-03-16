@@ -101,14 +101,14 @@
                                 </span>
                             @endif
                             <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
-                                <a href="{{ route('front.show', $item->slug ?? $item->id) }}">
+                                <a href="{{ route('front.show', $item->slug ?? $item->id) }}" wire:navigate>
                                     {{ Str::ucfirst($item->title ?? '') }}
                                 </a>
                             </h2>
                             <p class="mb-4 text-gray-500 dark:text-gray-400">
                                 {!! Str::limit($item->paragraph, 20, '...') !!}
                             </p>
-                            <a href="#"
+                            <a href="{{ route('front.show', $item->slug ?? $item->id) }}"
                                 class="inline-flex items-center font-medium underline underline-offset-4 text-primary-600 dark:text-primary-500 hover:no-underline">
                                 Read in 2 minutes
                             </a>
@@ -119,31 +119,7 @@
         </div>
     </aside>
     {{-- End main --}}
-    <!-- Footer -->
-    <footer class="front-footer">
-        <div class="front-footer-container">
-            <div class="front-footer-section">
-                <h3>BlogSphere</h3>
-                <p>Crafting stories since {{ date('Y') }}</p>
-            </div>
-            <div class="front-footer-section">
-                <h4>Quick Links</h4>
-                <a href="#" class="front-footer-link">Home</a>
-                <a href="#" class="front-footer-link">Privacy</a>
-                <a href="#" class="front-footer-link">Contact</a>
-            </div>
-            <div class="front-footer-section">
-                <h4>Connect</h4>
-                <div class="front-footer-social">
-                    <a href="#" class="front-social-link"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="front-social-link"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="front-footer-bottom">
-            <p>© {{ date('Y') }} BlogSphere. All rights reserved.</p>
-        </div>
-    </footer>
+    <x-footer />
 
     @vite(['resources/js/app.js'])
 

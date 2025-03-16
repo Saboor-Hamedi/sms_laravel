@@ -59,7 +59,8 @@
                             </div>
                             <div class="front-card-actions">
                                 <a href="{{ route('front.show', $post->slug ?? $post->id) }}" class="default-button"
-                                    style="padding: 8px !important; font-size: 12px">
+                                    style="padding: 8px !important; font-size: 12px"
+                                    wire:navigate>
                                     Read More
                                 </a>
                                 @auth
@@ -98,30 +99,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="front-footer">
-        <div class="front-footer-container">
-            <div class="front-footer-section">
-                <h3>BlogSphere</h3>
-                <p>Crafting stories since {{ date('Y') }}</p>
-            </div>
-            <div class="front-footer-section">
-                <h4>Quick Links</h4>
-                <a href="#" class="front-footer-link">Home</a>
-                <a href="#" class="front-footer-link">Privacy</a>
-                <a href="#" class="front-footer-link">Contact</a>
-            </div>
-            <div class="front-footer-section">
-                <h4>Connect</h4>
-                <div class="front-footer-social">
-                    <a href="#" class="front-social-link"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="front-social-link"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="front-footer-bottom">
-            <p>© {{ date('Y') }} BlogSphere. All rights reserved.</p>
-        </div>
-    </footer>
+    <x-footer />
 
     @vite(['resources/js/app.js'])
     </body>

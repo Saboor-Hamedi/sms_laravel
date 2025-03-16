@@ -5,8 +5,8 @@
         <h2 class="front-hero-title">{{ $title }}</h2>
         <p class="front-hero-subtitle">{{ $message }}</p>
         <div class="front-hero-actions">
-            <a href="#posts" class="default-button">Start Reading</a>
-            <a href="#" class="default-button">Subscribe</a>
+            <a href="{{ route('welcome') }}" class="default-button" wire:navigate>Start Reading</a>
+            <a href="{{ route('welcome') }}" class="default-button" wire:navigate>Subscribe</a>
         </div>
     </div>
 </section>

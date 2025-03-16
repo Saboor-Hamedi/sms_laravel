@@ -5,7 +5,7 @@
     position: fixed;
     left: 0;
     top: var(--header-height);
-    bottom: var(--footer-height);
+    bottom: 0;
     width: var(--sidebar-width);
     overflow-y: auto;
     box-shadow: var(--shadow-sm);
@@ -45,8 +45,6 @@
 
 .menu-item.active {
     background-color: rgba(26, 35, 126, 0.1);
-    /* background-color: var(--card-bg); */
-    /* color: var(--primary); */
     color: var(--text-dark);
     font-weight: 500;
     border-left: 3px solid var(--primary);

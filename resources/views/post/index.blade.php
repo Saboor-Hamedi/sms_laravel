@@ -99,6 +99,5 @@
 
 
     </div>
-    {{-- footer --}}
-    @include('components.footer')
+    {{-- <x-footer /> --}}
 </x-app-layout>
