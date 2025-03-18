@@ -19,13 +19,9 @@ class PostController extends Controller
 {
     use AuthorizesRequests;
 
-    /**
-     * Display a listing of the resource.
-     */
     public function index(PostService $postService)
     {
         $posts = $postService->fetchPost(Auth::user()->id, 'desc');
-
         return view('post.index', ['posts' => $posts]);
     }
 
@@ -173,6 +169,6 @@ class PostController extends Controller
             ])->warning('Operation failed.');
         }
 
-        return redirect()->route('post.index');
+        return redirect()->back();
     }
 }

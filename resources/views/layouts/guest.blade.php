@@ -23,11 +23,11 @@
         </div>
     </main>
     @vite(['resources/js/app.js'])
-    <script>
+    {{-- <script>
         document.querySelector('.front-menu-toggle').addEventListener('click', () => {
             document.querySelector('.front-nav').classList.toggle('active');
         });
-    </script>
+    </script> --}}
 </body>
 
 </html>

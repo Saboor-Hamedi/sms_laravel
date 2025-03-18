@@ -4,11 +4,11 @@
     <div class="pt-8 pb-16 antialiased dark:bg-gray-900">
         <div class="flex justify-between max-w-screen-xl mx-auto ">
             <article
-                class="w-full max-w-2xl mx-auto format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
-                <div class="p-2 mx-auto ">
+                class="w-full max-w-2xl mx-auto prose dark:prose-invert format format-sm sm:format-base lg:format-lg format-blue">
+                <div class="p-2 mx-auto">
                     <a href="{{ route('welcome') }}" class="default-button"><i class="fa-solid fa-arrow-left"></i></a>
                 </div>
-                <header class="mb-4 lg:mb-6 not-format">
+                <div class="mb-4 lg:mb-6 not-format">
                     <address class="flex items-center mb-6 not-italic">
                         <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
                             @if ($post->image)
@@ -39,12 +39,15 @@
                             </div>
                         </div>
                     </address>
+
                     <h1
                         class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">
                         {{ Str::ucfirst($post->title ?? '') }}
                     </h1>
-                </header>
-                <p class="lead">{{ $post->paragraph }}</p>
+                </div>
+                <x-markdown>
+                    {!! $post->paragraph !!}
+                </x-markdown>
                 <div class="tags-cad">
                     <span>
                         @foreach ($post->tags as $tag)
@@ -52,27 +55,22 @@
                         @endforeach
                     </span>
                 </div>
-                <div class="flex justify-end gap-2 p-2 ">
-                    @auth
-                        @if ($post->user_id == Auth::user()->id)
-                            <a href="{{ route('post.edit', $post->slug ?? $post->id) }}">
-                                <i class="text-blue-500 fas fa-edit"></i>
-                            </a>
-                            <form action="{{ route('post.destroy', $post->slug ?? $post->id) }}" method="POST"
-                                onsubmit="return confirm('Are you sure?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-300">
-                                    <i class="text-red-500 fas fa-trash"></i>
-                                </button>
-                            </form>
-                        @endif
-                    @endauth
-                </div>
-                <div class="views">
-                    <small><i class="far fa-eye"></i> 1.2k</small>
-                    <small><i class="far fa-heart"></i> 45</small>
-                </div>
+                <div class="blog-actions">
+                            <button class="like-btn">
+                                <i class="fa-regular fa-heart" style="font-size: 12px;"></i>Like</button>
+                            @auth
+                                @if ($post->auth())
+                                    <form action="{{ route('post.destroy', $post->slug ?? $post->id) }}" method="POST"
+                                        onsubmit="return confirm('Are you sure?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="delete-btn like-btn">
+                                            <i class="fa-solid fa-trash"
+                                                style="font-size: 12px; color: rgba(255, 0, 0, 0.449);"></i>Delete</button>
+                                    </form>
+                                @endif
+                            @endauth
+                        </div>
             </article>
         </div>
     </div>
@@ -124,8 +122,8 @@
     @vite(['resources/js/app.js'])
 
     <script>
-        document.querySelector('.front-menu-toggle').addEventListener('click', () => {
-            document.querySelector('.front-nav').classList.toggle('active');
-        });
+        // document.querySelector('.front-menu-toggle').addEventListener('click', () => {
+        //     document.querySelector('.front-nav').classList.toggle('active');
+        // });
     </script>
 </x-front-layout>

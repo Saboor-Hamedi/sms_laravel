@@ -40,13 +40,13 @@
 }
 
 body {
-   background-color: var(--background);
+    background-color: var(--background);
     color: var(--text-dark);
     line-height: 1.6;
     min-height: 100vh;
     overflow-x: hidden;
     -ms-overflow-style: none;
-    scrollbar-width: none; 
+    scrollbar-width: none;
 }
 body::-webkit-scrollbar {
     display: none; /* Hide scrollbar in Chrome/Safari */
@@ -63,7 +63,6 @@ body::-webkit-scrollbar {
         "footer footer";
     grid-template-columns: var(--sidebar-width) 1fr;
     grid-template-rows: var(--header-height) 1fr var(--footer-height);
-    
 }
 
 /* main content */
@@ -359,6 +358,7 @@ body::-webkit-scrollbar {
     border-color: var(--primary);
 }
 /* end */
+
 /* Responsive adjustments */
 @media (max-width: 992px) {
     .card-grid {
@@ -374,21 +374,38 @@ body::-webkit-scrollbar {
             "footer";
         grid-template-columns: 1fr;
     }
-
-   
-    /* .main-content {
-        margin-left: 5px;
-        margin-right: 5px;
-    } */
     .card-grid {
         grid-template-columns: 1fr;
     }
+    
 }
-
+@media (max-width:400px){
+    .dashboard{
+        display: flex;
+        justify-content: column;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+}
 /* Toastr */
 #toast-container {
     z-index: 9999 !important;
     position: fixed;
     top: 1rem;
     right: 1rem;
+}
+
+/* simplemade easy */
+
+.CodeMirror {
+    z-index: 0 !important;
+}
+.CodeMirror,
+.CodeMirror-scroll {
+    height: auto;
+    min-height: 100px !important;
+}
+.editor-statusbar {
+    display: none;
 }

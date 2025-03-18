@@ -82,6 +82,6 @@
             </div>
         </form>
     </div>
-    {{-- footer --}}
+
    {{-- <x-footer /> --}}
 </x-app-layout>

@@ -1,3 +1,142 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* Ensure the <pre> element is responsive */
+pre.shiki {
+    overflow-x: auto;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    max-width: 100%;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+pre.shiki .line {
+    display: block;
+}
+pre.shiki .line::before {
+    content: "";
+}
+pre.shiki .line-added {
+    background-color: #e6ffed; /* Light green background */
+    color: #22863a; /* Dark green text */
+    border-left: 4px solid #28a745; /* Green border on the left */
+    padding-left: 8px; /* Add padding to align text */
+}
+
+/* Highlight removed lines */
+pre.shiki.line-removed {
+    background-color: #ffeef0; /* Light red background */
+    color: #cb2431; /* Dark red text */
+    border-left: 4px solid #d73a49; /* Red border on the left */
+    padding-left: 8px; /* Add padding to align text */
+}
+
+pre.shiki code {
+    display: block;
+    font-family: "Fira Code", monospace;
+    font-size: 14px;
+    line-height: 1.5;
+}
+p img {
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+}
+
+p img {
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+@media (max-width: 768px) {
+    pre.shiki {
+        font-size: 12px;
+        padding: 12px;
+    }
+}
+
+/* delete, like, edit buttons*/
+
+.blog-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+.like-btn, .edit-btn, .delete-btn{
+    background: none;
+    border: none;
+    color: #666;
+    padding: 5px 12px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 12px;
+}
+.edit-btn{
+    text-decoration: none;
+}
+.like-btn:hover, .delete-btn:hover, .edit-btn:hover {
+    background: #cec6c64c;
+    color: #000000;
+}
+
+
+@media (max-width: 786px) {
+    .blog-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1.5rem;
+        align-items: center;
+        padding-top: 1rem;
+        border-top: 1px solid #eee;
+    }
+}
+
+/* end */
+
+
+/* Show more */
+
+.show-more {
+    background: none;
+    border: none;
+    color: #3498db;
+    cursor: pointer;
+    padding: 0;
+    margin-top: 0.5rem;
+}
+
+
+/* Show More Button */
+.show-more {
+    background: none;
+    border: none;
+    color: #3498db;
+    padding: 0.5rem;
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+}
+.show-more::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #3498db;
+    transition: width 0.3s ease;
+}
+
+.show-more:hover::after {
+    width: 100%;
+}
+
+.show-more:hover {
+    color: #2980b9;
+}

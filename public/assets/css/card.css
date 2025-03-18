@@ -91,33 +91,20 @@
     font-size: 14px;
     color: #555;
     line-height: 1.5;
+    flex: 1 0 auto;
 }
 /* Buttons Container */
-.card-actions {
-    margin-top: auto;
-    display: flex;
-justify-content: space-between;
-    gap: 10px;
 
-}
 /* Tags Section */
 .tags-cad {
     padding: 10px 0px;
     margin-bottom: 10px;
 }
-.tags-cad .tag{
+.tags-cad .tag {
     font-size: 12px;
     color: #87b5f9;
 }
-.views {
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    gap: 10px;
-}
-.views i {
-    font-size: 10px;
-}
+
 
 .btn-edit,
 .btn-delete {

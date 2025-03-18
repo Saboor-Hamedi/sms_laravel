@@ -8,13 +8,13 @@
         <div class="pt-2 dark:bg-gray-900">
             <div class="flex justify-between max-w-screen-xl mx-auto ">
                 <article
-                    class="w-full max-w-2xl mx-auto format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
+                    class="w-full max-w-2xl mx-auto ormat format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
                     <div class="action-header">
-            <a href="{{ route('post.index') }}" class="default-button" style="font-size: 14px">
-                <i class="fa-solid fa-arrow-left"></i>
-            </a>
-        </div>
-                    <header class="mb-4 lg:mb-6 not-format">
+                        <a href="{{ route('post.index') }}" class="default-button" style="font-size: 14px">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+                    </div>
+                    <div class="mb-4 lg:mb-6 not-format">
                         <address class="flex items-center mb-6 not-italic">
                             <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
                                 @if ($post->image)
@@ -49,8 +49,10 @@
                             class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">
                             {{ Str::ucfirst($post->title ?? '') }}
                         </h1>
-                    </header>
-                    <p class="lead">{{ $post->paragraph }}</p>
+                    </div>
+                    <x-markdown>
+                        {!! $post->paragraph !!}
+                    </x-markdown>
                     <div class="tags-cad">
                         <span>
                             @foreach ($post->tags as $tag)
@@ -58,35 +60,33 @@
                             @endforeach
                         </span>
                     </div>
-                    <div class="flex justify-end gap-2 p-2 ">
+
+                    <div class="blog-actions">
+                        <button class="like-btn">
+                            <i class="fa-solid fa-heart" style="background-color: none; font-size: 12px;"></i>   
+                        </button>
                         @auth
-                            @if ($post->user_id == Auth::user()->id)
-                                <a href="{{ route('post.edit', $post->slug ?? $post->id) }}">
-                                    <i class="text-blue-500 fas fa-edit"></i>
-                                </a>
+                            @if ($post->auth())
                                 <form action="{{ route('post.destroy', $post->slug ?? $post->id) }}" method="POST"
                                     onsubmit="return confirm('Are you sure?');">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="text-red-300">
-                                        <i class="text-red-500 fas fa-trash"></i>
+                                    <button class="delete-btn ">
+                                        <i class=" fa-solid fa-trash" style="font-size: 12px; color: rgba(255, 0, 0, 0.449);"></i>
+                                        Delete
                                     </button>
                                 </form>
                             @endif
                         @endauth
-                    </div>
-                    <div class="views">
-                        <small><i class="far fa-eye"></i> 1.2k</small>
-                        <small><i class="far fa-heart"></i> 45</small>
                     </div>
                 </article>
             </div>
         </div>
     </div>
     {{-- <x-footer /> --}}
-    <script>
+    {{-- <script>
         document.querySelector('.front-menu-toggle').addEventListener('click', () => {
             document.querySelector('.front-nav').classList.toggle('active');
         });
-    </script>
+    </script> --}}
 </x-app-layout>

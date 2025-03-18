@@ -35,11 +35,7 @@
                     </div>
 
                     <!-- Text Section -->
-                    <div class="card-text">
-                        <div class="views">
-                            <small><i class="far fa-eye"></i> 1.2k</small>
-                            <small><i class="far fa-heart"></i> 45</small>
-                        </div>
+                    <article  class="prose card-text lg:prose-xl">
                         @if (!empty($post->category->name))
                             <small class="category">
                                 Category:
@@ -51,13 +47,12 @@
 
                         <h2 class="card-title">{{ Str::limit($post->title, 20, '...') }}</h2>
                         <p class="card-body-paragraph">
-                            {{ Str::limit($post->paragraph, 100, '...') }}
+                            {!! Str::limit($post->cleanParagraph($post->paragraph), 100, '...')  !!}
                             <a href="{{ route('post.show', $post->slug ?? $post->id) }}"
                                 class="text-blue-500 hover:underline">
                                 Read more
                             </a>
                         </p>
-
                         <!-- Tags -->
                         <div class="tags-cad">
                             <span>
@@ -68,22 +63,27 @@
                         </div>
 
                         <!-- Edit and Delete Buttons -->
-                        <div class="card-actions">
-                            <a href="{{ route('post.edit', $post->slug ?? $post->id) }}" class="default-button"
-                                style="font-size:14px;">
-                                <i class="mr-2 fas fa-edit"></i>Edit
+                        <div class="blog-actions keep-action-bottom">
+                            <a href="{{ route('post.edit', $post->slug ?? $post->id) }}" 
+                            class="edit-btn">
+                                <i class="fas fa-edit" style="font-size: 12px;"></i>Edit
                             </a>
-                            <form action="{{ route('post.destroy', $post->slug ?? $post->id) }}" method="POST"
-                                onsubmit="return confirm('Are you sure you want to delete this post?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class=" default-button"
-                                    style="background: rgba(255, 0, 0, 0.368); font-size:14px;">
-                                    <i class="mr-2 fas fa-trash"></i>Delete
-                                </button>
-                            </form>
+                            {{-- <button class="like-btn">
+                                <i class="fa-regular fa-heart" style="font-size: 12px;"></i>Like</button> --}}
+                            @auth
+                                @if ($post->auth())
+                                    <form action="{{ route('post.destroy', $post->slug ?? $post->id) }}" method="POST"
+                                        onsubmit="return confirm('Are you sure?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="delete-btn like-btn">
+                                            <i class=" fa-solid fa-trash"
+                                                style="font-size: 12px; color: rgba(255, 0, 0, 0.449);"></i>Delete</button>
+                                    </form>
+                                @endif
+                            @endauth
                         </div>
-                    </div>
+                    </article >
 
                     <!-- Card Footer -->
                     <div class="card-footer">

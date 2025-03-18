@@ -1,111 +1,95 @@
 <x-front-layout>
     <x-front-header />
-    <!-- Hero Section -->
-    <x-hero title='Unlesh Your Curiosity' message='Discover the World of Knowledge and Inspiration' />
-    <!-- Content Wrapper -->
-    <div class="front-content-wrapper" id="posts">
-        <!-- Left Sidebar -->
-        <x-front-left-category />
-        <!-- Main Content -->
-        <div class="front-main-content">
-            <div class="front-cards-container">
-                @forelse ($frontPost as $post)
-                    <article class="front-card">
-                        <header class="front-card-header">
-                            <div class="front-card-profile">
-                                @if ($post->image)
-                                    <img src="{{ asset('storage/' . $post->image) }}" alt="No Image"
-                                        class="front-profile-img">
-                                @else
-                                    <img src="{{ asset('storage/default/default-profile.png') }}" alt="Default Profile"
-                                        class="front-profile-img">
-                                @endif
+    <div class="container">
+        <div class="sidebar-wrapper">
+            <aside class="sidebar">
+                @auth
+                    <div class="profile">
+                        <img src="https://placehold.co/100x100" alt="John Doe's profile picture">
+                        <h2>{{ Str::ucfirst(Auth::user()->name ?? '') }}</h2>
+                        <p>Blogger & Writer</p>
+                    </div>
+                @endauth
+                <div class="categories">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="#">Lifestyle</a></li>
+                        <li><a href="#">Technology</a></li>
+                        <li><a href="#">Travel</a></li>
+                        <li><a href="#">Food</a></li>
+                    </ul>
+                </div>
 
-                                <div class="front-card-author">
-                                    <span
-                                        class="front-author-name">{{ Str::ucfirst($post->user->name ?? 'Anonymous') }}</span>
-                                    <span
-                                        class="text-sm front-author-time">{{ $post->created_at->diffForHumans() }}</span>
-                                </div>
-                            </div>
-                            @if (!empty($post->category->name))
-                                <span class="front-card-category">
-                                    <a href="#" class="front-link">{{ Str::ucfirst($post->category->name) }}</a>
-                                </span>
-                            @endif
-                        </header>
-                        <div class="front-card-image">
-                            @if ($post->image)
-                                <img src="{{ asset('storage/' . $post->image) }}" alt="No Image">
-                            @else
-                                <img src="{{ asset('storage/default/default-post-image.png') }}" alt="No Image">
-                            @endif
-                        </div>
-                        <div class="front-card-content">
-                            <h2 class="front-card-title">{{ Str::limit($post->title, 25, '...') }}</h2>
-                            <p class="front-card-body">{{ Str::limit($post->paragraph, 120, '...') }}</p>
-                        </div>
-                        <footer class="front-card-footer">
-                            <div class="front-card-meta">
-                                <span class="front-card-tags">
-                                    @foreach ($post->tags as $tag)
-                                        <a href="#" class="front-tag">#{{ $tag->name ?? '' }}</a>
-                                    @endforeach
-                                </span>
-                                <span class="front-card-stats">
-                                    <i class="far fa-eye"></i> 1.2k
-                                    <i class="far fa-heart"></i> 45
-                                </span>
-                            </div>
-                            <div class="front-card-actions">
-                                <a href="{{ route('front.show', $post->slug ?? $post->id) }}" class="default-button"
-                                    style="padding: 8px !important; font-size: 12px"
-                                    wire:navigate>
-                                    Read More
-                                </a>
-                                @auth
-                                    <div class="front-card-controls">
-                                        @if ($post->user_id == Auth::user()->id)
-                                            <a href="{{ route('post.edit', $post->slug ?? $post->id) }}"
-                                                class="front-btn-edit">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-
-                                            <form action="{{ route('post.destroy', $post->slug ?? $post->id) }}"
-                                                method="POST" onsubmit="return confirm('Are you sure?');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="front-btn-delete">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
-                                        @endif
-                                    </div>
-                                @endauth
-                            </div>
-                        </footer>
-                    </article>
-                @empty
-                    <p class="front-no-posts">No posts available.</p>
-                @endforelse
-            </div>
-
-            <!-- Suggested Posts -->
-            <x-recommended title='Recommended Reads' />
+                <div class="tags">
+                    <h3>Tags</h3>
+                    <ul>
+                        <li><a href="#">#daily</a></li>
+                        <li><a href="#">#life</a></li>
+                        <li><a href="#">#blog</a></li>
+                        <li><a href="#">#personal</a></li>
+                    </ul>
+                </div>
+            </aside>
         </div>
 
-        <!-- Right Sidebar -->
-        <x-front-right-trend />
+        <main class="main-content">
+            @forelse ($frontPost  as $post)
+                <article class="blog-card">
+                    @if ($post->image)
+                        <img src="{{ asset('storage/' . $post->image) }}" alt="No Image" class="blog-image">
+                    @else
+                        <img src="{{ asset('storage/default/default-profile.png') }}" alt="Default Profile"
+                            class="blog-image">
+                    @endif
+                    <div class="blog-content">
+                        <h2>{{ $post->title }}</h2>
+                        <div class="blog-meta">
+                            <span>March 17, 2025</span>
+                            <span>4 min read</span>
+                            <span class="views">👁️ 900 views</span>
+                        </div>
+                        <p>
+                            {{ Str::limit($post->cleanParagraph($post->paragraph), 50, '...') }}
+                            <a class="show-more" href="{{ route('front.show', $post->slug ?? $post->id) }}">
+                                Read More→
+                            </a>
+                        </p>
+                        <div class="blog-actions">
+                            <button class="like-btn">
+                                <i class="fa-regular fa-heart" style="font-size: 12px;"></i>Like</button>
+                            @auth
+                                @if ($post->auth())
+                                    <form action="{{ route('post.destroy', $post->slug ?? $post->id) }}" method="POST"
+                                        onsubmit="return confirm('Are you sure?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="delete-btn like-btn">
+                                            <i class=" fa-solid fa-trash"
+                                                style="font-size: 12px; color: rgba(255, 0, 0, 0.449);"></i>Delete</button>
+                                    </form>
+                                @endif
+                            @endauth
+                        </div>
+                    </div>
+                </article>
+            @empty
+                <article class="blog-card">
+                    <img src="https://placehold.co/600x400" class="blog-image" alt="Blog post image">
+                    <div class="blog-content">
+                        <h2>Day 2: Mountain Adventures</h2>
+                        <div class="blog-meta">
+                            <span>
+                                {{ $post->created_at->now()->format('F d, Y') }}
+                            </span>
+                            <span>4 min read</span>
+                        </div>
+                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                            pariatur...</p>
+
+                    </div>
+                </article>
+            @endforelse
+        </main>
     </div>
-
-    <!-- Footer -->
-    <x-footer />
-
-    @vite(['resources/js/app.js'])
-    </body>
-    <script>
-        document.querySelector('.front-menu-toggle').addEventListener('click', () => {
-            document.querySelector('.front-nav').classList.toggle('active');
-        });
-    </script>
+    <script src="{{ asset('assets/js/frontSidebar.js') }}"></script>
 </x-front-layout>
