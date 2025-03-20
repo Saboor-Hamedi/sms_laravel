@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Scout\Searchable;
 use Spatie\Sluggable\HasSlug;
 
 class Post extends Model
 {
     /** @use HasFactory<\Database\Factories\PostFactory> */
-    use HasFactory;
+    use HasFactory, Searchable;
     // HasSlug
 
     public $timestamps = false;
@@ -53,7 +54,6 @@ class Post extends Model
      * 1. Replacing multiple whitespace characters with a single space.
      * 2. Removing special characters but keeping spaces and alphanumeric characters.
      *
-     * @param string $paragraph
      * @return string
      */
     public function cleanParagraph(string $paragraph)
@@ -64,5 +64,13 @@ class Post extends Model
         $string = preg_replace('/[^A-Za-z0-9\s]/', '', $string);
 
         return $string;
+    }
+
+    public function toSearchableArray()
+    {
+        return [
+            'title' => $this->title,
+            'paragraph' => $this->paragraph,
+        ];
     }
 }

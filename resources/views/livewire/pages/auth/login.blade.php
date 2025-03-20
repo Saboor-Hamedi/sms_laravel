@@ -57,7 +57,7 @@ new #[Layout('layouts.guest')] class extends Component {
         <div
             class="flex flex-col mt-4 space-y-3 md:flex-row md:items-center md:justify-between md:space-y-0 md:space-x-4">
             <div class="w-full md:w-auto">
-                <button type="submit" class="w-full default-button md:w-auto">
+                <button type="submit" class="w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500 dark:focus:bg-indigo-600">
                     {{ __('Log in') }}
                 </button>
             </div>

@@ -1,6 +1,6 @@
 <x-front-layout>
-    <x-front-header />
-    <div class="container">
+    <div class="front-container">
+        <x-front-header />
         <div class="sidebar-wrapper">
             <aside class="sidebar">
                 @auth
@@ -19,7 +19,6 @@
                         <li><a href="#">Food</a></li>
                     </ul>
                 </div>
-
                 <div class="tags">
                     <h3>Tags</h3>
                     <ul>
@@ -33,6 +32,7 @@
         </div>
 
         <main class="main-content">
+
             @forelse ($frontPost  as $post)
                 <article class="blog-card">
                     @if ($post->image)
@@ -64,7 +64,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button class="delete-btn like-btn">
-                                            <i class=" fa-solid fa-trash"
+                                            <i class="fa-solid fa-trash"
                                                 style="font-size: 12px; color: rgba(255, 0, 0, 0.449);"></i>Delete</button>
                                     </form>
                                 @endif
@@ -85,7 +85,6 @@
                         </div>
                         <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
                             pariatur...</p>
-
                     </div>
                 </article>
             @endforelse

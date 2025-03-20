@@ -22,6 +22,7 @@ class PostController extends Controller
     public function index(PostService $postService)
     {
         $posts = $postService->fetchPost(Auth::user()->id, 'desc');
+
         return view('post.index', ['posts' => $posts]);
     }
 

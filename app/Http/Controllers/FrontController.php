@@ -41,6 +41,7 @@ class FrontController extends Controller
 
         $post = $frontService->showPost($slug);
         $relatedPost = $frontService->relatedPosts($post);
+
         return view('front.show', ['post' => $post, 'relatedPost' => $relatedPost]);
     }
 

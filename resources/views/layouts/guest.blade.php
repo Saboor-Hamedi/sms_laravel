@@ -14,9 +14,7 @@
 
 <body>
     <x-front-header />
-    <main
-        class
-            ="flex flex-col items-center justify-center p-2 mt-6 bg-gray-50 dark:bg-gray-900">
+    <main class="flex items-center justify-center h-screen">
         <div
             class="w-full p-4 px-6 py-4 overflow-hidden bg-white rounded-md shadow-md sm:max-w-md dark:bg-gray-800 ">
             {{ $slot }}
