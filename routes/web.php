@@ -7,6 +7,7 @@ use App\Http\Controllers\Post\PostController;
 use App\Http\Controllers\Profile;
 use Illuminate\Support\Facades\Route;
 
+
 // Route::view('/', 'welcome');
 Route::get('/', [FrontController::class, 'index'])->name('welcome');
 Route::get('front/{slug}', [FrontController::class, 'show'])->name('front.show');

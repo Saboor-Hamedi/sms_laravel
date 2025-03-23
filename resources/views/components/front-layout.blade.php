@@ -7,20 +7,20 @@
     <title>Welcome to {{ config('app.name', 'Laravel') }}</title>
     @vite(['resources/css/app.css'])
     <link rel="stylesheet" href="{{ asset('assets/css/front-page.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/default-button.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/frontScriptTheme.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
-<body>
+<body class="light-theme">
     <!-- Main Container -->
-    <main class="front-main-page">
+    <main>
         {{ $slot }}
     </main>
     @vite(['resources/js/app.js'])
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
-    <script rel="text/javascript" src="{{ asset('assets/js/frontTheme.js') }}"></script>
-
+    {{-- <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
+    <script rel="text/javascript" src="{{ asset('assets/js/frontNavbar.js') }}"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons/dist/ionicons/ionicons.js"></script>
+    
 </body>
-
 </html>

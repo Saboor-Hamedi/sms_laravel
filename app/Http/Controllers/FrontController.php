@@ -12,9 +12,9 @@ class FrontController extends Controller
      */
     public function index(FrontService $frontService)
     {
-        $frontPost = $frontService->fetchPost();
+        $frontPosts = $frontService->fetchPost();
 
-        return view('welcome', ['frontPost' => $frontPost]);
+        return view('welcome', ['frontPosts' => $frontPosts]);
     }
 
     /**

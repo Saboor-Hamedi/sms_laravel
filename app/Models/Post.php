@@ -4,15 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Scout\Searchable;
-use Spatie\Sluggable\HasSlug;
+use Illuminate\Support\Str;
 
 class Post extends Model
 {
-    /** @use HasFactory<\Database\Factories\PostFactory> */
-    use HasFactory, Searchable;
-    // HasSlug
+    use HasFactory;
 
     public $timestamps = false;
 
@@ -22,29 +21,36 @@ class Post extends Model
     ];
 
     // check Authentication
-    public function auth()
+    public function auth(): bool
     {
         return $this->user_id == Auth::user()->id;
     }
 
     // Inverse of One-to-Many Relationship with User
-    public function user()
+
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function authorName()
+    public function authorName(): string
     {
-        return $this->user->name;
+        return Str::ucfirst($this->user->name ?? '');
     }
 
-    public function category()
+    public function getCategory()
+    {
+        return $this->category->name ?? 'Uncategorized';
+    }
+
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
     // Many-to-Many Relationship with tags
-    public function tags()
+
+    public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class, 'post_tag', 'post_id', 'tag_id');
     }
@@ -59,18 +65,10 @@ class Post extends Model
     public function cleanParagraph(string $paragraph)
     {
         // Normalize multiple spaces to single spaces
-        $string = preg_replace('/\s+/', ' ', trim($paragraph));
+        $value = preg_replace('/\s+/', ' ', trim($paragraph));
         // Remove special characters but keep spaces and alphanumeric characters
-        $string = preg_replace('/[^A-Za-z0-9\s]/', '', $string);
+        return preg_replace('/[^A-Za-z0-9\s]/', '', $value);
 
-        return $string;
     }
 
-    public function toSearchableArray()
-    {
-        return [
-            'title' => $this->title,
-            'paragraph' => $this->paragraph,
-        ];
-    }
 }

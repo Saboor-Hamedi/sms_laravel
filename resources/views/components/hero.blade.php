@@ -1,13 +1,36 @@
-<div>
-<section class="front-hero">
-    <div class="front-hero-overlay"></div>
-    <div class="front-hero-content">
-        <h2 class="front-hero-title">{{ $title }}</h2>
-        <p class="front-hero-subtitle">{{ $message }}</p>
-        <div class="front-hero-actions">
-            <a href="{{ route('welcome') }}" class="default-button hero-buttons" wire:navigate>Start Reading</a>
-            <a href="{{ route('welcome') }}" class="default-button hero-buttons" wire:navigate>Subscribe</a>
+    <div class="hero">
+
+        <div class="container">
+
+            <div class="left">
+
+                <h1 class="h1">
+                    Hi, I'm <b>Abdul Saboor&nbsp;Hamedi</b>.
+                    <br>Web Developer
+                </h1>
+
+                <p class="h3">
+                    Specialized in <abbr title="Accessibility">a11y</abbr>
+                    and Core Web Vitals
+                </p>
+
+                <div class="btn-group">
+                    <a href="#" class="btn btn-primary">Contact Me</a>
+                    <a href="#" class="btn btn-secondary">About Me</a>
+                </div>
+
+            </div>
+
+            <div class="right">
+                <div class="pattern-bg"></div>
+                <div class="img-box">
+                    <img src="{{ asset('storage/logo/hero.png') }}" alt="Julia Walker" class="hero-img">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                </div>
+
+            </div>
+
         </div>
+
     </div>
-</section>
-</div>

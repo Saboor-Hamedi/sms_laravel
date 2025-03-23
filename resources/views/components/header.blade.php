@@ -21,7 +21,16 @@
 
           <div class="user-profile" id="user-profile">
               <div class="avatar">JD</div>
-              <span>John Doe</span>
+
+              @auth
+
+                  @if(\Illuminate\Support\Facades\Auth::check())
+                  <span>{{Auth::user()->authorName()}}</span>
+                      @else
+                      <span>John Doe</span>
+                  @endif
+
+              @endauth
               <i class="fas fa-chevron-down" style="margin-left: 8px; font-size: 12px;"></i>
 
               <div class="profile-dropdown" id="profile-dropdown">

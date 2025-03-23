@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Post;
-
+// The comment is working.
 use App\Http\Controllers\Controller;
 use App\Services\CategoryService;
 use App\Services\PostService;

@@ -1,94 +1,204 @@
 <x-front-layout>
-    <div class="front-container">
-        <x-front-header />
-        <div class="sidebar-wrapper">
-            <aside class="sidebar">
-                @auth
-                    <div class="profile">
-                        <img src="https://placehold.co/100x100" alt="John Doe's profile picture">
-                        <h2>{{ Str::ucfirst(Auth::user()->name ?? '') }}</h2>
-                        <p>Blogger & Writer</p>
+
+{{-- HEADER --}}
+
+<x-front-header />
+
+{{-- HERO --}}
+<x-hero />
+<div class="main">
+
+<div class="container">
+
+{{-- BLOG SECTION --}}
+
+<div class="blog">
+
+    <h2 class="h2">Latest Blog Post</h2>
+
+    <div class="blog-card-group">
+
+        @foreach ($frontPosts as $post)
+            <div class="blog-card">
+                <div class="blog-card-banner">
+                    @if ($post->image)
+                        <img src="{{ asset('storage/' . $post->image) }}"
+                            alt="Building microservices with Dropwizard, MongoDB & Docker"
+                            class="blog-banner-img">
+                    @else
+                        <img src="{{ asset('storage/default/default-post-image.png') }}"
+                            alt="Building microservices with Dropwizard, MongoDB & Docker"
+                            class="blog-banner-img">
+                    @endif
+                </div>
+
+
+                <div class="blog-content-wrapper">
+                    <button class="blog-topic text-tiny">Database</button>
+                    <h3 class="h3">
+                        <a href="{{ route('front.show', $post->slug ?? $post->id) }}">
+                            {{ Str::ucfirst($post->title ?? '') }}
+                        </a>
+                    </h3>
+                    <small class="category">
+                        <a href="#">{{ Str::ucfirst($post->getCategory()) }}</a>
+                    </small>
+                    <p class="blog-text">
+                        {{ $post->cleanParagraph(Str::limit($post->paragraph, 100, '...')) }}
+                    </p>
+                    <small class="post-tags">
+                        @foreach ($post->tags as $tag)
+                            <a href="#" class="text-blue-400">#{{ $tag->name ?? '' }}</a>
+                        @endforeach
+                    </small>
+                    <div class="wrapper-flex">
+
+                        <div class="profile-wrapper">
+                            @if ($post->image)
+                                <img src="{{ asset('storage/' . $post->image) }}"
+                                    alt="Building microservices with Dropwizard, MongoDB & Docker"
+                                    class="blog-banner-img">
+                            @else
+                                <img src="{{ asset('storage/default/default-post-image.png') }}"
+                                    alt="Building microservices with Dropwizard, MongoDB & Docker"
+                                    class="blog-banner-img">
+                            @endif
+                        </div>
+
+                        <div class="wrapper">
+                            <a href="#" class="h4">{{ Str::ucfirst($post->authorName()) }}</a>
+                            <p class="text-sm">
+                                <time
+                                    datetime="2022-01-17">{{ $post->created_at->now()->format('d M Y') }}</time>
+                                <span class="separator"></span>
+                                <ion-icon name="time-outline"></ion-icon>
+                                <time datetime="PT3M">12 min</time>
+                            </p>
+                        </div>
+
                     </div>
-                @endauth
-                <div class="categories">
-                    <h3>Categories</h3>
-                    <ul>
-                        <li><a href="#">Lifestyle</a></li>
-                        <li><a href="#">Technology</a></li>
-                        <li><a href="#">Travel</a></li>
-                        <li><a href="#">Food</a></li>
-                    </ul>
+
                 </div>
-                <div class="tags">
-                    <h3>Tags</h3>
-                    <ul>
-                        <li><a href="#">#daily</a></li>
-                        <li><a href="#">#life</a></li>
-                        <li><a href="#">#blog</a></li>
-                        <li><a href="#">#personal</a></li>
-                    </ul>
-                </div>
-            </aside>
+
+            </div>
+        @endforeach
+    </div>
+    <button class="btn load-more">Load More</button>
+</div>
+
+
+
+
+
+<!--
+- ASIDE
+-->
+
+<div class="aside">
+
+    <div class="topics">
+
+        <h2 class="h2">Topics</h2>
+
+        <a href="#" class="topic-btn">
+            <div class="icon-box">
+                <ion-icon name="server-outline"></ion-icon>
+            </div>
+
+            <p>Database</p>
+        </a>
+
+        <a href="#" class="topic-btn">
+            <div class="icon-box">
+                <ion-icon name="accessibility-outline"></ion-icon>
+            </div>
+
+            <p>Accessibility</p>
+        </a>
+
+        <a href="#" class="topic-btn">
+            <div class="icon-box">
+                <ion-icon name="rocket-outline"></ion-icon>
+            </div>
+
+            <p>Web Performance</p>
+        </a>
+
+    </div>
+
+    <div class="tags">
+        <h2 class="h2">Tags</h2>
+        <div class="wrapper">
+            <button class="hashtag">#mongodb</button>
+            <button class="hashtag">#nodejs</button>
+            <button class="hashtag">#a11y</button>
+            <button class="hashtag">#mobility</button>
+            <button class="hashtag">#inclusion</button>
+            <button class="hashtag">#webperf</button>
+            <button class="hashtag">#optimize</button>
+            <button class="hashtag">#performance</button>
+        </div>
+    </div>
+    <div class="contact">
+        <h2 class="h2">Let's Talk</h2>
+        <div class="wrapper">
+            <p>
+                Do you want to learn more about how I can help your company overcome problems? Let us have a
+                conversation.
+            </p>
+
+            <ul class="social-link">
+
+                <li>
+                    <a href="#" class="icon-box discord">
+                        <ion-icon name="logo-discord"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="icon-box twitter">
+                        <ion-icon name="logo-twitter"></ion-icon>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="icon-box facebook">
+                        <ion-icon name="logo-facebook"></ion-icon>
+                    </a>
+                </li>
+
+            </ul>
+
         </div>
 
-        <main class="main-content">
-
-            @forelse ($frontPost  as $post)
-                <article class="blog-card">
-                    @if ($post->image)
-                        <img src="{{ asset('storage/' . $post->image) }}" alt="No Image" class="blog-image">
-                    @else
-                        <img src="{{ asset('storage/default/default-profile.png') }}" alt="Default Profile"
-                            class="blog-image">
-                    @endif
-                    <div class="blog-content">
-                        <h2>{{ $post->title }}</h2>
-                        <div class="blog-meta">
-                            <span>March 17, 2025</span>
-                            <span>4 min read</span>
-                            <span class="views">👁️ 900 views</span>
-                        </div>
-                        <p>
-                            {{ Str::limit($post->cleanParagraph($post->paragraph), 50, '...') }}
-                            <a class="show-more" href="{{ route('front.show', $post->slug ?? $post->id) }}">
-                                Read More→
-                            </a>
-                        </p>
-                        <div class="blog-actions">
-                            <button class="like-btn">
-                                <i class="fa-regular fa-heart" style="font-size: 12px;"></i>Like</button>
-                            @auth
-                                @if ($post->auth())
-                                    <form action="{{ route('post.destroy', $post->slug ?? $post->id) }}" method="POST"
-                                        onsubmit="return confirm('Are you sure?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="delete-btn like-btn">
-                                            <i class="fa-solid fa-trash"
-                                                style="font-size: 12px; color: rgba(255, 0, 0, 0.449);"></i>Delete</button>
-                                    </form>
-                                @endif
-                            @endauth
-                        </div>
-                    </div>
-                </article>
-            @empty
-                <article class="blog-card">
-                    <img src="https://placehold.co/600x400" class="blog-image" alt="Blog post image">
-                    <div class="blog-content">
-                        <h2>Day 2: Mountain Adventures</h2>
-                        <div class="blog-meta">
-                            <span>
-                                {{ $post->created_at->now()->format('F d, Y') }}
-                            </span>
-                            <span>4 min read</span>
-                        </div>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                            pariatur...</p>
-                    </div>
-                </article>
-            @endforelse
-        </main>
     </div>
-    <script src="{{ asset('assets/js/frontSidebar.js') }}"></script>
+
+    <div class="newsletter">
+
+        <h2 class="h2">Newsletter</h2>
+
+        <div class="wrapper">
+
+            <p>
+                Subscribe to our newsletter to be among the first to keep up with the latest updates.
+            </p>
+
+            <form action="#">
+                <input type="email" name="email" placeholder="Email Address" required>
+
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</div>
+
+<x-footer />
+
 </x-front-layout>

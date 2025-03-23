@@ -4,8 +4,11 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -17,15 +20,21 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+    // get the author name
+    public function authorName(): string
+    {
+        return Str::ucfirst($this->name ?? '');
+
+    }
 
     // One-to-One Relationship with Profile
-    public function profile()
+    public function profile():HasOne
     {
         return $this->hasOne(UserProfile::class);
     }
     // One-to-Many Relationship with Post
 
-    public function posts()
+    public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
     }

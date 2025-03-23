@@ -3,7 +3,14 @@
     <!-- Sidebar -->
     @include('components.sidebar')
 
+
     <div class="main-content">
+        <h1 x-data="{ message: 'I ❤️ Alpine' }" x-text="message"></h1>
+        <div x-data="{ count: 0 }">
+            <button x-on:click="count++">Increment</button>
+
+            <span x-text="count"></span>
+        </div>
         <div class="action-header">
             <a href="{{ route('post.create') }}" class="default-button">
                 <i class="fa-solid fa-plus"></i>
@@ -20,7 +27,7 @@
                             <img src="{{ asset('storage/default/default-profile.png') }}" alt="Default Profile">
                         @endif
                         <div class="card-author">
-                            <span class="author-name">{{ Str::ucfirst($post->user->name ?? 'Anonymous') }}</span>
+                            <span class="author-name">{{ $post->authorName() }}</span>
                             <span class="post-time">{{ $post->created_at->diffForHumans() }}</span>
                         </div>
                     </div>
@@ -35,7 +42,7 @@
                     </div>
 
                     <!-- Text Section -->
-                    <article  class="prose card-text lg:prose-xl">
+                    <article class="prose card-text lg:prose-xl">
                         @if (!empty($post->category->name))
                             <small class="category">
                                 Category:
@@ -47,9 +54,9 @@
 
                         <h2 class="card-title">{{ Str::limit($post->title, 20, '...') }}</h2>
                         <p class="card-body-paragraph">
-                            {!! Str::limit($post->cleanParagraph($post->paragraph), 100, '...')  !!}
+                            {{ $post->cleanParagraph(Str::limit ($post->paragraph), 100, '...') }}
                             <a href="{{ route('post.show', $post->slug ?? $post->id) }}"
-                                class="text-blue-500 hover:underline">
+                               class="text-blue-500 hover:underline">
                                 Read more
                             </a>
                         </p>
@@ -64,8 +71,8 @@
 
                         <!-- Edit and Delete Buttons -->
                         <div class="blog-actions keep-action-bottom">
-                            <a href="{{ route('post.edit', $post->slug ?? $post->id) }}" 
-                            class="edit-btn">
+                            <a href="{{ route('post.edit', $post->slug ?? $post->id) }}"
+                               class="edit-btn">
                                 <i class="fas fa-edit" style="font-size: 12px;"></i>Edit
                             </a>
                             {{-- <button class="like-btn">
@@ -73,17 +80,18 @@
                             @auth
                                 @if ($post->auth())
                                     <form action="{{ route('post.destroy', $post->slug ?? $post->id) }}" method="POST"
-                                        onsubmit="return confirm('Are you sure?');">
+                                          onsubmit="return confirm('Are you sure?');">
                                         @csrf
                                         @method('DELETE')
                                         <button class="delete-btn like-btn">
                                             <i class=" fa-solid fa-trash"
-                                                style="font-size: 12px; color: rgba(255, 0, 0, 0.449);"></i>Delete</button>
+                                               style="font-size: 12px; color: rgba(255, 0, 0, 0.449);"></i>Delete
+                                        </button>
                                     </form>
                                 @endif
                             @endauth
                         </div>
-                    </article >
+                    </article>
 
                     <!-- Card Footer -->
                     <div class="card-footer">

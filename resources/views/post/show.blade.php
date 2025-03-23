@@ -4,11 +4,10 @@
     @include('components.sidebar')
 
     <div class="main-content">
-
         <div class="pt-2 dark:bg-gray-900">
             <div class="flex justify-between max-w-screen-xl mx-auto ">
                 <article
-                    class="w-full max-w-2xl mx-auto ormat format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
+                    class="w-full max-w-2xl mx-auto  format-sm sm:format-base lg:format-lg format-blue prose dark:format-invert">
                     <div class="action-header">
                         <a href="{{ route('post.index') }}" class="default-button" style="font-size: 14px">
                             <i class="fa-solid fa-arrow-left"></i>
@@ -27,7 +26,9 @@
 
                                 <div>
                                     <a href="#" rel="author"
-                                        class="text-xl font-bold text-gray-900 dark:text-white">{{ Str::ucfirst($post->user->name ?? '') }}</a>
+                                        class="text-xl font-bold text-gray-900 dark:text-white">
+                                        {{ $post->authorName() }}
+                                    </a>
                                     <p class="text-base text-gray-500 dark:text-gray-400">
                                         @if (!empty($post->category->name))
                                             <span class="front-card-category">
@@ -63,7 +64,7 @@
 
                     <div class="blog-actions">
                         <button class="like-btn">
-                            <i class="fa-solid fa-heart" style="background-color: none; font-size: 12px;"></i>   
+                            <i class="fa-solid fa-heart" style="background-color: none; font-size: 12px;"></i>
                         </button>
                         @auth
                             @if ($post->auth())
