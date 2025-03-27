@@ -8,15 +8,15 @@
                 <div class="p-2 mx-auto">
                     <a href="{{ route('welcome') }}" class="default-button"><i class="fa-solid fa-arrow-left"></i></a>
                 </div>
-                <div class="mb-4 lg:mb-6 not-format">
-                    <address class="flex items-center mb-6 not-italic">
+                <div >
+                    <address class="flex items-center not-italic">
                         <div class="inline-flex items-center mr-3 text-sm ">
                             @if ($post->image)
                                 <img class="w-16 h-16 mr-4 rounded-full" src="{{ asset('storage/' . $post->image) }}"
                                     alt="No Image">
                             @else
                                 <img class="w-16 h-16 mr-4 rounded-full"
-                                    src="{{ asset('storage/default/default-profile.png') }}" alt="No Image">
+                                    src="{{ asset('storage/default/default-post-image.png') }}" alt="No Image">
                             @endif
 
                             <div>
@@ -40,9 +40,16 @@
                             </div>
                         </div>
                     </address>
-                    <h3 class="h3">
+                        <h3 class="h3">
                         {{ Str::ucfirst($post->title ?? '') }}
-                    </h3>
+                        </h3>
+                    @if ($post->image)
+                        <img src="{{ asset('storage/' . $post->image) }}"
+                            alt="no image" class="object-fill w-full" style="min-height: 150px">
+                    @else
+                        <img src="{{ asset('storage/default/default-post-image.png') }}"
+                            alt="no image" class="object-fill w-full" style="min-height: 150px">
+                    @endif
                 </div>
                 <x-markdown>
                     {!! $post->paragraph !!}
@@ -89,9 +96,9 @@
                                         class="mb-5 rounded-lg" alt="No Image">
                                 </a>
                             @endif
-                                <small class="category">
-                                    <a href="#">{{ Str::ucfirst($item->getCategory()) }}</a>
-                                </small>
+                            <small class="category">
+                                <a href="#">{{ Str::ucfirst($item->getCategory()) }}</a>
+                            </small>
                             <h2 class="mb-2 text-xl font-bold leading-tight text-gray-900 dark:text-white">
                                 <a href="{{ route('front.show', $item->slug ?? $item->id) }}" wire:navigate>
                                     {{ Str::ucfirst($item->title ?? '') }}
@@ -115,9 +122,5 @@
 
     @vite(['resources/js/app.js'])
 
-    <script>
-        // document.querySelector('.front-menu-toggle').addEventListener('click', () => {
-        //     document.querySelector('.front-nav').classList.toggle('active');
-        // });
-    </script>
+
 </x-front-layout>

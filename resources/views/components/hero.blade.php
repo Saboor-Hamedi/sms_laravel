@@ -1,7 +1,5 @@
     <div class="hero">
-
         <div class="container">
-
             <div class="left">
 
                 <h1 class="h1">

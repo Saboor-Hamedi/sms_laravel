@@ -163,6 +163,8 @@ html {
 }
 p, a, span , li, button,lable,input,textarea,select,option, h1, h2, h3, h4, h5, h6 ,code, strong{
     color: var(--foreground-secondary) !important;
+    padding: 0;
+    margin: 0;
 }
 .h1 {
     font-size: var(--fs-1);
@@ -208,6 +210,7 @@ p, a, span , li, button,lable,input,textarea,select,option, h1, h2, h3, h4, h5, 
 .btn-primary {
     background: var(--accent);
     color: var(--white);
+    
     padding: 0.6875rem 1.1875rem;
      min-width: 10rem !important;
     border-radius: 5px !important;
@@ -393,7 +396,7 @@ header .btn-group {
 
 .hero .h3 {
     color: var(--foreground-secondary);
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .hero .btn-group {
@@ -522,13 +525,13 @@ header .btn-group {
 .load-more {
     margin-inline: auto;
     margin: auto; /* fallback for margin-inline */
-    background: var(--foreground-secondary);
-    color: var(--background-secondary);
+    background: var(--background-secondary);
+    color: var(--foreground-secondary);
     padding: 0.6875rem 1.1875rem;
 }
 
 .load-more:hover {
-    background: var(--accent);
+    background: white;
 }
 
 /*-----------------------------------*\ 

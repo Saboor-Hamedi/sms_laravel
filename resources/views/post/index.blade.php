@@ -24,7 +24,7 @@
                         @if ($post->image)
                             <img src="{{ asset('storage/' . $post->image) }}" alt="No Image">
                         @else
-                            <img src="{{ asset('storage/default/default-profile.png') }}" alt="Default Profile">
+                            <img src="{{ asset('storage/default/default-post-image.png') }}" alt="Default Profile">
                         @endif
                         <div class="card-author">
                             <span class="author-name">{{ $post->authorName() }}</span>

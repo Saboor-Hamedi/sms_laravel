@@ -11,7 +11,8 @@
       <div class="header-actions">
           <div class="search-bar">
               <i class="fas fa-search search-icon"></i>
-              <input type="text" placeholder="Search...">
+              {{-- <input type="text" placeholder="Search..."> --}}
+              <livewire:search.post-search />
           </div>
 
           <div class="notification-icon">

@@ -17,7 +17,6 @@
         {{ $slot }}
     </main>
     @vite(['resources/js/app.js'])
-    {{-- <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
     <script rel="text/javascript" src="{{ asset('assets/js/frontNavbar.js') }}"></script>
     <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons/dist/ionicons/ionicons.js"></script>

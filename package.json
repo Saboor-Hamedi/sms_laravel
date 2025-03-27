@@ -6,8 +6,10 @@
         "dev": "vite"
     },
     "devDependencies": {
+        "@alpinejs/focus": "^3.14.9",
         "@tailwindcss/forms": "^0.5.2",
         "@tailwindcss/typography": "^0.5.16",
+        "alpinejs": "^3.14.9",
         "autoprefixer": "^10.4.2",
         "axios": "^1.7.4",
         "concurrently": "^9.0.1",
@@ -20,7 +22,6 @@
     "dependencies": {
         "@selectize/selectize": "^0.15.2",
         "@yaireo/tagify": "^4.33.2",
-        "alpinejs": "^3.14.9",
         "cors": "^2.8.5",
         "jquery": "^3.7.1",
         "selectize": "^0.12.6",
